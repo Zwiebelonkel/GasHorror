@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://brk1bi6nckn8r"]
+
+[ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="1_rvslj"]
+[ext_resource type="PackedScene" uid="uid://b508608ahs5xv" path="res://ui/ObjectiveHUD.tscn" id="2_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://biotu7ggx4mvt" path="res://assets/3d/gas_station/scene.gltf" id="3_0bbpv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rvslj"]
+size = Vector3(100, 0.5, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0bbpv"]
+data = PackedVector3Array(-5, 0.25, 5, 5, 0.25, 5, -5, -0.25, 5, 5, 0.25, 5, 5, -0.25, 5, -5, -0.25, 5, 5, 0.25, -5, -5, 0.25, -5, 5, -0.25, -5, -5, 0.25, -5, -5, -0.25, -5, 5, -0.25, -5, 5, 0.25, 5, 5, 0.25, -5, 5, -0.25, 5, 5, 0.25, -5, 5, -0.25, -5, 5, -0.25, 5, -5, 0.25, -5, -5, 0.25, 5, -5, -0.25, -5, -5, 0.25, 5, -5, -0.25, 5, -5, -0.25, -5, 5, 0.25, 5, -5, 0.25, 5, 5, 0.25, -5, -5, 0.25, 5, -5, 0.25, -5, 5, 0.25, -5, -5, -0.25, 5, 5, -0.25, 5, -5, -0.25, -5, 5, -0.25, 5, 5, -0.25, -5, -5, -0.25, -5)
+
+[node name="Main" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.265231, 0)
+mesh = SubResource("BoxMesh_rvslj")
+skeleton = NodePath("../ObjectiveHud")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0bbpv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.008269, -0.542515, 0.840006, 0.00534025, 0.840046, 0.542489, -0.999952, 0, 0.0098435, 6.08608, 4.70644, 0)
+
+[node name="FpsPlayer" parent="." instance=ExtResource("1_rvslj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2514, 0, 0)
+
+[node name="ObjectiveHud" parent="." instance=ExtResource("2_0bbpv")]
+
+[node name="gas_station" parent="." instance=ExtResource("3_0bbpv")]
