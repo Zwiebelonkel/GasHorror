@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://brk1bi6nckn8r"]
+[gd_scene load_steps=29 format=3 uid="uid://brk1bi6nckn8r"]
 
 [ext_resource type="Script" uid="uid://bjp1xbcce3uwv" path="res://scripts/main.gd" id="1_bjd11"]
 [ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="1_rvslj"]
@@ -9,11 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://c7jnqeoq7xx8p" path="res://scenes/props/gas_station.tscn" id="4_vcsgt"]
 [ext_resource type="Script" uid="uid://bs38i01lfq3hw" path="res://scripts/flickerLight.gd" id="6_bjd11"]
 [ext_resource type="PackedScene" uid="uid://l2htm3powhjl" path="res://scenes/props/car.tscn" id="6_c01mt"]
+[ext_resource type="AudioStream" uid="uid://cwosylj8tr2lp" path="res://assets/sounds/doors.wav" id="6_cvmbd"]
 [ext_resource type="PackedScene" uid="uid://bibrda0q610u" path="res://assets/3d/people/hillybilly.tscn" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://cxone3oejtr47" path="res://scenes/props/box.tscn" id="9_lhr70"]
 [ext_resource type="PackedScene" uid="uid://5hh0b165fj4p" path="res://scenes/props/breaker.tscn" id="10_lhr70"]
 [ext_resource type="PackedScene" uid="uid://j30csp6a6tuo" path="res://scenes/props/lantern.tscn" id="13_qmy6f"]
 [ext_resource type="PackedScene" uid="uid://mjhdv6c1qnyi" path="res://scenes/props/cellar.tscn" id="14_mwfav"]
+[ext_resource type="AudioStream" uid="uid://b38eudtsr1ssj" path="res://assets/sounds/Alley(145).wav" id="15_3p2gp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nxtc6"]
 
@@ -257,6 +259,9 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 [node name="SpotLight3D2" parent="gas_station/Sketchfab_model/Gas_Station_fbx/RootNode/Sign/Sign_Sign_0" index="1"]
 light_energy = 17.632
 
+[node name="DoorSound" type="AudioStreamPlayer" parent="gas_station/Sketchfab_model/Gas_Station_fbx/RootNode/Store/Door/Door_Palette_0/StaticBody3D" index="2"]
+stream = ExtResource("6_cvmbd")
+
 [node name="SpotLight3D" type="SpotLight3D" parent="gas_station/lamps/lamp" index="1"]
 transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, 0, 0, 17.2767)
 light_color = Color(1, 1, 0.580392, 1)
@@ -410,6 +415,12 @@ transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 
 
 [node name="Node3D" parent="." instance=ExtResource("14_mwfav")]
 transform = Transform3D(-0.00313282, 0, -0.49999, 0, 0.5, 0, 0.49999, 0, -0.00313282, -11.956, 0.0519361, -1.61629)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_3p2gp")
+volume_db = -5.622
+pitch_scale = 0.57
+autoplay = true
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://7d6a8g45nvy3"]
+[gd_scene load_steps=8 format=3 uid="uid://7d6a8g45nvy3"]
 
 [ext_resource type="Script" uid="uid://6x2sjn8iswf2" path="res://scripts/fridge.gd" id="1_4yxgs"]
 [ext_resource type="PackedScene" uid="uid://dbiqneyq36pyd" path="res://assets/3d/fridge.glb" id="1_r81u6"]
 [ext_resource type="PackedScene" uid="uid://csvttmtaamf1a" path="res://assets/3d/cans/can2.glb" id="2_duex1"]
 [ext_resource type="PackedScene" uid="uid://do6px65tckum1" path="res://assets/3d/cans/can.glb" id="3_4yxgs"]
 [ext_resource type="PackedScene" uid="uid://bw4u3g68fctgf" path="res://assets/3d/cans/can3.glb" id="4_ys72c"]
+[ext_resource type="AudioStream" uid="uid://cta1uwj05ikr6" path="res://assets/sounds/cans.wav" id="6_ys72c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r81u6"]
 size = Vector3(13.186, 17.8237, 5.29242)
@@ -145,3 +146,6 @@ transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.08451
 
 [node name="can40" parent="cans" instance=ExtResource("4_ys72c")]
 transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, -5.65528, 3.46029, 2.30115)
+
+[node name="PlaceSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ys72c")

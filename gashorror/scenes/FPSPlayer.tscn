@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dukjcvebb57k2"]
+[gd_scene load_steps=7 format=3 uid="uid://dukjcvebb57k2"]
 
 [ext_resource type="Script" uid="uid://b0qqg34esq65y" path="res://scripts/fps_player.gd" id="1_wycwc"]
 [ext_resource type="Script" uid="uid://dcrd3ujn6qqq3" path="res://scripts/interactor.gd" id="2_savv0"]
 [ext_resource type="Script" uid="uid://bs38i01lfq3hw" path="res://scripts/flickerLight.gd" id="2_wba1j"]
+[ext_resource type="AudioStream" uid="uid://cwjbaf43oe027" path="res://assets/sounds/light.wav" id="4_ar54r"]
+[ext_resource type="AudioStream" uid="uid://c7khd5yuiqpxi" path="res://assets/sounds/step.wav" id="5_5gvag"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wycwc"]
 
@@ -20,6 +22,7 @@ debug_color = Color(1, 1, 1, 0.42)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.677489, 0)
 
 [node name="flashlight" type="SpotLight3D" parent="CharacterBody3D/Camera3D"]
+visible = false
 light_energy = 2.131
 light_indirect_energy = 1.646
 light_volumetric_fog_energy = 2.858
@@ -32,3 +35,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376948, -1.31067)
 
 [node name="Interactor" type="Node3D" parent="CharacterBody3D"]
 script = ExtResource("2_savv0")
+
+[node name="LightSound" type="AudioStreamPlayer" parent="CharacterBody3D"]
+stream = ExtResource("4_ar54r")
+volume_db = -5.622
+
+[node name="StepSound" type="AudioStreamPlayer" parent="CharacterBody3D"]
+stream = ExtResource("5_5gvag")
+volume_db = -4.685
+pitch_scale = 0.82
+
+[node name="StepTimer" type="Timer" parent="CharacterBody3D"]

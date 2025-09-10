@@ -2,6 +2,8 @@ extends Node3D  # Der Hauptknoten für die Tür, jetzt Node3D statt StaticBody3D
 
 @export var is_open: bool = false  # Flag, ob die Tür geöffnet ist oder nicht
 @onready var animation_player: AnimationPlayer = $AnimationPlayer  # AnimationPlayer unter StaticBody3D
+@onready var door_sound: AudioStreamPlayer = $DoorSound
+
 
 # Diese Methode wird von der Area3D aufgerufen, um die Tür zu öffnen oder zu schließen
 func interact() -> void:
@@ -17,6 +19,8 @@ func open_door() -> void:
 		print("Tür geöffnet")
 		if animation_player:
 			animation_player.play("open")  # Türöffnungs-Animation
+			door_sound.play()
+
 		else:
 			print("Fehler: AnimationPlayer nicht gefunden")
 
@@ -27,6 +31,8 @@ func close_door() -> void:
 		print("Tür geschlossen")
 		if animation_player:
 			animation_player.play("close")  # Türschließungs-Animation
+			door_sound.play()
+
 		else:
 			print("Fehler: AnimationPlayer nicht gefunden")
 

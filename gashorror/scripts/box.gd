@@ -3,6 +3,8 @@ extends Node3D
 var is_held := false
 var holder = null
 
+@onready var hit_sound: AudioStreamPlayer = $HitSound
+
 func interact(player):
 	if is_held:
 		drop()
@@ -21,6 +23,9 @@ func pick_up(player):
 		self.transform = Transform3D.IDENTITY
 		self.position = Vector3.ZERO
 		self.rotation = Vector3.ZERO
+
+	# 🎵 Sound abspielen beim Aufheben
+	hit_sound.play()
 
 func drop():
 	if not is_held: return

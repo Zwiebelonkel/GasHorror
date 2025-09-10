@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://c5a30iqc83kwo"]
+[gd_scene load_steps=11 format=4 uid="uid://c5a30iqc83kwo"]
 
 [ext_resource type="Texture2D" uid="uid://ubwwpumyi26x" path="res://assets/3d/gas_station/textures/Palette_baseColor.png" id="1_0p6dq"]
 [ext_resource type="Script" uid="uid://o2oooxhrbfcu" path="res://scripts/cabinet.gd" id="1_22ua8"]
+[ext_resource type="AudioStream" uid="uid://bk4o751mrrfei" path="res://assets/sounds/place.wav" id="3_r2ika"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldblv"]
 resource_name = "Palette"
@@ -427,3 +428,6 @@ shape = SubResource("BoxShape3D_22ua8")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.01242, 124.157, -0.00234985)
 shape = SubResource("BoxShape3D_22ua8")
+
+[node name="PlaceSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_r2ika")

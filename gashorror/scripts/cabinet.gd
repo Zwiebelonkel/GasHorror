@@ -1,6 +1,8 @@
 extends StaticBody3D
 
 @onready var snack_container = $snacks
+@onready var place_sound: AudioStreamPlayer = $PlaceSound
+
 
 var is_filled := false
 
@@ -29,6 +31,8 @@ func _fill_shelf(box: Node3D):
 	box.queue_free()
 	Objectives.add_stocked_package()
 	print("Should add now")
+	place_sound.play()
+
 
 	for child in snack_container.get_children():
 		child.visible = true

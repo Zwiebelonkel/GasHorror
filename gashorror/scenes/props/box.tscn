@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxone3oejtr47"]
+[gd_scene load_steps=8 format=3 uid="uid://cxone3oejtr47"]
 
 [ext_resource type="Script" uid="uid://tvnuyf3k6763" path="res://scripts/box.gd" id="1_g4j6v"]
+[ext_resource type="AudioStream" uid="uid://bnwhm5ff8u3p7" path="res://assets/sounds/hit.wav" id="2_nsoa3"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1cclh"]
 data = PackedVector3Array(-0.25, 0.25, 0.35, 0.25, 0.25, 0.35, -0.25, -0.25, 0.35, 0.25, 0.25, 0.35, 0.25, -0.25, 0.35, -0.25, -0.25, 0.35, 0.25, 0.25, -0.35, -0.25, 0.25, -0.35, 0.25, -0.25, -0.35, -0.25, 0.25, -0.35, -0.25, -0.25, -0.35, 0.25, -0.25, -0.35, 0.25, 0.25, 0.35, 0.25, 0.25, -0.35, 0.25, -0.25, 0.35, 0.25, 0.25, -0.35, 0.25, -0.25, -0.35, 0.25, -0.25, 0.35, -0.25, 0.25, -0.35, -0.25, 0.25, 0.35, -0.25, -0.25, -0.35, -0.25, 0.25, 0.35, -0.25, -0.25, 0.35, -0.25, -0.25, -0.35, 0.25, 0.25, 0.35, -0.25, 0.25, 0.35, 0.25, 0.25, -0.35, -0.25, 0.25, 0.35, -0.25, 0.25, -0.35, 0.25, 0.25, -0.35, -0.25, -0.25, 0.35, 0.25, -0.25, 0.35, -0.25, -0.25, -0.35, 0.25, -0.25, 0.35, 0.25, -0.25, -0.35, -0.25, -0.25, -0.35)
@@ -35,3 +36,6 @@ mesh = SubResource("BoxMesh_g4j6v")
 [node name="stripe" type="MeshInstance3D" parent="body"]
 mesh = SubResource("BoxMesh_6d8kf")
 skeleton = NodePath("../..")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_nsoa3")

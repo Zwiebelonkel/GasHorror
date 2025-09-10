@@ -2,15 +2,24 @@ extends CharacterBody3D
 
 @export var move_speed: float = 3.2
 @export var run_mult: float = 1.8
-@export var mouse_sens: float = 0.01     # 0.05–0.15 angenehm
+@export var mouse_sens: float = 0.01
 @export var gravity: float = 9.8
-@export var jump_strength: float = 2.0   # Sprungkraft
-@export var crouch_speed: float = 1.6    # Crouch movement speed
-@export var crouch_height: float = 0.5   # Crouch height (lowered height)
-@export var normal_height: float = 2   # Normal height (standing)
+@export var jump_strength: float = 2.0
+@export var crouch_speed: float = 1.6
+@export var crouch_height: float = 0.5
+@export var normal_height: float = 2.0
+
+# Schritt-Tempo-Basis (Sekunden)
+@export var step_interval_walk: float = 0.45
+@export var step_interval_run_mult: float = 0.65      # schneller beim Rennen
+@export var step_interval_crouch_mult: float = 1.4    # langsamer im Crouch
+@export var step_pitch_jitter: float = 0.06           # ±6% Pitch-Variation
 
 @onready var cam: Camera3D = $Camera3D
-@onready var collision_shape: CollisionShape3D = $CollisionShape3D  # Assuming your character has a CollisionShape3D node
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+@onready var s_light: AudioStreamPlayer = $LightSound
+@onready var s_step:  AudioStreamPlayer = $StepSound
+@onready var step_timer: Timer = $StepTimer
 
 var yaw: float = 0.0
 var pitch: float = 0.0
@@ -19,9 +28,12 @@ var is_crouching: bool = false
 func _ready() -> void:
 	add_to_group("player")
 	_capture_mouse(true)
+	randomize()
+	if not step_timer.is_connected("timeout", Callable(self, "_on_step_timer_timeout")):
+		step_timer.connect("timeout", Callable(self, "_on_step_timer_timeout"))
 
 func _input(event: InputEvent) -> void:
-	# Mouse look (only when mouse is captured)
+	# Maus-Look
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		yaw   -= event.relative.x * mouse_sens
 		pitch -= event.relative.y * mouse_sens
@@ -29,34 +41,36 @@ func _input(event: InputEvent) -> void:
 		rotation.y = yaw
 		cam.rotation.x = pitch
 
-	# Toggle flashlight on/off
+	# Taschenlampe toggeln + Sound
 	if event.is_action_pressed("flashlight"):
 		var lamp := cam.get_node_or_null("flashlight")
 		if lamp:
 			lamp.visible = !lamp.visible
+		if s_light:
+			s_light.play()
 
-	# Release or recapture mouse (ESC or left-click)
-	if event.is_action_pressed("ui_cancel"):     # ESC → release
+	# Maus-Capture toggeln
+	if event.is_action_pressed("ui_cancel"):
 		_capture_mouse(false)
 	elif event is InputEventMouseButton and event.pressed and Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		_capture_mouse(true)
 
-	# Crouch toggle (Ctrl key)
-	#if event.is_action_pressed("crouch"):
-		#is_crouching = !is_crouching
-		#_toggle_crouch()
+	# (Optional) Crouch-Toggle, falls du eine Action "crouch" hast:
+	# if event.is_action_pressed("crouch"):
+	# 	is_crouching = !is_crouching
+	# 	_toggle_crouch()
 
 func _toggle_crouch() -> void:
 	var capsule_shape: CapsuleShape3D = collision_shape.shape as CapsuleShape3D
 	if capsule_shape:
 		if is_crouching:
-			capsule_shape.height = crouch_height  # Adjust height for crouching
-			capsule_shape.radius = 0.5            # Adjust radius if necessary for crouch
-			cam.position.y = crouch_height        # Lower the camera position to match crouch
+			capsule_shape.height = crouch_height
+			capsule_shape.radius = 0.5
+			cam.position.y = crouch_height
 		else:
-			capsule_shape.height = normal_height  # Reset height to normal
-			capsule_shape.radius = 0.6            # Reset radius to normal (adjust if needed)
-			cam.position.y = normal_height        # Reset the camera height to normal
+			capsule_shape.height = normal_height
+			capsule_shape.radius = 0.6
+			cam.position.y = normal_height
 
 func _physics_process(delta: float) -> void:
 	var dir := Vector3.ZERO
@@ -68,30 +82,51 @@ func _physics_process(delta: float) -> void:
 	if dir != Vector3.ZERO:
 		dir = dir.normalized()
 
-	# Adjust movement speed when crouching
-	var speed : float
-	if is_crouching:
-		speed = crouch_speed
-	else:
-		speed = move_speed
-
+	# Geschwindigkeit (ohne ?:)
+	var speed: float = crouch_speed if is_crouching else move_speed
+	var running := false
 	if Input.is_action_pressed("run"):
 		speed *= run_mult
+		running = true
 
 	velocity.x = dir.x * speed
 	velocity.z = dir.z * speed
 
-	# Simple gravity
+	# Gravity + Jump
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	else:
-		velocity.y = 0.0
-		
-		# Jump if the spacebar (ui_accept) is pressed and the character is on the floor
-		if Input.is_action_pressed("ui_accept"):  # Spacebar by default as "ui_accept"
+		if velocity.y < 0.0:
+			velocity.y = 0.0
+		if Input.is_action_pressed("ui_accept"):
 			velocity.y = jump_strength
 
 	move_and_slide()
+
+	# Fußschritte an/aus je nach Bewegung
+	_update_step_timer(dir, running)
+
+func _update_step_timer(dir: Vector3, running: bool) -> void:
+	var moving := dir.length() > 0.01
+	if moving and is_on_floor():
+		var interval := step_interval_walk
+		if is_crouching:
+			interval *= step_interval_crouch_mult
+		if running:
+			interval *= step_interval_run_mult
+		if abs(step_timer.wait_time - interval) > 0.001:
+			step_timer.wait_time = interval
+		if step_timer.is_stopped():
+			step_timer.start()
+	else:
+		if not step_timer.is_stopped():
+			step_timer.stop()
+
+func _on_step_timer_timeout() -> void:
+	if s_step:
+		var jitter := (randf() * 2.0 - 1.0) * step_pitch_jitter
+		s_step.pitch_scale = 1.0 + jitter
+		s_step.play()
 
 func _capture_mouse(enable: bool) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if enable else Input.MOUSE_MODE_VISIBLE)
