@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://5hh0b165fj4p"]
+
+[ext_resource type="Script" uid="uid://d1bsetfigjbp6" path="res://scripts/breaker.gd" id="1_anh3a"]
+[ext_resource type="PackedScene" uid="uid://cpcbih85ej10r" path="res://assets/3d/breaker.glb" id="1_s7hm2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s7hm2"]
+size = Vector3(0.75, 2.1275, 1.61386)
+
+[node name="Breaker" type="Area3D"]
+script = ExtResource("1_anh3a")
+
+[node name="breaker2" parent="." instance=ExtResource("1_s7hm2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0144655, 0, -0.0280424)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0576172, -0.0284729, 0.0192719)
+shape = SubResource("BoxShape3D_s7hm2")
+
+[editable path="breaker2"]

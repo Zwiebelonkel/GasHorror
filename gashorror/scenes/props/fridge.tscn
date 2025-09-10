@@ -1,0 +1,147 @@
+[gd_scene load_steps=7 format=3 uid="uid://7d6a8g45nvy3"]
+
+[ext_resource type="Script" uid="uid://6x2sjn8iswf2" path="res://scripts/fridge.gd" id="1_4yxgs"]
+[ext_resource type="PackedScene" uid="uid://dbiqneyq36pyd" path="res://assets/3d/fridge.glb" id="1_r81u6"]
+[ext_resource type="PackedScene" uid="uid://csvttmtaamf1a" path="res://assets/3d/cans/can2.glb" id="2_duex1"]
+[ext_resource type="PackedScene" uid="uid://do6px65tckum1" path="res://assets/3d/cans/can.glb" id="3_4yxgs"]
+[ext_resource type="PackedScene" uid="uid://bw4u3g68fctgf" path="res://assets/3d/cans/can3.glb" id="4_ys72c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r81u6"]
+size = Vector3(13.186, 17.8237, 5.29242)
+
+[node name="fridge" type="StaticBody3D"]
+script = ExtResource("1_4yxgs")
+
+[node name="fridge" parent="." instance=ExtResource("1_r81u6")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.408936, 8.41187, 1.63297)
+shape = SubResource("BoxShape3D_r81u6")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.408936, 8.41187, 1.63297)
+shape = SubResource("BoxShape3D_r81u6")
+
+[node name="cans" type="Node3D" parent="."]
+
+[node name="can2" parent="cans" instance=ExtResource("2_duex1")]
+transform = Transform3D(0.203409, 0, 0.22051, 0, 0.3, 0, -0.22051, 0, 0.203409, 0.105453, 12.6168, 1.85519)
+
+[node name="can6" parent="cans" instance=ExtResource("2_duex1")]
+transform = Transform3D(0.203409, 0, 0.22051, 0, 0.3, 0, -0.22051, 0, 0.203409, -2.49202, 12.6168, 1.85519)
+
+[node name="can7" parent="cans" instance=ExtResource("2_duex1")]
+transform = Transform3D(0.203409, 0, 0.22051, 0, 0.3, 0, -0.22051, 0, 0.203409, -3.61321, 12.6168, 1.85519)
+
+[node name="can8" parent="cans" instance=ExtResource("2_duex1")]
+transform = Transform3D(0.203409, 0, 0.22051, 0, 0.3, 0, -0.22051, 0, 0.203409, -4.69522, 12.6168, 1.85519)
+
+[node name="can9" parent="cans" instance=ExtResource("2_duex1")]
+transform = Transform3D(0.203409, 0, 0.22051, 0, 0.3, 0, -0.22051, 0, 0.203409, -5.95393, 12.6168, 1.85519)
+
+[node name="can3" parent="cans" instance=ExtResource("2_duex1")]
+transform = Transform3D(0.203409, 0, 0.22051, 0, 0.3, 0, -0.22051, 0, 0.203409, 1.19355, 12.6168, 1.85519)
+
+[node name="can4" parent="cans" instance=ExtResource("2_duex1")]
+transform = Transform3D(0.203409, 0, 0.22051, 0, 0.3, 0, -0.22051, 0, 0.203409, 2.25289, 12.6168, 1.85519)
+
+[node name="can5" parent="cans" instance=ExtResource("2_duex1")]
+transform = Transform3D(0.203409, 0, 0.22051, 0, 0.3, 0, -0.22051, 0, 0.203409, 3.38991, 12.6168, 1.85519)
+
+[node name="can" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 3.18459, 10.343, 0.511889)
+
+[node name="can10" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.07376, 10.343, 0.511889)
+
+[node name="can11" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.985373, 10.343, 0.511889)
+
+[node name="can12" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.147895, 10.343, 0.511889)
+
+[node name="can13" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.68372, 10.343, 0.511889)
+
+[node name="can14" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.86187, 10.343, 0.511889)
+
+[node name="can15" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.90538, 10.343, 0.511889)
+
+[node name="can16" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -6.25183, 10.343, 0.511889)
+
+[node name="can17" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 3.18459, 8.04431, 0.511889)
+
+[node name="can18" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 2.07376, 8.04431, 0.511889)
+
+[node name="can19" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.985373, 8.04431, 0.511889)
+
+[node name="can20" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.147895, 8.04431, 0.511889)
+
+[node name="can21" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.68372, 8.04431, 0.511889)
+
+[node name="can22" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -3.86187, 8.04431, 0.511889)
+
+[node name="can23" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -4.90538, 8.04431, 0.511889)
+
+[node name="can24" parent="cans" instance=ExtResource("3_4yxgs")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -6.25183, 8.04431, 0.511889)
+
+[node name="can25" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, 3.82442, 5.78432, 2.30115)
+
+[node name="can26" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, 2.71927, 5.78432, 2.30115)
+
+[node name="can27" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, 1.60588, 5.78432, 2.30115)
+
+[node name="can28" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, 0.508974, 5.78432, 2.30115)
+
+[node name="can29" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, -2.08237, 5.78432, 2.30115)
+
+[node name="can30" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, -3.29951, 5.78432, 2.30115)
+
+[node name="can31" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, -4.29417, 5.78432, 2.30115)
+
+[node name="can32" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, -5.65528, 5.78432, 2.30115)
+
+[node name="can33" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, 3.82442, 3.46029, 2.30115)
+
+[node name="can34" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, 2.71927, 3.46029, 2.30115)
+
+[node name="can35" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, 1.60588, 3.46029, 2.30115)
+
+[node name="can36" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, 0.508974, 3.46029, 2.30115)
+
+[node name="can37" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, -2.08237, 3.46029, 2.30115)
+
+[node name="can38" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, -3.29951, 3.46029, 2.30115)
+
+[node name="can39" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, -4.29417, 3.46029, 2.30115)
+
+[node name="can40" parent="cans" instance=ExtResource("4_ys72c")]
+transform = Transform3D(0.0845166, 0, 0.287849, 0, 0.3, 0, -0.287849, 0, 0.0845166, -5.65528, 3.46029, 2.30115)

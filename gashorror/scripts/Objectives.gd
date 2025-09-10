@@ -6,7 +6,7 @@ signal power_restored()
 
 var state := {
 	"entered_station": false,
-	"packages_total": 6,
+	"packages_total": 4,
 	"packages_stocked": 0,
 	"basement_unlocked": false,
 	"note_spawned": false,
@@ -19,12 +19,20 @@ var state := {
 	"power_on": true
 }
 
+func _ready():
+	print("Objectives Instanz-ID:", self.get_instance_id())
+
+
 func set_entered_station():
+	print("Entered Station")
 	if state.entered_station: return
 	state.entered_station = true
 	emit_signal("objective_changed", "entered_station", state)
+	print("Signal 'objective_changed' gesendet")
+
 
 func add_stocked_package():
+	print("Adding now in Objectives")
 	state.packages_stocked += 1
 	emit_signal("objective_changed", "packages_stocked", state)
 	if state.packages_stocked >= state.packages_total:
@@ -64,3 +72,14 @@ func restore_power():
 	state.power_on = true
 	emit_signal("power_restored")
 	emit_signal("objective_changed", "power_restored", state)
+
+
+func _on_area_3d_body_entered_station(_body) -> void:
+	print("_on_area_3d_body_entered_station aufgerufen mit:", _body)
+	if state.entered_station:
+		print("Schon betreten, return")
+		return
+	if not (_body is CharacterBody3D):
+		print("Nicht der richtige Body-Typ:", _body)
+		return
+	set_entered_station()

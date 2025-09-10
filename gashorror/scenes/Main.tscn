@@ -1,16 +1,31 @@
-[gd_scene load_steps=14 format=3 uid="uid://brk1bi6nckn8r"]
+[gd_scene load_steps=27 format=3 uid="uid://brk1bi6nckn8r"]
 
+[ext_resource type="Script" uid="uid://bjp1xbcce3uwv" path="res://scripts/main.gd" id="1_bjd11"]
 [ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="1_rvslj"]
+[ext_resource type="PackedScene" uid="uid://c5a30iqc83kwo" path="res://scenes/props/shelf.tscn" id="1_wp0k4"]
 [ext_resource type="PackedScene" uid="uid://b508608ahs5xv" path="res://ui/ObjectiveHUD.tscn" id="2_0bbpv"]
+[ext_resource type="Shader" uid="uid://1tc2rtqiu7q2" path="res://shaders/buckshot.gdshader" id="2_rarhs"]
 [ext_resource type="Shader" uid="uid://ber46v45djbx5" path="res://shaders/crt.gdshader" id="4_rarhs"]
 [ext_resource type="PackedScene" uid="uid://c7jnqeoq7xx8p" path="res://scenes/props/gas_station.tscn" id="4_vcsgt"]
+[ext_resource type="Script" uid="uid://bs38i01lfq3hw" path="res://scripts/flickerLight.gd" id="6_bjd11"]
+[ext_resource type="PackedScene" uid="uid://l2htm3powhjl" path="res://scenes/props/car.tscn" id="6_c01mt"]
+[ext_resource type="PackedScene" uid="uid://bibrda0q610u" path="res://assets/3d/people/hillybilly.tscn" id="7_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://cxone3oejtr47" path="res://scenes/props/box.tscn" id="9_lhr70"]
+[ext_resource type="PackedScene" uid="uid://5hh0b165fj4p" path="res://scenes/props/breaker.tscn" id="10_lhr70"]
+[ext_resource type="PackedScene" uid="uid://j30csp6a6tuo" path="res://scenes/props/lantern.tscn" id="13_qmy6f"]
+[ext_resource type="PackedScene" uid="uid://mjhdv6c1qnyi" path="res://scenes/props/cellar.tscn" id="14_mwfav"]
 
-[sub_resource type="Sky" id="Sky_0bbpv"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nxtc6"]
+
+[sub_resource type="Sky" id="Sky_lhr70"]
+sky_material = SubResource("ProceduralSkyMaterial_nxtc6")
+process_mode = 1
 
 [sub_resource type="Environment" id="Environment_rarhs"]
 background_mode = 2
 background_energy_multiplier = 0.0
-sky = SubResource("Sky_0bbpv")
+sky = SubResource("Sky_lhr70")
+sky_custom_fov = 2.5
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 1.17
 reflected_light_source = 1
@@ -24,12 +39,16 @@ glow_hdr_threshold = 0.0
 glow_hdr_scale = 0.0
 glow_hdr_luminance_cap = 70.35
 glow_map_strength = 0.0
-fog_enabled = true
 fog_light_color = Color(0.140447, 0.140447, 0.140447, 1)
 fog_light_energy = 0.45
 fog_density = 0.0626
 fog_height = 280.25
-volumetric_fog_density = 0.3524
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0347
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.1
+volumetric_fog_length = 15.47
+volumetric_fog_ambient_inject = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rarhs"]
 albedo_color = Color(0, 0, 0, 1)
@@ -74,15 +93,36 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.4
 shader_parameter/vignette_opacity = 0.5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c01mt"]
+shader = ExtResource("2_rarhs")
+shader_parameter/exposure = 1.0
+shader_parameter/contrast = 1.05
+shader_parameter/saturation = 0.9
+shader_parameter/enable_pixelate = true
+shader_parameter/pixel_factor = 3.0
+shader_parameter/enable_posterize = true
+shader_parameter/color_levels = 16.0
+shader_parameter/dither_strength = 0.35
+shader_parameter/chrom_aberration = 0.07
+shader_parameter/vignette_strength = 1.0
+shader_parameter/grain_strength = 0.2
+shader_parameter/tint_color = Vector3(0.95, 1.03, 0.9)
+shader_parameter/tint_strength = 0.15
+shader_parameter/viewport_size_override = Vector2(0, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nxtc6"]
+size = Vector3(1.35651, 4.28571, 3.78235)
+
 [node name="Main" type="Node3D"]
+script = ExtResource("1_bjd11")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rarhs")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.265231, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.6376, -0.265231, -4.86137)
 mesh = SubResource("BoxMesh_rvslj")
-skeleton = NodePath("../ObjectiveHud")
+skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
 
@@ -104,22 +144,107 @@ shape = SubResource("ConcavePolygonShape3D_vcsgt")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D4"]
 shape = SubResource("ConcavePolygonShape3D_c01mt")
 
+[node name="Floor3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.0881, -0.265231, -51.8488)
+mesh = SubResource("BoxMesh_rvslj")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0bbpv")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_rarhs")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D3"]
+shape = SubResource("ConcavePolygonShape3D_vcsgt")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D4"]
+shape = SubResource("ConcavePolygonShape3D_c01mt")
+
+[node name="Floor2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55051, -0.265231, 53.9295)
+mesh = SubResource("BoxMesh_rvslj")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0bbpv")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_rarhs")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D3"]
+shape = SubResource("ConcavePolygonShape3D_vcsgt")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D4"]
+shape = SubResource("ConcavePolygonShape3D_c01mt")
+
+[node name="Floor4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.4319, -0.265231, -34.4354)
+mesh = SubResource("BoxMesh_rvslj")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0bbpv")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_rarhs")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D3"]
+shape = SubResource("ConcavePolygonShape3D_vcsgt")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D4"]
+shape = SubResource("ConcavePolygonShape3D_c01mt")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.008269, -0.542515, 0.840006, 0.965048, 0.22438, 0.135415, -0.261945, 0.809525, 0.525408, 6.08608, 11.9077, -120.974)
-light_color = Color(0.796078, 1, 1, 1)
-light_energy = 0.515
+light_color = Color(0.330305, 0.510314, 0.488677, 1)
+light_energy = 0.068
+light_indirect_energy = 1.149
 light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 
 [node name="FpsPlayer" parent="." instance=ExtResource("1_rvslj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2514, 0, 0)
 
-[node name="ObjectiveHud" parent="." instance=ExtResource("2_0bbpv")]
-
 [node name="CRT" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CRT"]
+[node name="crt" type="ColorRect" parent="CRT"]
 material = SubResource("ShaderMaterial_vcsgt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vhs" type="CanvasLayer" parent="."]
+
+[node name="vhs" type="ColorRect" parent="vhs"]
+material = SubResource("ShaderMaterial_c01mt")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -128,3 +253,164 @@ grow_vertical = 2
 
 [node name="gas_station" parent="." instance=ExtResource("4_vcsgt")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="SpotLight3D2" parent="gas_station/Sketchfab_model/Gas_Station_fbx/RootNode/Sign/Sign_Sign_0" index="1"]
+light_energy = 17.632
+
+[node name="SpotLight3D" type="SpotLight3D" parent="gas_station/lamps/lamp" index="1"]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, 0, 0, 17.2767)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="gas_station/lamps/lamp2" index="1"]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, -6.62309, 0, 8.70748)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="gas_station/lamps/lamp3" index="1"]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, -6.66134, 0, 0)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="gas_station/lamps/lamp4" index="1"]
+transform = Transform3D(-1.89251, -0.871019, -3.80735e-08, 0, -9.10654e-08, 2.08333, -0.871019, 1.89251, 8.27244e-08, 13.2252, 0, -8.57915)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+script = ExtResource("6_bjd11")
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="gas_station/lamps/lamp5" index="1"]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, 0.0458059, 0, -0.184185)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="gas_station/lamps/lamp6" index="1"]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, -6.67061, 0, 8.52461)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="gas_station/lamps/lamp7" index="1"]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, 13.2593, 0, -0.0590744)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="gas_station/lamps/lamp8" index="1"]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, -6.62309, 0, -17.2413)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="gas_station/lamps/lamp9" index="1"]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, 0.155204, 0, -8.68942)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="Car" parent="." instance=ExtResource("6_c01mt")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 8.165, 0, -2.355)
+
+[node name="Hillybilly" parent="." instance=ExtResource("7_nxtc6")]
+transform = Transform3D(0.892024, 0, 1.20594, 0, 1.5, 0, -1.20594, 0, 0.892024, -5.66977, 0, -4.28961)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16043, 1.64285, 0.569406)
+shape = SubResource("BoxShape3D_nxtc6")
+
+[node name="Shelf" parent="." instance=ExtResource("1_wp0k4")]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, 0, 0, 0, 0.008, -3.99654, 0, 0.16435)
+
+[node name="Shelf2" parent="." instance=ExtResource("1_wp0k4")]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, 0, 0, 0, 0.008, -6.43708, 0, 0.16435)
+
+[node name="Box" parent="." instance=ExtResource("9_lhr70")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16043, 0.217959, 8.14623)
+
+[node name="Box2" parent="." instance=ExtResource("9_lhr70")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98153, 0.217959, 8.14623)
+
+[node name="Box3" parent="." instance=ExtResource("9_lhr70")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3.9153, 0.383823, 8.14623)
+
+[node name="Box4" parent="." instance=ExtResource("9_lhr70")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.82702, 0.383823, 8.14623)
+
+[node name="Breaker" parent="." instance=ExtResource("10_lhr70")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -9.54452, 1.51044, 5.67607)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InteractionPrompt" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "[E] Interagieren"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ObjectiveHud" parent="." instance=ExtResource("2_0bbpv")]
+
+[node name="lantern" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.97322, -0.211525, 7.41536)
+
+[node name="lantern12" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.499954, 0, 0.00680656, 0, 0.5, 0, -0.00680656, 0, -0.499954, -10.1987, -0.211525, 4.74028)
+
+[node name="lantern2" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.8833, -0.211525, 8.0675)
+
+[node name="lantern3" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.8833, -0.211525, 24.0967)
+
+[node name="lantern4" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.8833, -0.211525, 39.8773)
+
+[node name="lantern5" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.8833, -0.211525, -7.96166)
+
+[node name="lantern6" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.8833, -0.211525, -24.3636)
+
+[node name="lantern7" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 29.0384, -0.211525, 7.81898)
+
+[node name="lantern8" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 29.0244, -0.211525, -8.21017)
+
+[node name="lantern9" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 29.0106, -0.211525, -23.9908)
+
+[node name="lantern10" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 29.0524, -0.211525, 23.8481)
+
+[node name="lantern11" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 29.0667, -0.211525, 40.2501)
+
+[node name="Node3D" parent="." instance=ExtResource("14_mwfav")]
+transform = Transform3D(-0.00313282, 0, -0.49999, 0, 0.5, 0, 0.49999, 0, -0.00313282, -11.956, 0.0519361, -1.61629)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
+
+[editable path="gas_station"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://j30csp6a6tuo"]
+
+[ext_resource type="PackedScene" uid="uid://gkwr4fr1av7i" path="res://assets/3d/lantern.glb" id="1_wsame"]
+
+[node name="lantern" type="MeshInstance3D"]
+
+[node name="lantern2" parent="." instance=ExtResource("1_wsame")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.024117, 1.19209e-07, -0.0890799)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="lantern2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.60487, 11.2122, 0)
+light_color = Color(1, 1, 0.729412, 1)
+light_energy = 9.088
+spot_range = 14.114
+spot_angle = 35.78
