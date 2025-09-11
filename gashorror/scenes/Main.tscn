@@ -432,8 +432,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.242476, 0.204227)
 curve = SubResource("Curve3D_bb450")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.99973, 0, 0.0223125, 0, 1, 0, -0.0223125, 0, 0.99973, -7.49907, 0, -3.03725)
-progress = 37.4694
+transform = Transform3D(-4.37104e-08, 0, -0.999978, 0, 1, 0, 0.999978, 0, -4.37104e-08, 1.27, 0, -15.775)
 h_offset = 0.28
 rotation_mode = 1
 loop = false

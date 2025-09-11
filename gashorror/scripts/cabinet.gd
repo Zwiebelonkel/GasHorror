@@ -29,7 +29,7 @@ func _get_held_box(player) -> Node3D:
 func _fill_shelf(box: Node3D):
 	is_filled = true
 	box.queue_free()
-	Objectives.add_stocked_package()
+	Objectives.progress_package_stock()
 	print("Should add now")
 	place_sound.play()
 

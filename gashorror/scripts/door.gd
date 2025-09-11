@@ -5,13 +5,6 @@ extends Node3D  # Der Hauptknoten für die Tür, jetzt Node3D statt StaticBody3D
 @onready var door_sound: AudioStreamPlayer = $DoorSound
 
 
-# Diese Methode wird von der Area3D aufgerufen, um die Tür zu öffnen oder zu schließen
-func interact() -> void:
-	if not is_open:
-		open_door()
-	else:
-		close_door()
-
 # Tür öffnen
 func open_door() -> void:
 	if not is_open:
@@ -38,12 +31,13 @@ func close_door() -> void:
 
 # Wenn der Spieler in den Interaktionsbereich eintritt
 func _on_Area3D_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):  # Überprüfen, ob der Körper der Spieler ist
-		print("Spieler ist in Reichweite der Tür!")
-	open_door()  # Rufe die Interaktionsmethode auf
+	print("body Typ:", body.get_class())
+	if body is CharacterBody3D:
+		print("Ein Charakter (Spieler oder NPC) ist in Reichweite der Tür!")
+		open_door()
 
-
-func _on_area3D_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):  # Überprüfen, ob der Körper der Spieler ist
-		print("Spieler ist ausserhalb der Tür!")
-	close_door()  # Rufe die Interaktionsmethode auf
+func _on_Area3D_body_exited(body: Node) -> void:
+	print("body Typ:", body.get_class())
+	if body is CharacterBody3D:
+		print("Ein Charakter (Spieler oder NPC) ist außerhalb der Tür!")
+		close_door()

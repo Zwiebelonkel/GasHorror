@@ -1,85 +1,113 @@
 extends Node
+
 signal objective_changed(name: String, data: Dictionary)
-signal all_packages_stocked()
-signal blackout_triggered()
-signal power_restored()
+signal all_packages_stocked()  # <-- Hier hinzufügen
+
+# Enum für besser lesbare States
+enum {
+	START,
+	PACKAGES,
+	CUSTOMER,
+	BLACKOUT,
+	FIND_NOTE,
+	FIND_KEY,
+	JUMPSCARE,
+	POWER_ON,
+	SIGN_CHANGE,
+	REENTER_CELLAR,
+	SECRET_ENTRANCE,
+	SEE_TRUTH,
+	TRY_TO_ESCAPE,
+	MANAGER_APPEARS,
+	ESCAPE,
+	END
+}
+
+var current_step := START
 
 var state := {
 	"entered_station": false,
-	"packages_total": 4,
 	"packages_stocked": 0,
-	"basement_unlocked": false,
-	"note_spawned": false,
-
-	"basement_entered": false,
-	"valve_fixed": false,
-	"is_blackout": false,
-	"outside_checkpoints_total": 3,
-	"outside_checkpoints_hit": 0,
-	"power_on": true
+	"packages_total": 4,
+	"customer_spoken": false,
+	"blackout": false,
+	"found_note": false,
+	"has_key": false,
+	"jumpscare_done": false,
+	"power_on": false,
+	"sign_changed": false,
+	"found_secret": false,
+	"seen_truth": false,
+	"manager_triggered": false,
+	"escaped": false
 }
 
 func _ready():
-	print("Objectives Instanz-ID:", self.get_instance_id())
+	emit_signal("objective_changed", get_current_objective_name(), state)
 
+func advance():
+	current_step += 1
+	emit_signal("objective_changed", get_current_objective_name(), state)
 
-func set_entered_station():
-	print("Entered Station")
-	if state.entered_station: return
-	state.entered_station = true
-	emit_signal("objective_changed", "entered_station", state)
-	print("Signal 'objective_changed' gesendet")
+func set_step(step: int):
+	current_step = step
+	emit_signal("objective_changed", get_current_objective_name(), state)
 
+func get_current_objective_name() -> String:
+	match current_step:
+		START:
+			return "Ziel: Betrete die Tankstelle."
+		PACKAGES:
+			return "Ziel: Pakete in die Schränke einräumen."
+		CUSTOMER:
+			return "Ziel: Sprich mit dem Kunden."
+		BLACKOUT:
+			return "Ziel: Der Strom ist ausgefallen!"
+		FIND_NOTE:
+			return "Ziel: Finde heraus, wie man den Stromkasten öffnet."
+		FIND_KEY:
+			return "Ziel: Finde den Schlüssel im Keller."
+		JUMPSCARE:
+			return "Ziel: Kehre nach oben zurück."
+		POWER_ON:
+			return "Ziel: Schalte den Strom wieder an."
+		SIGN_CHANGE:
+			return "Ziel: Das Schild draußen hat sich verändert..."
+		REENTER_CELLAR:
+			return "Ziel: Gehe erneut in den Keller."
+		SECRET_ENTRANCE:
+			return "Ziel: Finde einen geheimen Zugang."
+		SEE_TRUTH:
+			return "Ziel: Entdecke, was wirklich hier unten passiert."
+		TRY_TO_ESCAPE:
+			return "Ziel: Fliehe aus der Tankstelle!"
+		MANAGER_APPEARS:
+			return "Ziel: Der Manager ist hier – lauf!"
+		ESCAPE:
+			return "Ziel: Entkomme!"
+		END:
+			return "Ziel erreicht. (Oder doch nicht?)"
+		_:
+			return "Ziel: ???"
 
-func add_stocked_package():
-	print("Adding now in Objectives")
+func progress_package_stock():
 	state.packages_stocked += 1
-	emit_signal("objective_changed", "packages_stocked", state)
+	emit_signal("objective_changed", get_current_objective_name(), state)
+	
 	if state.packages_stocked >= state.packages_total:
-		emit_signal("all_packages_stocked")
-		unlock_basement()
+		emit_signal("all_packages_stocked")  # Signal feuern, wenn alles fertig ist
+		advance()
 
-func unlock_basement():
-	state.basement_unlocked = true
-	emit_signal("objective_changed", "basement_unlocked", state)
-
-func mark_note_spawned(): state.note_spawned = true
-func mark_basement_entered():
-	if state.basement_entered: return
-	state.basement_entered = true
-	emit_signal("objective_changed", "basement_entered", state)
-
-func mark_valve_fixed():
-	if state.valve_fixed: return
-	state.valve_fixed = true
-	emit_signal("objective_changed", "valve_fixed", state)
-
-func trigger_blackout():
-	if state.is_blackout: return
-	state.is_blackout = true
-	state.power_on = false
-	emit_signal("blackout_triggered")
-	emit_signal("objective_changed", "blackout", state)
-
-func hit_outside_checkpoint():
-	if not state.is_blackout: return
-	state.outside_checkpoints_hit = min(state.outside_checkpoints_hit + 1, state.outside_checkpoints_total)
-	emit_signal("objective_changed", "outside_progress", state)
-
-func restore_power():
-	if not state.is_blackout: return
-	state.is_blackout = false
-	state.power_on = true
-	emit_signal("power_restored")
-	emit_signal("objective_changed", "power_restored", state)
+		
+func enter_station():
+	if current_step == START:
+		state.entered_station = true
+		set_step(PACKAGES)  # Hier wird dann das Signal emittiert
 
 
-func _on_area_3d_body_entered_station(_body) -> void:
-	print("_on_area_3d_body_entered_station aufgerufen mit:", _body)
-	if state.entered_station:
-		print("Schon betreten, return")
-		return
-	if not (_body is CharacterBody3D):
-		print("Nicht der richtige Body-Typ:", _body)
-		return
-	set_entered_station()
+
+
+func set_flag(key: String, value: bool):
+	if state.has(key):
+		state[key] = value
+	emit_signal("objective_changed", get_current_objective_name(), state)

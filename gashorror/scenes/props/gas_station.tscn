@@ -1587,4 +1587,4 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -6.26855, 0.0470543, 7.
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -8.93704, 0.0470543, 7.91539)
 
 [connection signal="body_entered" from="Sketchfab_model/Gas_Station_fbx/RootNode/Store/Area3D" to="Sketchfab_model/Gas_Station_fbx/RootNode/Store/Door/Door_Palette_0/StaticBody3D" method="_on_Area3D_body_entered"]
-[connection signal="body_exited" from="Sketchfab_model/Gas_Station_fbx/RootNode/Store/Area3D" to="Sketchfab_model/Gas_Station_fbx/RootNode/Store/Door/Door_Palette_0/StaticBody3D" method="_on_area3D_body_exited"]
+[connection signal="body_exited" from="Sketchfab_model/Gas_Station_fbx/RootNode/Store/Area3D" to="Sketchfab_model/Gas_Station_fbx/RootNode/Store/Door/Door_Palette_0/StaticBody3D" method="_on_Area3D_body_exited"]
