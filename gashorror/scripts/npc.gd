@@ -1,25 +1,46 @@
 extends CharacterBody3D
 
-@onready var animation_player: AnimationPlayer = $hillybilly/AnimationPlayer  # Der korrekte Pfad zum AnimationPlayer
+@onready var animation_player: AnimationPlayer = $hillybilly/AnimationPlayer
+@onready var path_follow: PathFollow3D = get_node("..")
 
-# Diese Funktion wird beim Start des Spiels aufgerufen
+@export var speed: float = 1.0
+
+var started := false
+var reached_end := false
+
 func _ready():
-	# Überprüfe, ob die "idle"-Animation existiert
-	if animation_player.has_animation("idle"):
-		print("Found idle animation, playing now.")
-		play_idle_animation()  # Idle-Animation abspielen
-	else:
-		print("Idle animation not found.")  # Fehlermeldung, falls die Animation nicht existiert
+	# Animation auf idle setzen
+	play_idle_animation()
+	
+	# Mit Objectives verbinden
+	Objectives.all_packages_stocked.connect(_on_all_packages_stocked)
 
-# Diese Funktion spielt die Idle-Animation kontinuierlich ab
+func _process(delta):
+	if not started or reached_end:
+		return
+
+	# NPC entlang des Pfads bewegen
+	path_follow.progress += speed * delta
+
+	if animation_player.current_animation != "walk":
+		play_walk_animation()
+
+	if path_follow.progress_ratio >= 1.0:
+		reached_end = true
+		play_idle_animation()
+
+func _on_all_packages_stocked():
+	print("Alle Pakete eingeräumt – NPC startet")
+	started = true
+
 func play_idle_animation():
-	var idle_animation = animation_player.get_animation("idle")  # Hole die "idle"-Animation
-	idle_animation.loop = true  # Setze die Loop-Option auf true
-	animation_player.play("idle")  # Die Idle-Animation wird abgespielt
+	if animation_player.has_animation("idle"):
+		var anim = animation_player.get_animation("idle")
+		anim.loop = true
+		animation_player.play("idle")
 
-# Optional: Falls du Animationen per Tastendruck wechseln möchtest (z.B. auf "F" drücken, um eine neue Animation zu starten)
-#func _input(event):
-	#if event.is_action_pressed("ui_accept"):  # Standard-Taste "Enter" oder "F"
-		#if animation_player.has_animation("walk"):  # Falls eine "walk"-Animation existiert
-			#animation_player.play("walk")  # Wechsel zur Walk-Animation
-			#print("Playing Walk animation")
+func play_walk_animation():
+	if animation_player.has_animation("walk"):
+		var anim = animation_player.get_animation("walk")
+		anim.loop = true
+		animation_player.play("walk")

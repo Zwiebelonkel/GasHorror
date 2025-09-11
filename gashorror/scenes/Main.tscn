@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://brk1bi6nckn8r"]
+[gd_scene load_steps=31 format=3 uid="uid://brk1bi6nckn8r"]
 
 [ext_resource type="Script" uid="uid://bjp1xbcce3uwv" path="res://scripts/main.gd" id="1_bjd11"]
 [ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="1_rvslj"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://j30csp6a6tuo" path="res://scenes/props/lantern.tscn" id="13_qmy6f"]
 [ext_resource type="PackedScene" uid="uid://mjhdv6c1qnyi" path="res://scenes/props/cellar.tscn" id="14_mwfav"]
 [ext_resource type="AudioStream" uid="uid://b38eudtsr1ssj" path="res://assets/sounds/Alley(145).wav" id="15_3p2gp"]
+[ext_resource type="Script" uid="uid://btswlr8jqov3h" path="res://scripts/path.gd" id="16_ft6cd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nxtc6"]
 
@@ -114,6 +115,13 @@ shader_parameter/viewport_size_override = Vector2(0, 0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nxtc6"]
 size = Vector3(1.35651, 4.28571, 3.78235)
+
+[sub_resource type="Curve3D" id="Curve3D_bb450"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0.82, 0, 0, 1.27, 0, -16.055, 1.805, 0, 0, 0, 0, 0, 1.15, 0, 0, 0, 0, 2.465, 0, 0, 0, -2.48, 0, -1.465, 1.32, 0, -0.715, 0, 0, 0, -5.13147, 0, -2.59, -0.315, 0, 0, 0, 0, 1.99, -5.22945, 0, 1.90927, -0.485, 0, 0, 0, 0, 0, -7.65711, 0, 2.43036, 0, 0, 0, 0, 0, 0, -7.779, 0, -3.031),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_bjd11")
@@ -329,9 +337,6 @@ spot_angle = 87.51
 [node name="Car" parent="." instance=ExtResource("6_c01mt")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 8.165, 0, -2.355)
 
-[node name="Hillybilly" parent="." instance=ExtResource("7_nxtc6")]
-transform = Transform3D(0.892024, 0, 1.20594, 0, 1.5, 0, -1.20594, 0, 0.892024, -5.66977, 0, -4.28961)
-
 [node name="Area3D" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
@@ -418,9 +423,24 @@ transform = Transform3D(-0.00313282, 0, -0.49999, 0, 0.5, 0, 0.49999, 0, -0.0031
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_3p2gp")
-volume_db = -5.622
+volume_db = -8.838
 pitch_scale = 0.57
 autoplay = true
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.242476, 0.204227)
+curve = SubResource("Curve3D_bb450")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.99973, 0, 0.0223125, 0, 1, 0, -0.0223125, 0, 0.99973, -7.49907, 0, -3.03725)
+progress = 37.4694
+h_offset = 0.28
+rotation_mode = 1
+loop = false
+script = ExtResource("16_ft6cd")
+
+[node name="Hillybilly" parent="Path3D/PathFollow3D" instance=ExtResource("7_nxtc6")]
+transform = Transform3D(-1.49524, 0, 0.119568, 0, 1.5, 0, -0.119568, 0, -1.49524, 0.0238495, -0.242476, 0.0291016)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
 

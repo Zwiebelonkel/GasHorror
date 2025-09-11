@@ -40,10 +40,10 @@ func close_door() -> void:
 func _on_Area3D_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):  # Überprüfen, ob der Körper der Spieler ist
 		print("Spieler ist in Reichweite der Tür!")
-		open_door()  # Rufe die Interaktionsmethode auf
+	open_door()  # Rufe die Interaktionsmethode auf
 
 
 func _on_area3D_body_exited(body: Node) -> void:
 	if body.is_in_group("player"):  # Überprüfen, ob der Körper der Spieler ist
 		print("Spieler ist ausserhalb der Tür!")
-		close_door()  # Rufe die Interaktionsmethode auf
+	close_door()  # Rufe die Interaktionsmethode auf
