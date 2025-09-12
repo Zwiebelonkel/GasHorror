@@ -64,7 +64,7 @@ func get_current_objective_name() -> String:
 		BLACKOUT:
 			return "Ziel: Der Strom ist ausgefallen!"
 		FIND_NOTE:
-			return "Ziel: Schaue im Laden nach einer Notiz."
+			return "Ziel: Abgeschlossen: Schaue im Laden nach einer Notiz."
 		FIND_KEY:
 			return "Ziel: Finde den Schlüssel im Keller."
 		JUMPSCARE:

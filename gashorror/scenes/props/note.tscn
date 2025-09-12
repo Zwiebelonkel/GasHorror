@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://dig56my50obj6"]
+[gd_scene load_steps=12 format=4 uid="uid://dig56my50obj6"]
 
 [ext_resource type="Script" uid="uid://c0acybln3n8a7" path="res://scripts/note.gd" id="1_eqih7"]
+[ext_resource type="Shader" uid="uid://brdlcujsby21f" path="res://shaders/shine.gdshader" id="2_p56xp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oogp4"]
 resource_name = "Material"
@@ -41,6 +42,22 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_cjoug")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vj7ia"]
+render_priority = 0
+shader = ExtResource("2_p56xp")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 0.595
+shader_parameter/shine_width = 0.048
+shader_parameter/cycle_interval = 1.0
+shader_parameter/angle_fade = 1.0
+shader_parameter/x_direction = 0.0
+shader_parameter/y_direction = 0.0
+shader_parameter/z_direction = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3hf0g"]
+next_pass = SubResource("ShaderMaterial_vj7ia")
+albedo_color = Color(1, 1, 0.431373, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2xcb"]
 resource_name = "Material.001"
@@ -93,6 +110,7 @@ script = ExtResource("1_eqih7")
 transform = Transform3D(0.0509678, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_agw71")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_3hf0g")
 
 [node name="Text" type="MeshInstance3D" parent="Note"]
 transform = Transform3D(-7.69643e-08, 12.6673, -5.35459e-07, -0.0712489, -1.06083e-05, -0.64168, -0.64168, -3.41443e-07, 0.0712489, 0.948366, 0.0164178, -0.0313698)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://brk1bi6nckn8r"]
+[gd_scene load_steps=37 format=3 uid="uid://brk1bi6nckn8r"]
 
 [ext_resource type="Script" uid="uid://bjp1xbcce3uwv" path="res://scripts/main.gd" id="1_bjd11"]
 [ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="1_rvslj"]
@@ -21,6 +21,8 @@
 [ext_resource type="AudioStream" uid="uid://b38eudtsr1ssj" path="res://assets/sounds/Alley(145).wav" id="15_3p2gp"]
 [ext_resource type="Script" uid="uid://btswlr8jqov3h" path="res://scripts/path.gd" id="16_ft6cd"]
 [ext_resource type="PackedScene" uid="uid://dx7hr7gqjomm1" path="res://ui/Dialog.tscn" id="18_bb450"]
+[ext_resource type="Script" uid="uid://ddlnnjyxsdj3r" path="res://scripts/npc.gd" id="21_ebg2g"]
+[ext_resource type="PackedScene" uid="uid://cm54sb8canv0x" path="res://scenes/props/product.tscn" id="22_2ofn6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nxtc6"]
 
@@ -483,6 +485,9 @@ script = ExtResource("16_ft6cd")
 
 [node name="Hillybilly" parent="Path3D/PathFollow3D" instance=ExtResource("7_nxtc6")]
 transform = Transform3D(-1.49524, 0, 0.119568, 0, 1.5, 0, -0.119568, 0, -1.49524, 0.0238495, -0.242476, 0.0291016)
+script = ExtResource("21_ebg2g")
+speed = 5.0
+product_scene = ExtResource("22_2ofn6")
 spawn_marker_path = NodePath("../../../productSpawn")
 
 [node name="productSpawn" type="Marker3D" parent="."]
@@ -496,3 +501,6 @@ transform = Transform3D(0.00355033, -1.59185e-18, -0.00716904, 0, 0.008, -1.7763
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
 
 [editable path="gas_station"]
+[editable path="gas_station/lamps/lamp4"]
+[editable path="Path3D/PathFollow3D/Hillybilly"]
+[editable path="Path3D/PathFollow3D/Hillybilly/hillybilly"]

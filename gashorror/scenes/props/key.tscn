@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://jecr2otm3448"]
+
+[ext_resource type="PackedScene" uid="uid://et2kkwd6itwk" path="res://assets/3d/key_with_tag.glb" id="1_2c0bv"]
+[ext_resource type="Script" uid="uid://ctb5keuk7k53g" path="res://scripts/key.gd" id="1_qm46u"]
+[ext_resource type="Shader" uid="uid://brdlcujsby21f" path="res://shaders/shine.gdshader" id="2_qm46u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0yxup"]
+render_priority = 0
+shader = ExtResource("2_qm46u")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 0.405
+shader_parameter/shine_width = 0.024
+shader_parameter/cycle_interval = 1.0
+shader_parameter/angle_fade = 1.0
+shader_parameter/x_direction = 0.0
+shader_parameter/y_direction = 0.0
+shader_parameter/z_direction = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7sxk4"]
+next_pass = SubResource("ShaderMaterial_0yxup")
+albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2c0bv"]
+size = Vector3(0.0578003, 0.0720215, 0.143036)
+
+[node name="Key" type="Area3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+script = ExtResource("1_qm46u")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_2c0bv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00134641, 0, 0.00187716)
+
+[node name="SM_Key_Key_0" parent="Sketchfab_Scene/Sketchfab_model/Key_fbx/RootNode/SM_Key" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7sxk4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00369263, 0.00925998, 0.00675851)
+shape = SubResource("BoxShape3D_2c0bv")
+
+[editable path="Sketchfab_Scene"]

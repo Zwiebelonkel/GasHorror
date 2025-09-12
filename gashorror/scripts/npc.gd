@@ -11,7 +11,7 @@ extends CharacterBody3D
 var started := false
 var reached_end := false
 var has_spawned := false
-var spawned_product = null  # Zum späteren Entfernen
+var spawned_product = null  # Zum späteren Entfernendw
 
 func _ready():
 	play_idle_animation()
