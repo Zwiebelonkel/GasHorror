@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://k3wuttqn3ye0"]
+
+[ext_resource type="PackedScene" uid="uid://dsuootxbjvx3r" path="res://assets/3d/people/psx_base_-_bearded_man.glb" id="1_uommk"]
+
+[node name="Node3D" type="CharacterBody3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_uommk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00721312, -0.00840086, 0.082649)

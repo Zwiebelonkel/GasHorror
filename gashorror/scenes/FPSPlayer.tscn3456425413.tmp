@@ -15,12 +15,18 @@
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03875, 0)
 script = ExtResource("1_wycwc")
-flashlight_path = NodePath("Camera3D/flashlightModel")
-gun_path = NodePath("Camera3D/gun")
-sway_rot_deg_x = 10.0
-sway_rot_deg_y = 10.0
-sway_pos_x = 0.15
-sway_pos_y = 0.1
+move_speed = 5.0
+run_mult = 6.0
+mouse_sens = 5.0
+gravity = 1.0
+jump_strength = 10.0
+crouch_speed = 1.0
+crouch_height = 1.0
+normal_height = 1.8
+step_interval_walk = 2.0
+step_interval_run_mult = 1.0
+step_interval_crouch_mult = 0.9
+step_pitch_jitter = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_wycwc")
@@ -41,17 +47,16 @@ script = ExtResource("2_wba1j")
 [node name="HoldPoint" type="Marker3D" parent="CharacterBody3D/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.376948, -1.31067)
 
-[node name="flashlightModel" type="Marker3D" parent="CharacterBody3D/Camera3D"]
+[node name="FlashLight" type="Marker3D" parent="CharacterBody3D/Camera3D"]
 transform = Transform3D(1.5, 0, 0, 0, 1.48631, -0.202173, 0, 0.202173, 1.48631, -0.809794, -0.729896, -0.859101)
 
-[node name="Node3D" parent="CharacterBody3D/Camera3D/flashlightModel" instance=ExtResource("3_fkaks")]
+[node name="Node3D" parent="CharacterBody3D/Camera3D/FlashLight" instance=ExtResource("3_fkaks")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="gun" type="Marker3D" parent="CharacterBody3D/Camera3D"]
+[node name="Gun" type="Marker3D" parent="CharacterBody3D/Camera3D"]
 transform = Transform3D(0.984112, -0.177549, 0, 0.177549, 0.984112, 0, 0, 0, 1, 0.563341, -0.545775, -0.865401)
-visible = false
 
-[node name="Node3D" parent="CharacterBody3D/Camera3D/gun" instance=ExtResource("3_5gvag")]
+[node name="Node3D" parent="CharacterBody3D/Camera3D/Gun" instance=ExtResource("3_5gvag")]
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)
 
 [node name="Interactor" type="Node3D" parent="CharacterBody3D"]

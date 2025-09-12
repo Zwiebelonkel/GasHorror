@@ -4,7 +4,7 @@ extends Node3D
 @export var distance: float = 2.5
 
 @onready var cam: Camera3D = get_node(cam_path)
-@onready var prompt_label: Label = get_node("/root/Main/CanvasLayer/InteractionPrompt")
+@onready var prompt_label: Label = get_node("/root/Main/Interactor HUD/InteractionPrompt")
 
 var current_target: Object = null
 

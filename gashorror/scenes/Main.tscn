@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://brk1bi6nckn8r"]
+[gd_scene load_steps=38 format=3 uid="uid://brk1bi6nckn8r"]
 
 [ext_resource type="Script" uid="uid://bjp1xbcce3uwv" path="res://scripts/main.gd" id="1_bjd11"]
 [ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="1_rvslj"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dx7hr7gqjomm1" path="res://ui/Dialog.tscn" id="18_bb450"]
 [ext_resource type="Script" uid="uid://ddlnnjyxsdj3r" path="res://scripts/npc.gd" id="21_ebg2g"]
 [ext_resource type="PackedScene" uid="uid://cm54sb8canv0x" path="res://scenes/props/product.tscn" id="22_2ofn6"]
+[ext_resource type="PackedScene" uid="uid://cwixmhxiwdbma" path="res://ui/cross.tscn" id="24_2ofn6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nxtc6"]
 
@@ -409,9 +410,9 @@ main_node_path = NodePath("..")
 transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -9.54452, 1.51044, 5.67607)
 visible = false
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Interactor HUD" type="CanvasLayer" parent="."]
 
-[node name="InteractionPrompt" type="Label" parent="CanvasLayer"]
+[node name="InteractionPrompt" type="Label" parent="Interactor HUD"]
 visible = false
 anchors_preset = 14
 anchor_top = 0.5
@@ -497,6 +498,8 @@ transform = Transform3D(0.008, 0, 0, 0, 0.008, -1.77636e-18, 0, 1.77636e-18, 0.0
 transform = Transform3D(0.00355033, -1.59185e-18, -0.00716904, 0, 0.008, -1.77636e-18, 0.00716904, 7.88332e-19, 0.00355033, -8.41652, 0.95177, -3.85853)
 
 [node name="dialog" parent="." instance=ExtResource("18_bb450")]
+
+[node name="Cross" parent="." instance=ExtResource("24_2ofn6")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bh1bde8sgfkwd"]
+
+[ext_resource type="PackedScene" uid="uid://c47d8kxl4prb4" path="res://assets/3d/psx_colt_1911.glb" id="1_iwijv"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_iwijv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206333, 0.0607282, 0.0913634)

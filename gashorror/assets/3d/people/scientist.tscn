@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7kviigfk0laj"]
+
+[ext_resource type="PackedScene" uid="uid://cyr8220xmnqqn" path="res://assets/3d/people/scientist_psx_style.glb" id="1_5kr7a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d7wr7"]
+size = Vector3(1, 1.72949, 0.434509)
+
+[node name="Node3D" type="CharacterBody3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_5kr7a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023694, 0, -0.0447137)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.846651, -0.0533142)
+shape = SubResource("BoxShape3D_d7wr7")
+
+[editable path="Sketchfab_Scene"]

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4hoht45y63l0"]
+
+[ext_resource type="PackedScene" uid="uid://bccvr0fkrmpas" path="res://scenes/props/corpse.tscn" id="1_6mkvh"]
+[ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="2_ehj20"]
+[ext_resource type="PackedScene" uid="uid://b7kviigfk0laj" path="res://assets/3d/people/scientist.tscn" id="3_fie5y"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yq778"]
+size = Vector2(10, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fknr6"]
+data = PackedVector3Array(5, 0, 5, -5, 0, 5, 5, 0, -5, -5, 0, 5, -5, 0, -5, 5, 0, -5)
+
+[node name="Laboratory" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_yq778")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_fknr6")
+
+[node name="Corpse" parent="." instance=ExtResource("1_6mkvh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="FpsPlayer" parent="." instance=ExtResource("2_ehj20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0715528, 3.78202)
+
+[node name="Camera3D" parent="FpsPlayer/CharacterBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.228439, 0)
+
+[node name="Scientist" parent="." instance=ExtResource("3_fie5y")]
+transform = Transform3D(-0.0703136, 0, -0.997525, 0, 1, 0, 0.997525, 0, -0.0703136, 0.9905, 0, 0)
+
+[node name="Scientist2" parent="." instance=ExtResource("3_fie5y")]
+transform = Transform3D(0.241278, 0, 0.970456, 0, 1, 0, -0.970456, 0, 0.241278, -0.752766, 0, 0)
+
+[editable path="FpsPlayer"]
