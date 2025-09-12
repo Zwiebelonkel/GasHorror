@@ -34,6 +34,11 @@ version_control/size/mode=3
 version_control/size/viewport_height=300
 version_control/size/viewport_width=400
 
+[global_group]
+
+Lights=""
+Emissive=""
+
 [importer_defaults]
 
 scene={

@@ -24,6 +24,9 @@ extends CharacterBody3D
 var yaw: float = 0.0
 var pitch: float = 0.0
 var is_crouching: bool = false
+var can_look := true
+var keys: Array[String] = []
+
 
 func _ready() -> void:
 	add_to_group("player")
@@ -34,6 +37,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	# Maus-Look
+	if not can_look:
+		return  # Input ignorieren, wenn nicht erlaubt
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		yaw   -= event.relative.x * mouse_sens
 		pitch -= event.relative.y * mouse_sens
@@ -130,3 +135,10 @@ func _on_step_timer_timeout() -> void:
 
 func _capture_mouse(enable: bool) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if enable else Input.MOUSE_MODE_VISIBLE)
+
+func has_key(key_name: String) -> bool:
+	return key_name in keys
+
+
+func add_key(name) -> void:
+		keys.append(name)

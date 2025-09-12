@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=3 uid="uid://brk1bi6nckn8r"]
+[gd_scene load_steps=35 format=3 uid="uid://brk1bi6nckn8r"]
 
 [ext_resource type="Script" uid="uid://bjp1xbcce3uwv" path="res://scripts/main.gd" id="1_bjd11"]
 [ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="1_rvslj"]
 [ext_resource type="PackedScene" uid="uid://c5a30iqc83kwo" path="res://scenes/props/shelf.tscn" id="1_wp0k4"]
 [ext_resource type="PackedScene" uid="uid://b508608ahs5xv" path="res://ui/ObjectiveHUD.tscn" id="2_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://dig56my50obj6" path="res://scenes/props/note.tscn" id="2_1iba3"]
 [ext_resource type="Shader" uid="uid://1tc2rtqiu7q2" path="res://shaders/buckshot.gdshader" id="2_rarhs"]
 [ext_resource type="Shader" uid="uid://ber46v45djbx5" path="res://shaders/crt.gdshader" id="4_rarhs"]
 [ext_resource type="PackedScene" uid="uid://c7jnqeoq7xx8p" path="res://scenes/props/gas_station.tscn" id="4_vcsgt"]
@@ -13,10 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://bibrda0q610u" path="res://assets/3d/people/hillybilly.tscn" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://cxone3oejtr47" path="res://scenes/props/box.tscn" id="9_lhr70"]
 [ext_resource type="PackedScene" uid="uid://5hh0b165fj4p" path="res://scenes/props/breaker.tscn" id="10_lhr70"]
+[ext_resource type="PackedScene" uid="uid://cw17vkmh56ysm" path="res://scenes/props/breakerClosed.tscn" id="11_1nqs0"]
+[ext_resource type="Script" uid="uid://d2dt7i481l32k" path="res://scripts/lockedBreaker.gd" id="12_1iba3"]
 [ext_resource type="PackedScene" uid="uid://j30csp6a6tuo" path="res://scenes/props/lantern.tscn" id="13_qmy6f"]
 [ext_resource type="PackedScene" uid="uid://mjhdv6c1qnyi" path="res://scenes/props/cellar.tscn" id="14_mwfav"]
 [ext_resource type="AudioStream" uid="uid://b38eudtsr1ssj" path="res://assets/sounds/Alley(145).wav" id="15_3p2gp"]
 [ext_resource type="Script" uid="uid://btswlr8jqov3h" path="res://scripts/path.gd" id="16_ft6cd"]
+[ext_resource type="PackedScene" uid="uid://dx7hr7gqjomm1" path="res://ui/Dialog.tscn" id="18_bb450"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nxtc6"]
 
@@ -125,6 +129,9 @@ point_count = 7
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_bjd11")
+note_marker_path = NodePath("noteSpawn")
+note_scene = ExtResource("2_1iba3")
+doorArea = NodePath("Area3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rarhs")
@@ -270,28 +277,46 @@ light_energy = 17.632
 [node name="DoorSound" type="AudioStreamPlayer" parent="gas_station/Sketchfab_model/Gas_Station_fbx/RootNode/Store/Door/Door_Palette_0/StaticBody3D" index="2"]
 stream = ExtResource("6_cvmbd")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="gas_station/lamps/lamp" index="1"]
+[node name="lamps" parent="gas_station" index="1" groups=["Emissive"]]
+
+[node name="lamp" parent="gas_station/lamps" index="0" groups=["Emissive"]]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="gas_station/lamps/lamp" index="1" groups=["Lights"]]
 transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, 0, 0, 17.2767)
 light_color = Color(1, 1, 0.580392, 1)
 shadow_enabled = true
 spot_range = 10.444
 spot_angle = 87.51
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="gas_station/lamps/lamp2" index="1"]
+[node name="lamp2" parent="gas_station/lamps" index="1" groups=["Emissive"]]
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="gas_station/lamps/lamp2" index="1" groups=["Lights"]]
 transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, -6.62309, 0, 8.70748)
 light_color = Color(1, 1, 0.580392, 1)
 shadow_enabled = true
 spot_range = 10.444
 spot_angle = 87.51
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="gas_station/lamps/lamp3" index="1"]
+[node name="lamp10" parent="gas_station/lamps" index="2" groups=["Emissive"]]
+
+[node name="lamp11" parent="gas_station/lamps" index="3" groups=["Emissive"]]
+
+[node name="lamp12" parent="gas_station/lamps" index="4" groups=["Emissive"]]
+
+[node name="lamp13" parent="gas_station/lamps" index="5" groups=["Emissive"]]
+
+[node name="lamp3" parent="gas_station/lamps" index="6" groups=["Emissive"]]
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="gas_station/lamps/lamp3" index="1" groups=["Lights"]]
 transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, -6.66134, 0, 0)
 light_color = Color(1, 1, 0.580392, 1)
 shadow_enabled = true
 spot_range = 10.444
 spot_angle = 87.51
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="gas_station/lamps/lamp4" index="1"]
+[node name="lamp4" parent="gas_station/lamps" index="7" groups=["Emissive"]]
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="gas_station/lamps/lamp4" index="1" groups=["Lights"]]
 transform = Transform3D(-1.89251, -0.871019, -3.80735e-08, 0, -9.10654e-08, 2.08333, -0.871019, 1.89251, 8.27244e-08, 13.2252, 0, -8.57915)
 light_color = Color(1, 1, 0.580392, 1)
 shadow_enabled = true
@@ -299,35 +324,45 @@ spot_range = 10.444
 spot_angle = 87.51
 script = ExtResource("6_bjd11")
 
-[node name="SpotLight3D6" type="SpotLight3D" parent="gas_station/lamps/lamp5" index="1"]
+[node name="lamp5" parent="gas_station/lamps" index="8" groups=["Emissive"]]
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="gas_station/lamps/lamp5" index="1" groups=["Lights"]]
 transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, 0.0458059, 0, -0.184185)
 light_color = Color(1, 1, 0.580392, 1)
 shadow_enabled = true
 spot_range = 10.444
 spot_angle = 87.51
 
-[node name="SpotLight3D5" type="SpotLight3D" parent="gas_station/lamps/lamp6" index="1"]
+[node name="lamp6" parent="gas_station/lamps" index="9" groups=["Emissive"]]
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="gas_station/lamps/lamp6" index="1" groups=["Lights"]]
 transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, -6.67061, 0, 8.52461)
 light_color = Color(1, 1, 0.580392, 1)
 shadow_enabled = true
 spot_range = 10.444
 spot_angle = 87.51
 
-[node name="SpotLight3D6" type="SpotLight3D" parent="gas_station/lamps/lamp7" index="1"]
+[node name="lamp7" parent="gas_station/lamps" index="10" groups=["Emissive"]]
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="gas_station/lamps/lamp7" index="1" groups=["Lights"]]
 transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, 13.2593, 0, -0.0590744)
 light_color = Color(1, 1, 0.580392, 1)
 shadow_enabled = true
 spot_range = 10.444
 spot_angle = 87.51
 
-[node name="SpotLight3D7" type="SpotLight3D" parent="gas_station/lamps/lamp8" index="1"]
+[node name="lamp8" parent="gas_station/lamps" index="11" groups=["Emissive"]]
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="gas_station/lamps/lamp8" index="1" groups=["Lights"]]
 transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, -6.62309, 0, -17.2413)
 light_color = Color(1, 1, 0.580392, 1)
 shadow_enabled = true
 spot_range = 10.444
 spot_angle = 87.51
 
-[node name="SpotLight3D8" type="SpotLight3D" parent="gas_station/lamps/lamp9" index="1"]
+[node name="lamp9" parent="gas_station/lamps" index="12" groups=["Emissive"]]
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="gas_station/lamps/lamp9" index="1" groups=["Lights"]]
 transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, 0.155204, 0, -8.68942)
 light_color = Color(1, 1, 0.580392, 1)
 shadow_enabled = true
@@ -361,8 +396,16 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3.9153, 0.383823, 8.14
 [node name="Box4" parent="." instance=ExtResource("9_lhr70")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.82702, 0.383823, 8.14623)
 
+[node name="breakerClosed" parent="." instance=ExtResource("11_1nqs0")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -9.54722, 1.51044, 5.6765)
+script = ExtResource("12_1iba3")
+breaker_closed_node = NodePath(".")
+breaker_open_node = NodePath("../Breaker")
+main_node_path = NodePath("..")
+
 [node name="Breaker" parent="." instance=ExtResource("10_lhr70")]
 transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -9.54452, 1.51044, 5.67607)
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -440,6 +483,15 @@ script = ExtResource("16_ft6cd")
 
 [node name="Hillybilly" parent="Path3D/PathFollow3D" instance=ExtResource("7_nxtc6")]
 transform = Transform3D(-1.49524, 0, 0.119568, 0, 1.5, 0, -0.119568, 0, -1.49524, 0.0238495, -0.242476, 0.0291016)
+spawn_marker_path = NodePath("../../../productSpawn")
+
+[node name="productSpawn" type="Marker3D" parent="."]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, -1.77636e-18, 0, 1.77636e-18, 0.008, -7.23118, 0.958245, -3.60451)
+
+[node name="noteSpawn" type="Marker3D" parent="."]
+transform = Transform3D(0.00355033, -1.59185e-18, -0.00716904, 0, 0.008, -1.77636e-18, 0.00716904, 7.88332e-19, 0.00355033, -8.41652, 0.95177, -3.85853)
+
+[node name="dialog" parent="." instance=ExtResource("18_bb450")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
 

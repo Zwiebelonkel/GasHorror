@@ -18,9 +18,9 @@ func _ready():
 
 # Signal-Handler
 func _refresh(_n = null, _d = {}):
-	print("HUD _refresh aufgerufen mit Signal:", _n)
+	#print("HUD _refresh aufgerufen mit Signal:", _n)
 	var s = objectives.state
-	print("State im HUD:", s)
+	#print("State im HUD:", s)
 
 	# Objective-Text vom Singleton holen
 	obj_label.text = objectives.get_current_objective_name()

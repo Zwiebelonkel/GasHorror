@@ -18,8 +18,8 @@ func _toggle_breaker():
 	var anim = $breaker2/AnimationPlayer
 	if is_on:
 		anim.play_backwards("on")
-		Objectives.trigger_blackout()
+		Objectives.blackOut()
 	else:
 		anim.play("on")
-		Objectives.restore_power()
+		Objectives.restore_lights()
 	is_on = !is_on

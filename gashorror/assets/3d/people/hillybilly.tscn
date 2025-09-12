@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bibrda0q610u"]
+[gd_scene load_steps=6 format=3 uid="uid://bibrda0q610u"]
 
 [ext_resource type="Script" uid="uid://ddlnnjyxsdj3r" path="res://scripts/npc.gd" id="1_awvc3"]
 [ext_resource type="PackedScene" uid="uid://1j4hka22jixx" path="res://assets/3d/people/hillybilly.glb" id="1_hcs1e"]
+[ext_resource type="PackedScene" uid="uid://cm54sb8canv0x" path="res://scenes/props/product.tscn" id="2_ue6s2"]
 [ext_resource type="Material" uid="uid://dtdolx4d8p5ee" path="res://assets/3d/people/hillybilly.tres" id="3_oa37l"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_awvc3"]
@@ -9,6 +10,8 @@ data = PackedVector3Array(0.0252, 0.4661, 0.0443, 0.0984, 0.5455, -0.0138, 0.031
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_awvc3")
+speed = 2.0
+product_scene = ExtResource("2_ue6s2")
 
 [node name="hillybilly" parent="." instance=ExtResource("1_hcs1e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0169586, 0, -0.120409)
@@ -28,9 +31,7 @@ bones/26/rotation = Quaternion(0.0456387, -0.00234047, -0.0266068, 0.998601)
 [node name="Object_34" parent="hillybilly/metarig/Skeleton3D" index="0"]
 surface_material_override/0 = ExtResource("3_oa37l")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="hillybilly/metarig/Skeleton3D/Object_34" index="0"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hillybilly/metarig/Skeleton3D/Object_34/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 0, -0.135811)
 shape = SubResource("ConcavePolygonShape3D_awvc3")
 

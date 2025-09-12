@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cl8v7eias4p7a"]
+
+[ext_resource type="FontFile" uid="uid://cf54ji6hr1hw2" path="res://assets/fonts/VCR_OSD_MONO.ttf" id="1_wruno"]
+
+[resource]
+font = ExtResource("1_wruno")
+font_color = Color(0.884941, 0.88494, 7.70092e-07, 1)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm54sb8canv0x"]
+
+[ext_resource type="Script" uid="uid://c6hldc1c762o3" path="res://scripts/productSpawner.gd" id="1_ym6xv"]
+[ext_resource type="PackedScene" uid="uid://2s8p0h1rhxdw" path="res://scenes/props/cans/can1.tscn" id="2_kwbbl"]
+[ext_resource type="PackedScene" uid="uid://bxjcxa42i6j6c" path="res://scenes/props/cans/can2.tscn" id="3_r1pdb"]
+[ext_resource type="PackedScene" uid="uid://85u47207xnf5" path="res://scenes/props/cans/can3.tscn" id="4_rqxpt"]
+
+[node name="Product" type="Node3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+script = ExtResource("1_ym6xv")
+possible_products = Array[PackedScene]([ExtResource("2_kwbbl"), ExtResource("3_r1pdb"), ExtResource("4_rqxpt")])

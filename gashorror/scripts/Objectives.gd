@@ -64,7 +64,7 @@ func get_current_objective_name() -> String:
 		BLACKOUT:
 			return "Ziel: Der Strom ist ausgefallen!"
 		FIND_NOTE:
-			return "Ziel: Finde heraus, wie man den Stromkasten öffnet."
+			return "Ziel: Schaue im Laden nach einer Notiz."
 		FIND_KEY:
 			return "Ziel: Finde den Schlüssel im Keller."
 		JUMPSCARE:
@@ -103,6 +103,42 @@ func enter_station():
 	if current_step == START:
 		state.entered_station = true
 		set_step(PACKAGES)  # Hier wird dann das Signal emittiert
+		
+func blackOut():
+	if current_step == CUSTOMER:
+		state.blackout = true
+		set_step(BLACKOUT)
+
+		# 🕯️ Lichter ausschalten
+		for light in get_tree().get_nodes_in_group("Lights"):
+			if light is Light3D:
+				light.visible = false
+
+		# 💡 Emission-Materialien deaktivieren
+		for mesh in get_tree().get_nodes_in_group("Emissive"):
+			if mesh is MeshInstance3D:
+				var mat = mesh.get_active_material()
+				if mat is StandardMaterial3D:
+					mat.emission_enabled = false
+					mesh.set_surface_override_material(0, mat)
+					
+func found_locked_breaker():
+	if current_step < FIND_NOTE:
+		set_step(FIND_NOTE)
+
+
+func restore_lights():
+	if current_step == BLACKOUT:
+		state.blackout = true
+		set_step(BLACKOUT)
+	for light in get_tree().get_nodes_in_group("Lights"):
+		light.visible = true
+
+	#for mesh in get_tree().get_nodes_in_group("Emissive"):
+		#var mat = mesh.get_active_material()
+		#if mat is StandardMaterial3D:
+			#mat.emission_enabled = true
+			#mesh.set_surface_override_material(0, mat)
 
 
 
