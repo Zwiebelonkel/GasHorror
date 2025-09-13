@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bh1bde8sgfkwd"]
+[gd_scene load_steps=4 format=3 uid="uid://bh1bde8sgfkwd"]
 
 [ext_resource type="PackedScene" uid="uid://dniwfgga4nb14" path="res://assets/3d/gun.glb" id="1_iwijv"]
 [ext_resource type="Script" uid="uid://bmpyoj0wesp2a" path="res://scripts/gun.gd" id="1_rjvdq"]
+[ext_resource type="AudioStream" uid="uid://cd7avn5viv4bx" path="res://assets/sounds/shot.wav" id="3_eryc1"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -9,7 +10,17 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335476, 0, 1.00173)
 script = ExtResource("1_rjvdq")
 
-[node name="Muzzle" parent="gun" index="3"]
-transform = Transform3D(0.173386, 0, 0, 0, -2.23595e-08, 0.146399, 0, -0.511527, -6.3993e-09, -0.158329, 0.0418466, 0.0223962)
+[node name="muzzleLight" type="OmniLight3D" parent="gun/Muzzle" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243221, 0.0981131, -2.10493)
+light_color = Color(1, 1, 0.67451, 1)
+light_energy = 16.0
+light_indirect_energy = 1.485
+light_size = 1.0
+light_specular = 11.328
+
+[node name="shot_sound" type="AudioStreamPlayer" parent="gun"]
+stream = ExtResource("3_eryc1")
+volume_db = -21.55
+pitch_scale = 0.53
 
 [editable path="gun"]
