@@ -52,7 +52,7 @@ transform = Transform3D(0.984112, -0.177549, 0, 0.177549, 0.984112, 0, 0, 0, 1, 
 visible = false
 
 [node name="Node3D" parent="CharacterBody3D/Camera3D/gun" instance=ExtResource("3_5gvag")]
-transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, 0, 0, 0)
+transform = Transform3D(-0.7, 0, -1.05697e-07, 0, 0.7, 0, 1.05697e-07, 0, -0.7, 0, 0, 0)
 
 [node name="Interactor" type="Node3D" parent="CharacterBody3D"]
 script = ExtResource("2_savv0")

@@ -232,6 +232,7 @@ func _update_headbob(delta: float, dir: Vector3, running: bool) -> void:
 	cam.position = cam.position.lerp(target_pos, clamp(bob_return_speed * delta, 0.0, 1.0))
 
 # ---------------- WEAPON SWAY ----------------
+# ---------------- WEAPON SWAY ----------------
 func _update_weapon_sway(delta: float, dir: Vector3) -> void:
 	# Maus-Impuls dämpfen (Feder)
 	_mouse_impulse = _mouse_impulse.lerp(Vector2.ZERO, clamp(sway_return_speed * delta, 0.0, 1.0))
@@ -251,22 +252,31 @@ func _update_weapon_sway(delta: float, dir: Vector3) -> void:
 
 	if flashlight:
 		var tgt_basis := _flash_base_rot \
-			* Basis(Vector3.RIGHT,  rot_x) \
-			* Basis(Vector3.UP,     rot_y)
+			* Basis(Vector3.RIGHT, rot_x) \
+			* Basis(Vector3.UP, rot_y)
 		var tgt_pos := _flash_base_pos + Vector3(pos_x, pos_y, 0.0)
 
-		# smooth lerp
-		flashlight.transform.basis = flashlight.transform.basis.slerp(tgt_basis, clamp(sway_return_speed * delta, 0.0, 1.0))
-		flashlight.position = flashlight.position.lerp(tgt_pos, clamp(sway_return_speed * delta, 0.0, 1.0))
+		# smooth lerp + normalisieren
+		flashlight.transform.basis = flashlight.transform.basis.slerp(
+			tgt_basis, clamp(sway_return_speed * delta, 0.0, 1.0)
+		).orthonormalized()
+		flashlight.position = flashlight.position.lerp(
+			tgt_pos, clamp(sway_return_speed * delta, 0.0, 1.0)
+		)
 
 	if gun:
 		var tgt_basis2 := _gun_base_rot \
-			* Basis(Vector3.RIGHT,  rot_x) \
-			* Basis(Vector3.UP,     rot_y)
+			* Basis(Vector3.RIGHT, rot_x) \
+			* Basis(Vector3.UP, rot_y)
 		var tgt_pos2 := _gun_base_pos + Vector3(pos_x, pos_y, 0.0)
 
-		gun.transform.basis = gun.transform.basis.slerp(tgt_basis2, clamp(sway_return_speed * delta, 0.0, 1.0))
-		gun.position = gun.position.lerp(tgt_pos2, clamp(sway_return_speed * delta, 0.0, 1.0))
+		# smooth lerp + normalisieren
+		gun.transform.basis = gun.transform.basis.slerp(
+			tgt_basis2, clamp(sway_return_speed * delta, 0.0, 1.0)
+		).orthonormalized()
+		gun.position = gun.position.lerp(
+			tgt_pos2, clamp(sway_return_speed * delta, 0.0, 1.0)
+		)
 
 # ------------- Utility -------------
 func _capture_mouse(enable: bool) -> void:
