@@ -12,7 +12,7 @@ extends Node3D
 @onready var s_shot: AudioStreamPlayer = get_node_or_null(shot_sound_path) as AudioStreamPlayer
 
 # --- Timing ---
-@export var muzzle_flash_time: float = 0.08   # 80 ms typischer Flash
+@export var muzzle_flash_time: float = 0.1   # 80 ms typischer Flash
 @export var fire_cooldown: float = 0.12       # minimale Zeit zwischen Schüssen
 
 # Optional: Anim-Visibility-Tracks deaktivieren (falls vorhanden)

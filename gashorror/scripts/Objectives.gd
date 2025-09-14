@@ -66,7 +66,7 @@ func get_current_objective_name() -> String:
 		FIND_NOTE:
 			return "Ziel: Abgeschlossen: Schaue im Laden nach einer Notiz."
 		FIND_KEY:
-			return "Ziel: Finde den Schlüssel im Keller."
+			return "Ziel: Finde den Schlüssel im Keller. Code: 1906"
 		JUMPSCARE:
 			return "Ziel: Kehre nach oben zurück."
 		POWER_ON:

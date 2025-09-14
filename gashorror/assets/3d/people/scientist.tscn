@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7kviigfk0laj"]
+[gd_scene load_steps=5 format=3 uid="uid://b7kviigfk0laj"]
 
 [ext_resource type="PackedScene" uid="uid://cyr8220xmnqqn" path="res://assets/3d/people/scientist_psx_style.glb" id="1_5kr7a"]
+[ext_resource type="Texture2D" uid="uid://vx6ka56k4gcx" path="res://assets/3d/people/scientist_psx_style_0.png" id="2_d7wr7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yx7bm"]
+albedo_texture = ExtResource("2_d7wr7")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d7wr7"]
 size = Vector3(1, 1.72949, 0.434509)
@@ -9,6 +13,9 @@ size = Vector3(1, 1.72949, 0.434509)
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_5kr7a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0023694, 0, -0.0447137)
+
+[node name="Object_7" parent="Sketchfab_Scene/Sketchfab_model/scientist_fbx/RootNode/Armature/Object_4/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_yx7bm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.846651, -0.0533142)

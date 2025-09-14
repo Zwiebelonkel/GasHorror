@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6mwuyhgq67nl"]
+
+[ext_resource type="Script" uid="uid://d1pet15stivs5" path="res://scripts/code_ui.gd" id="1_ecmxq"]
+
+[node name="code_ui" type="CanvasLayer"]
+script = ExtResource("1_ecmxq")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 63.0
+offset_right = 485.0
+offset_bottom = 516.0
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Input" type="LineEdit" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="OkBtn" type="Button" parent="Panel/VBox/HBox"]
+layout_mode = 2
+text = "OK"
+
+[node name="CancelBtn" type="Button" parent="Panel/VBox/HBox"]
+layout_mode = 2
+text = "Abbrechen"

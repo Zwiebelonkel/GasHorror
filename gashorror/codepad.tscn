@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqhxymjbpvxjf"]
+
+[ext_resource type="PackedScene" uid="uid://1ar6jj1xfup2" path="res://assets/3d/code.glb" id="1_spdx3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_spdx3"]
+size = Vector3(2.03096, 3.05746, 0.524626)
+
+[node name="Codepad" type="Area3D"]
+
+[node name="code" parent="." instance=ExtResource("1_spdx3")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00505257, -0.00448817, 0.025028)
+shape = SubResource("BoxShape3D_spdx3")
