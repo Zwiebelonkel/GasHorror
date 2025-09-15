@@ -4,12 +4,12 @@ extends Node3D
 @export var note_scene: PackedScene
 @export var doorArea: NodePath  # <-- Pfad zu deiner Area3D (z. B. Türtrigger)
 
-func _ready():
-	var area = get_node_or_null(doorArea)
-	if area:
-		area.body_entered.connect(_on_area_3d_body_entered_station)
-	else:
-		print("⚠️ doorArea-Node nicht gefunden!")
+#func _ready():
+	#var area = get_node_or_null(doorArea)
+	#if area:
+		#area.body_entered.connect(_on_area_3d_body_entered_station)
+	#else:
+		#print("⚠️ doorArea-Node nicht gefunden!")
 
 func _on_area_3d_body_entered_station(body: Node3D) -> void:
 	if body.is_in_group("player"):

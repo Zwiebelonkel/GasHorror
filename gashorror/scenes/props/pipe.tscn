@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://da7mh73xi5r1f"]
+
+[ext_resource type="PackedScene" uid="uid://d4ns3i6dfuo18" path="res://assets/3d/cable.glb" id="1_jptf1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jrf68"]
+albedo_color = Color(0.190762, 0.190762, 0.190762, 1)
+
+[sub_resource type="GDScript" id="GDScript_jptf1"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="cable" parent="." instance=ExtResource("1_jptf1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0459865, 0, 0.0645115)
+
+[node name="Cylinder" parent="cable" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_jrf68")
+script = SubResource("GDScript_jptf1")
+
+[editable path="cable"]

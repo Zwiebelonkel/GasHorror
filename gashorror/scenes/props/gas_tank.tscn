@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwk2yvojjebn8"]
+
+[ext_resource type="PackedScene" uid="uid://difeit8ft7td5" path="res://assets/3d/gasTank.glb" id="1_sh0je"]
+
+[node name="gasTank" type="Node3D"]
+
+[node name="gasTank" parent="." instance=ExtResource("1_sh0je")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00612462, -1.19209e-07, -0.0493538)
+
+[editable path="gasTank"]
