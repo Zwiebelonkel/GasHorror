@@ -1,8 +1,7 @@
-[gd_scene load_steps=100 format=4 uid="uid://c7jnqeoq7xx8p"]
+[gd_scene load_steps=96 format=4 uid="uid://c7jnqeoq7xx8p"]
 
 [ext_resource type="Script" uid="uid://c1bswyq1cpgm1" path="res://scripts/door.gd" id="2_a8coi"]
 [ext_resource type="Texture2D" uid="uid://s04bwy0c53h0" path="res://assets/3d/gas_station/textures/Material_baseColor.png" id="2_bkcxg"]
-[ext_resource type="PackedScene" uid="uid://cr3h4epr0smro" path="res://assets/3d/sign/sign.glb" id="2_et14o"]
 [ext_resource type="PackedScene" uid="uid://kkjptqkpemnq" path="res://assets/3d/lamp.glb" id="2_f82qa"]
 [ext_resource type="Texture2D" uid="uid://0gfixbfp0s64" path="res://assets/3d/gas_station/textures/Sign_baseColor.png" id="3_a3h8y"]
 [ext_resource type="Texture2D" uid="uid://ubwwpumyi26x" path="res://assets/3d/gas_station/textures/Palette_baseColor.png" id="3_nn78w"]
@@ -1123,42 +1122,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_224el")
 
-[sub_resource type="Animation" id="Animation_bkcxg"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-4.28686, 398.751, 47.684)]
-}
-
-[sub_resource type="Animation" id="Animation_et14o"]
-resource_name = "flicker"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0518851, 0.204081, 0.221376, 0.239928, 0.254813, 0.273365, 0.3, 0.644528, 0.698719),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-13.8015, 398.751, 47.6837), Vector3(-14.782, 398.751, 47.684), Vector3(-13.8015, 398.751, 47.6837), Vector3(-13.8015, 398.751, 47.6837), Vector3(-14.782, 398.751, 47.684), Vector3(-13.8015, 398.751, 47.6837), Vector3(-14.782, 398.751, 47.684), Vector3(-13.8015, 398.751, 47.6837), Vector3(-14.782, 398.751, 47.684), Vector3(-14.782, 398.751, 47.684), Vector3(-13.8015, 398.751, 47.6837)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a3h8y"]
-_data = {
-&"RESET": SubResource("Animation_bkcxg"),
-&"flicker": SubResource("Animation_et14o")
-}
-
 [node name="gas_station" type="Node3D"]
 
 [node name="Sketchfab_model" type="Node3D" parent="."]
@@ -1530,14 +1493,6 @@ shape = SubResource("ConcavePolygonShape3D_6sryq")
 [node name="Door2_Palette_001_0" type="MeshInstance3D" parent="Sketchfab_model/Gas_Station_fbx/RootNode/Store/Door2"]
 mesh = SubResource("ArrayMesh_pdftj")
 skeleton = NodePath("")
-
-[node name="sign" parent="Sketchfab_model/Gas_Station_fbx/RootNode" instance=ExtResource("2_et14o")]
-transform = Transform3D(-8.74228e-06, 0, 100, 0, 104.315, 0, -200, 0, -4.37114e-06, -4.28686, 398.751, 47.684)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sketchfab_model/Gas_Station_fbx/RootNode/sign"]
-libraries = {
-&"": SubResource("AnimationLibrary_a3h8y")
-}
 
 [node name="lamps" type="Node3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -10.3652, 4.25238, -3.04444)

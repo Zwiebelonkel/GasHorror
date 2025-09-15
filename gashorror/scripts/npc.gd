@@ -43,11 +43,11 @@ func interact(player):
 		dialog_ui.show_dialog(["📦 Warte bis er angekommen ist"])
 	else:
 		var dialogues = [
-			"Einmal das hier bitte.",
-			"2$ bitte. Haben Sie alles gefunden?",
-			"Ja, aber alles kann ich mir hier leider nicht leisten.",
-			"Tankstellenpreise eben. Tschüs!",
-			"Tschüss."
+			" Kunde: Einmal das hier bitte.",
+			" Spieler: 2$ bitte. Haben Sie alles gefunden?",
+			" Kunde: Ja, aber alles kann ich mir hier leider nicht leisten.",
+			" Spieler: Tankstellenpreise eben. Tschüs!",
+			" Kunde: Tschüss."
 		]
 		dialog_ui.show_dialog(dialogues, _on_dialog_finished)
 

@@ -176,10 +176,10 @@ func _start_dialog_after_scare() -> void:
 		return
 
 	var lines := [
-		"Du hast mich erschreckt!",
-		"Entschuldigung. Ist hier die Toilette?",
-		"Nein, ist sie nicht.",
-		"Okay, auf Wiedersehen!"
+		" Spieler: Du hast mich erschreckt!",
+		" Kunde: Entschuldigung. Ist hier die Toilette?",
+		" Spieler: Nein, ist sie nicht.",
+		" Kunde: Okay, auf Wiedersehen!"
 	]
 
 	if dialog_ui.has_method("show_dialog"):

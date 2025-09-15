@@ -11,8 +11,8 @@ extends Area3D
 @export var sign2_node: Node           # neues Schild
 
 # Optional zusätzlich: NodePaths (falls du lieber Pfade nutzt)
-@export var sign_path: NodePath
-@export var sign2_path: NodePath
+#@export var sign_path: NodePath
+#@export var sign2_path: NodePath
 
 # Fallback-Gruppen (falls oben nichts gesetzt ist)
 @export var old_group: StringName = &"SignOld"
@@ -21,6 +21,7 @@ extends Area3D
 var is_on := false
 
 func interact(player: Node) -> void:
+	_dbg("breaker path: " + str(get_path()))
 	if not player.is_in_group("player"):
 		_dbg("interact(): Body ist kein Spieler → Abbruch.")
 		return
@@ -51,8 +52,7 @@ func interact(player: Node) -> void:
 	# Schilder umschalten
 	var ok := _switch_signs_on_power()
 	if not ok:
-		_warn("Konnte keine Schilder finden. Setze sign_node/sign2_node ODER sign_path/sign2_path ODER Gruppen "
-			+ str(old_group) + "/" + str(new_group) + ".")
+		_warn("⚠️ Konnte keine Schilder finden. Bitte `sign_node`/`sign2_node` oder `sign_path`/`sign2_path` korrekt setzen.")
 
 	# Flags/Step
 	is_on = true
@@ -69,27 +69,26 @@ func interact(player: Node) -> void:
 func _switch_signs_on_power() -> bool:
 	var touched := false
 
-	# 1) Pfade (falls Nodes noch leer sind)
-	if sign_node == null and sign_path != NodePath():
-		sign_node = get_node_or_null(sign_path)
-		_dbg("sign_path → " + str(sign_path) + " → " + _node_info(sign_node))
-	if sign2_node == null and sign2_path != NodePath():
-		sign2_node = get_node_or_null(sign2_path)
-		_dbg("sign2_path → " + str(sign2_path) + " → " + _node_info(sign2_node))
+	# Priorität 1: direkte Node-Referenzen verwenden, wenn gesetzt
 
-	# 2) Umschalten per Node-Referenz
-	if sign_node:
+	# Umschalten per Node-Referenz (Node direkt gesetzt oder über Pfad aufgelöst)
+	if sign_node != null:
 		_dbg("Altes Schild (Node) vorher: " + _vis_str(sign_node))
 		_set_visible_recursive(sign_node, false)
 		_log("🪧 Alt aus (Node): " + str(sign_node.get_path()))
 		touched = true
-	if sign2_node:
+	else:
+		_dbg("❌ Kein `sign_node` vorhanden.")
+
+	if sign2_node != null:
 		_dbg("Neues Schild (Node) vorher: " + _vis_str(sign2_node))
 		_set_visible_recursive(sign2_node, true)
 		_log("🪧 Neu an  (Node): " + str(sign2_node.get_path()))
 		touched = true
+	else:
+		_dbg("❌ Kein `sign2_node` vorhanden.")
 
-	# 3) Fallback: Gruppen
+	# Fallback: Gruppen
 	if not touched:
 		var any_old := _set_group_visibility(old_group, false)
 		var any_new := _set_group_visibility(new_group, true)

@@ -428,11 +428,14 @@ main_node_path = NodePath("..")
 [node name="gas24" parent="breakerClosed" instance=ExtResource("8_36rkl")]
 transform = Transform3D(-1.31134e-07, 0, -2.103, 0, 2.103, 0, 3, 0, -9.1925e-08, -18.9001, 3.6144, 10.5432)
 
-[node name="Breaker" parent="." node_paths=PackedStringArray("sign_node", "sign2_node") instance=ExtResource("10_lhr70")]
+[node name="Breaker" parent="." instance=ExtResource("10_lhr70")]
 transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -9.54452, 1.51044, 5.67607)
 visible = false
-sign_node = NodePath("../breakerClosed/gas24")
-sign2_node = NodePath("thereIsMore")
+debug_logs = null
+sign_path = null
+sign2_path = null
+old_group = null
+new_group = null
 
 [node name="thereIsMore" parent="Breaker" instance=ExtResource("8_xa025")]
 transform = Transform3D(-1.31134e-07, 0, -2.103, 0, 2.103, 0, 3, 0, -9.1925e-08, -18.9651, 3.54569, 10.5984)
