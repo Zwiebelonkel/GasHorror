@@ -1,58 +1,85 @@
 extends CharacterBody3D
 
-# --- Referenzen ---
+# ----------------- Referenzen -----------------
 @export var dialog_ui: CanvasLayer
 @export var animation_player: AnimationPlayer
 @export var manager_trigger: Area3D
-@export var player_path: NodePath      # optional; leer lassen → per Gruppe
+@export var player_path: NodePath      # optional; leer lassen → via Gruppe "player" finden
 
-# --- Animationen ---
+# ----------------- Animationen ----------------
 @export var walk_anim: StringName = &"mixamo_com"
 @export var idle_anim: StringName = &"idle"
 
-# --- Bewegung/Verhalten ---
+# ----------------- Bewegung -------------------
 @export var speed: float = 5.0
 @export var turn_speed: float = 8.0
 @export var stop_distance: float = 1.5
 @export var use_gravity: bool = true
 @export var gravity: float = 9.8
 
-# --- Ragdoll/Death ---
-@export var skeleton_path: NodePath
+# ----------------- Ragdoll / Death ------------
+@export var skeleton_path: NodePath                 # -> auf dein Skeleton3D zeigen
 @export var ragdoll_impulse: float = 18.0
 @export var death_free_delay: float = 10.0
-@export var auto_shrink_shapes_factor: float = 0.0
+@export var auto_shrink_shapes_factor: float = 0.0  # z.B. 0.1 wenn importierte Shapes zu groß sind
 
-# --- intern ---
+# ----------------- Debug ----------------------
+@export var debug_logs: bool = false
+
+# ----------------- Intern ---------------------
 var _dialog_started := false
 var _chase := false
+var _dead := false
+
 var _player: Node3D
 var _skeleton: Skeleton3D
-var _dead := false
+var _sim: PhysicalBoneSimulator3D
 var _reacquire_timer := 0.0
 
 func _ready() -> void:
 	if dialog_ui:
 		dialog_ui.hide()
+
 	if manager_trigger and not manager_trigger.is_connected("body_entered", Callable(self, "_on_manager_trigger_entered")):
 		manager_trigger.body_entered.connect(Callable(self, "_on_manager_trigger_entered"))
 
 	_resolve_player(true)
 
-	_skeleton = get_node_or_null(skeleton_path) as Skeleton3D
+	# Skeleton & optionalen Simulator finden
+	_skeleton = _resolve_skeleton()
+	_sim      = _resolve_simulator()
+
+	# --- Ragdoll AUS beim Start ---
 	if _skeleton:
 		_skeleton.physical_bones_stop_simulation()
 		_skeleton.reset_bone_poses()
+		_skeleton.call_deferred("physical_bones_stop_simulation")
+		_skeleton.call_deferred("reset_bone_poses")
 		if auto_shrink_shapes_factor > 0.0:
 			_shrink_ragdoll_shapes(_skeleton, auto_shrink_shapes_factor)
 
+	# Simulator „deaktivieren“, falls vorhanden (kein stop_simulation(): active/process togglen)
+	if _sim:
+		_toggle_simulator(_sim, false)
+
+	# Sicherheitsnetz: sinnvolle Layer/Mask
+	if collision_layer == 0:
+		collision_layer = 1
+	if collision_mask == 0:
+		collision_mask = 1
+
+	# Idle sofort, damit keine T-Pose zu sehen ist
+	if animation_player and animation_player.has_animation(idle_anim):
+		animation_player.play(String(idle_anim))
+
+	_log("ready: player=%s, skeleton=%s, sim=%s"
+		% [str(_player), str(_skeleton), str(_sim)])
+
 func _resolve_player(force_pick_nearest := false) -> void:
-	# 1) expliziter Pfad
 	if not force_pick_nearest and _player == null and player_path != NodePath():
 		_player = get_node_or_null(player_path) as Node3D
 		if _player: return
 
-	# 2) per Gruppe "player"
 	var candidates := get_tree().get_nodes_in_group("player")
 	if candidates.is_empty():
 		return
@@ -65,13 +92,50 @@ func _pick_nearest_player(arr: Array) -> Node3D:
 	var best: Node3D = null
 	var best_d2 := INF
 	for n in arr:
-		if not (n is Node3D): continue
+		if not (n is Node3D):
+			continue
 		var p := (n as Node3D).global_position
 		var d2 := (p - global_position).length_squared()
 		if d2 < best_d2:
 			best_d2 = d2
 			best = n
 	return best
+
+func _resolve_skeleton() -> Skeleton3D:
+	if skeleton_path != NodePath():
+		var sk := get_node_or_null(skeleton_path) as Skeleton3D
+		if sk: return sk
+	return _find_skeleton_down(self)
+
+func _find_skeleton_down(n: Node) -> Skeleton3D:
+	if n is Skeleton3D:
+		return n as Skeleton3D
+	for c in n.get_children():
+		var sk := _find_skeleton_down(c)
+		if sk: return sk
+	return null
+
+func _resolve_simulator() -> PhysicalBoneSimulator3D:
+	return _find_simulator_down(self)
+
+func _find_simulator_down(n: Node) -> PhysicalBoneSimulator3D:
+	if n is PhysicalBoneSimulator3D:
+		return n as PhysicalBoneSimulator3D
+	for c in n.get_children():
+		var s := _find_simulator_down(c)
+		if s: return s
+	return null
+
+# Simulator robust (de)aktivieren, je nach verfügbarer API/Property
+func _toggle_simulator(sim: Node, enabled: bool) -> void:
+	# aktive Property?
+	if _has_property(sim, &"active"):
+		sim.set(&"active", enabled)
+	# falls eigene Processing-Schleifen
+	if sim.has_method("set_physics_process"):
+		sim.set_physics_process(enabled)
+	if sim.has_method("set_process"):
+		sim.set_process(enabled)
 
 func _on_manager_trigger_entered(body: Node) -> void:
 	if not body.is_in_group("player") or _dialog_started:
@@ -97,7 +161,6 @@ func _on_manager_trigger_entered(body: Node) -> void:
 		manager_trigger.queue_free()
 
 func _on_dialog_finished() -> void:
-	# Beim Start des Verfolgens sicherheitshalber den richtigen Player wählen
 	_resolve_player(true)
 	_chase = true
 
@@ -105,7 +168,6 @@ func _physics_process(delta: float) -> void:
 	if _dead:
 		return
 
-	# alle 0.5 s ggf. den "richtigen" Player neu wählen (falls mehrere/dupliziert)
 	_reacquire_timer -= delta
 	if _reacquire_timer <= 0.0:
 		_reacquire_timer = 0.5
@@ -157,7 +219,6 @@ func apply_damage(_amount: float, hit_pos: Vector3, hit_dir: Vector3) -> void:
 	die(hit_pos, hit_dir)
 
 func die(hit_pos: Vector3 = global_position, hit_dir: Vector3 = Vector3.FORWARD) -> void:
-	print("treffer")
 	if _dead:
 		return
 	_dead = true
@@ -166,6 +227,11 @@ func die(hit_pos: Vector3 = global_position, hit_dir: Vector3 = Vector3.FORWARD)
 	set_physics_process(false)
 	velocity = Vector3.ZERO
 
+	# vorherige Layer/Mask merken → für PBs übernehmen
+	var prev_layer := 1 if collision_layer == 0 else collision_layer
+	var prev_mask  := 1 if collision_mask == 0 else collision_mask
+
+	# CharacterBody-Kollisionen aus
 	collision_layer = 0
 	collision_mask  = 0
 	for c in get_children():
@@ -175,32 +241,62 @@ func die(hit_pos: Vector3 = global_position, hit_dir: Vector3 = Vector3.FORWARD)
 	if animation_player:
 		animation_player.stop()
 
+	# Simulator wieder aktivieren (falls vorhanden)
+	if _sim:
+		_toggle_simulator(_sim, true)
+
 	if _skeleton:
+		print("active skelton")
+		# PBs auf sinnvolle Layer/Mask setzen und Shapes aktivieren
+		for n in _skeleton.get_children():
+			if n is PhysicalBone3D:
+				var pb := n as PhysicalBone3D
+				pb.collision_layer = prev_layer
+				pb.collision_mask  = prev_mask
+				for ch in pb.get_children():
+					if ch is CollisionShape3D:
+						(ch as CollisionShape3D).disabled = false
+
 		_skeleton.physical_bones_start_simulation()
-		var impulse: Vector3 = hit_dir.normalized() * ragdoll_impulse
-		for ch in _skeleton.get_children():
-			if ch is PhysicalBone3D:
-				var pb := ch as PhysicalBone3D
+
+		# kleiner Impuls vom Schuss
+		var impulse := hit_dir.normalized() * ragdoll_impulse
+		for n in _skeleton.get_children():
+			if n is PhysicalBone3D:
+				var pb := n as PhysicalBone3D
 				if pb.has_method("apply_central_impulse"):
 					pb.apply_central_impulse(impulse)
 				break
 
 	if death_free_delay > 0.0:
 		await get_tree().create_timer(death_free_delay).timeout
-		queue_free()
+		if is_instance_valid(self):
+			queue_free()
 
-# --- Optional: Ragdoll-Shapes einmalig kleiner machen ---
+# optional: Shapes verkleinern (ohne Node-Scale)
 func _shrink_ragdoll_shapes(skel: Skeleton3D, factor: float) -> void:
 	if skel == null: return
 	for pb in skel.get_children():
 		if pb is PhysicalBone3D:
 			for ch in pb.get_children():
-				if ch is CollisionShape3D and ch.shape:
-					if ch.shape is CapsuleShape3D:
-						var cap := ch.shape as CapsuleShape3D
+				if ch is CollisionShape3D and (ch as CollisionShape3D).shape:
+					var shp := (ch as CollisionShape3D).shape
+					if shp is CapsuleShape3D:
+						var cap := shp as CapsuleShape3D
 						cap.radius *= factor
 						cap.height *= factor
-					elif ch.shape is BoxShape3D:
-						(ch.shape as BoxShape3D).size *= factor
-					elif ch.shape is SphereShape3D:
-						(ch.shape as SphereShape3D).radius *= factor
+					elif shp is SphereShape3D:
+						(shp as SphereShape3D).radius *= factor
+					elif shp is BoxShape3D:
+						(shp as BoxShape3D).size *= factor
+
+# kleine Reflection-Helpers
+func _has_property(obj: Object, prop: StringName) -> bool:
+	for info in obj.get_property_list():
+		if info.has("name") and String(info["name"]) == String(prop):
+			return true
+	return false
+
+func _log(msg: String) -> void:
+	if debug_logs:
+		print("[manager] " + msg)

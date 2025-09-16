@@ -134,6 +134,7 @@ bone_name = "_rootJoint"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D/Physical Bone _rootJoint"]
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_3iw8k")
+debug_color = Color(0, 0.6, 0.701961, 1)
 
 [node name="Physical Bone mixamorig_Hips_00" type="PhysicalBone3D" parent="Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D"]
 transform = Transform3D(0.997817, 0.0510273, -0.0419221, -0.0439833, 0.0399659, -0.998233, -0.0492617, 0.997897, 0.042123, 0.00199704, 2.0013, -0.0173165)
