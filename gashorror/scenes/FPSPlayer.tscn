@@ -15,7 +15,6 @@
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.03875, 0)
 script = ExtResource("1_wycwc")
-move_speed = 8.0
 bob_amp_x = 0.05
 bob_amp_y = 0.06
 flashlight_path = NodePath("Camera3D/flashlightModel")

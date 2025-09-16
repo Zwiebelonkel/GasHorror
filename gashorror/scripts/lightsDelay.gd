@@ -5,6 +5,8 @@ var lights = []
 
 var current_light_index = 0
 var time_since_last_on = 0.0
+var is_active = false
+
 
 func _ready():
 

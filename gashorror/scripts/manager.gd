@@ -1,88 +1,87 @@
+# manager.gd
 extends CharacterBody3D
 
-# ----------------- Referenzen -----------------
+# --- Referenzen (im Inspector zuweisen) ---
 @export var dialog_ui: CanvasLayer
 @export var animation_player: AnimationPlayer
 @export var manager_trigger: Area3D
-@export var player_path: NodePath      # optional; leer lassen → via Gruppe "player" finden
+@export var player_path: NodePath = NodePath()     # leer lassen -> per Gruppe "player"
 
-# ----------------- Animationen ----------------
+# --- Animationen ---
 @export var walk_anim: StringName = &"mixamo_com"
-@export var idle_anim: StringName = &"idle"
+@export var idle_anim:  StringName = &"idle"
 
-# ----------------- Bewegung -------------------
+# --- Bewegung/Verhalten ---
 @export var speed: float = 5.0
-@export var turn_speed: float = 8.0
+@export var turn_speed: float = 8.0                # weich zum Spieler drehen
 @export var stop_distance: float = 1.5
 @export var use_gravity: bool = true
 @export var gravity: float = 9.8
 
-# ----------------- Ragdoll / Death ------------
-@export var skeleton_path: NodePath                 # -> auf dein Skeleton3D zeigen
+# --- Ragdoll/Death ---
+@export var skeleton_path:  NodePath               # -> Skeleton3D deines Models
+@export var simulator_path: NodePath               # -> PhysicalBoneSimulator3D
 @export var ragdoll_impulse: float = 18.0
-@export var death_free_delay: float = 10.0
-@export var auto_shrink_shapes_factor: float = 0.0  # z.B. 0.1 wenn importierte Shapes zu groß sind
+@export var death_free_delay: float = 10.0         # 0 = liegen lassen
+@export var auto_shrink_shapes_factor: float = 0.0 # z.B. 0.1 falls Shapes zu groß
 
-# ----------------- Debug ----------------------
-@export var debug_logs: bool = false
+# --- Debug ---
+@export var debug_logs: bool = true
 
-# ----------------- Intern ---------------------
+# --- intern ---
 var _dialog_started := false
 var _chase := false
-var _dead := false
-
 var _player: Node3D
 var _skeleton: Skeleton3D
 var _sim: PhysicalBoneSimulator3D
-var _reacquire_timer := 0.0
+var _dead := false
+var _reacquire_timer := 0.0       # alle 0.5s den richtigen Player wählen
 
+# -----------------------------------------------------------
+# READY
+# -----------------------------------------------------------
 func _ready() -> void:
 	if dialog_ui:
 		dialog_ui.hide()
 
+	# Trigger verbinden
 	if manager_trigger and not manager_trigger.is_connected("body_entered", Callable(self, "_on_manager_trigger_entered")):
 		manager_trigger.body_entered.connect(Callable(self, "_on_manager_trigger_entered"))
 
+	# Player bestimmen
 	_resolve_player(true)
 
-	# Skeleton & optionalen Simulator finden
-	_skeleton = _resolve_skeleton()
-	_sim      = _resolve_simulator()
+	# Ragdoll-Komponenten holen
+	_skeleton = get_node_or_null(skeleton_path) as Skeleton3D
+	_sim      = get_node_or_null(simulator_path) as PhysicalBoneSimulator3D
+	_bind_simulator_to_skeleton()
 
-	# --- Ragdoll AUS beim Start ---
+	# Shapes und Simulation zu Beginn AUS, damit nichts „flattert“
 	if _skeleton:
+		_set_pb_shapes_enabled(false)
 		_skeleton.physical_bones_stop_simulation()
 		_skeleton.reset_bone_poses()
-		_skeleton.call_deferred("physical_bones_stop_simulation")
-		_skeleton.call_deferred("reset_bone_poses")
 		if auto_shrink_shapes_factor > 0.0:
 			_shrink_ragdoll_shapes(_skeleton, auto_shrink_shapes_factor)
 
-	# Simulator „deaktivieren“, falls vorhanden (kein stop_simulation(): active/process togglen)
-	if _sim:
-		_toggle_simulator(_sim, false)
+	# Logs ausgeben
+	_log_ragdoll_setup()
 
-	# Sicherheitsnetz: sinnvolle Layer/Mask
-	if collision_layer == 0:
-		collision_layer = 1
-	if collision_mask == 0:
-		collision_mask = 1
-
-	# Idle sofort, damit keine T-Pose zu sehen ist
-	if animation_player and animation_player.has_animation(idle_anim):
-		animation_player.play(String(idle_anim))
-
-	_log("ready: player=%s, skeleton=%s, sim=%s"
-		% [str(_player), str(_skeleton), str(_sim)])
-
+# -----------------------------------------------------------
+# PLAYER RESOLVE
+# -----------------------------------------------------------
 func _resolve_player(force_pick_nearest := false) -> void:
+	# 1) expliziter Pfad
 	if not force_pick_nearest and _player == null and player_path != NodePath():
 		_player = get_node_or_null(player_path) as Node3D
-		if _player: return
+		if _player:
+			return
 
+	# 2) per Gruppe "player"
 	var candidates := get_tree().get_nodes_in_group("player")
 	if candidates.is_empty():
 		return
+
 	if force_pick_nearest or candidates.size() > 1:
 		_player = _pick_nearest_player(candidates)
 	else:
@@ -101,42 +100,9 @@ func _pick_nearest_player(arr: Array) -> Node3D:
 			best = n
 	return best
 
-func _resolve_skeleton() -> Skeleton3D:
-	if skeleton_path != NodePath():
-		var sk := get_node_or_null(skeleton_path) as Skeleton3D
-		if sk: return sk
-	return _find_skeleton_down(self)
-
-func _find_skeleton_down(n: Node) -> Skeleton3D:
-	if n is Skeleton3D:
-		return n as Skeleton3D
-	for c in n.get_children():
-		var sk := _find_skeleton_down(c)
-		if sk: return sk
-	return null
-
-func _resolve_simulator() -> PhysicalBoneSimulator3D:
-	return _find_simulator_down(self)
-
-func _find_simulator_down(n: Node) -> PhysicalBoneSimulator3D:
-	if n is PhysicalBoneSimulator3D:
-		return n as PhysicalBoneSimulator3D
-	for c in n.get_children():
-		var s := _find_simulator_down(c)
-		if s: return s
-	return null
-
-# Simulator robust (de)aktivieren, je nach verfügbarer API/Property
-func _toggle_simulator(sim: Node, enabled: bool) -> void:
-	# aktive Property?
-	if _has_property(sim, &"active"):
-		sim.set(&"active", enabled)
-	# falls eigene Processing-Schleifen
-	if sim.has_method("set_physics_process"):
-		sim.set_physics_process(enabled)
-	if sim.has_method("set_process"):
-		sim.set_process(enabled)
-
+# -----------------------------------------------------------
+# TRIGGER + DIALOG
+# -----------------------------------------------------------
 func _on_manager_trigger_entered(body: Node) -> void:
 	if not body.is_in_group("player") or _dialog_started:
 		return
@@ -157,6 +123,7 @@ func _on_manager_trigger_entered(body: Node) -> void:
 	else:
 		_on_dialog_finished()
 
+	# Trigger nur einmal
 	if manager_trigger:
 		manager_trigger.queue_free()
 
@@ -164,10 +131,14 @@ func _on_dialog_finished() -> void:
 	_resolve_player(true)
 	_chase = true
 
+# -----------------------------------------------------------
+# MOVEMENT
+# -----------------------------------------------------------
 func _physics_process(delta: float) -> void:
 	if _dead:
 		return
 
+	# alle 0.5 s ggf. richtigen Player neu wählen
 	_reacquire_timer -= delta
 	if _reacquire_timer <= 0.0:
 		_reacquire_timer = 0.5
@@ -187,16 +158,18 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var from: Vector3 = global_position
-	var to: Vector3 = _player.global_position
-	var dir: Vector3 = to - from
+	var to:   Vector3 = _player.global_position
+	var dir:  Vector3 = to - from
 	dir.y = 0.0
 	var dist: float = dir.length()
 
+	# weich zum Spieler drehen
 	if dist > 0.001:
-		var n: Vector3 = dir / dist
-		var target_yaw: float = atan2(n.x, n.z)
+		var n := dir / dist
+		var target_yaw := atan2(n.x, n.z)
 		rotation.y = lerp_angle(rotation.y, target_yaw, turn_speed * delta)
 
+	# laufen/stoppen
 	var n2: Vector3 = (dir / dist) if dist > 0.0001 else Vector3.ZERO
 	if dist > stop_distance:
 		velocity.x = n2.x * speed
@@ -214,7 +187,10 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-# --- Treffer-API (One-Shot) ---
+# -----------------------------------------------------------
+# DAMAGE / RAGDOLL
+# -----------------------------------------------------------
+# Wird von der Gun aufgerufen (ein Treffer reicht)
 func apply_damage(_amount: float, hit_pos: Vector3, hit_dir: Vector3) -> void:
 	die(hit_pos, hit_dir)
 
@@ -227,11 +203,7 @@ func die(hit_pos: Vector3 = global_position, hit_dir: Vector3 = Vector3.FORWARD)
 	set_physics_process(false)
 	velocity = Vector3.ZERO
 
-	# vorherige Layer/Mask merken → für PBs übernehmen
-	var prev_layer := 1 if collision_layer == 0 else collision_layer
-	var prev_mask  := 1 if collision_mask == 0 else collision_mask
-
-	# CharacterBody-Kollisionen aus
+	# CharacterBody-Kollision aus (nur Ragdoll soll kollidieren)
 	collision_layer = 0
 	collision_mask  = 0
 	for c in get_children():
@@ -241,62 +213,117 @@ func die(hit_pos: Vector3 = global_position, hit_dir: Vector3 = Vector3.FORWARD)
 	if animation_player:
 		animation_player.stop()
 
-	# Simulator wieder aktivieren (falls vorhanden)
-	if _sim:
-		_toggle_simulator(_sim, true)
+	# Simulator sauber binden (falls noch nicht) und aktivieren
+	_bind_simulator_to_skeleton()
 
+	# PB-Shapes aktivieren, dann Simulation starten
 	if _skeleton:
-		print("active skelton")
-		# PBs auf sinnvolle Layer/Mask setzen und Shapes aktivieren
-		for n in _skeleton.get_children():
-			if n is PhysicalBone3D:
-				var pb := n as PhysicalBone3D
-				pb.collision_layer = prev_layer
-				pb.collision_mask  = prev_mask
-				for ch in pb.get_children():
-					if ch is CollisionShape3D:
-						(ch as CollisionShape3D).disabled = false
+		_set_pb_shapes_enabled(true)
 
-		_skeleton.physical_bones_start_simulation()
+		# Simulator aktiv schalten (versch. Godot-Versionen absichern)
+		if _sim:
+			if _has_property(_sim, &"active"):
+				_sim.active = true
+			if _sim.has_method("set_physics_process"):
+				_sim.set_physics_process(true)
+			if _sim.has_method("set_process"):
+				_sim.set_process(true)
 
-		# kleiner Impuls vom Schuss
+		_skeleton.call_deferred("physical_bones_start_simulation")
+		await get_tree().process_frame
+
+		# kleiner Impuls in Schussrichtung
 		var impulse := hit_dir.normalized() * ragdoll_impulse
 		for n in _skeleton.get_children():
 			if n is PhysicalBone3D:
-				var pb := n as PhysicalBone3D
-				if pb.has_method("apply_central_impulse"):
-					pb.apply_central_impulse(impulse)
+				(n as PhysicalBone3D).apply_central_impulse(impulse)
 				break
 
+	# Auto-Despawn
 	if death_free_delay > 0.0:
 		await get_tree().create_timer(death_free_delay).timeout
 		if is_instance_valid(self):
 			queue_free()
 
-# optional: Shapes verkleinern (ohne Node-Scale)
+# -----------------------------------------------------------
+# Helpers
+# -----------------------------------------------------------
+func _bind_simulator_to_skeleton() -> void:
+	if _sim == null or _skeleton == null:
+		return
+	# je nach Godot-Version 'skeleton' ODER 'skeleton_path'
+	if _has_property(_sim, &"skeleton"):
+		_sim.set(&"skeleton", _skeleton)
+	elif _has_property(_sim, &"skeleton_path"):
+		_sim.set(&"skeleton_path", _skeleton.get_path())
+
+func _set_pb_shapes_enabled(enabled: bool) -> void:
+	if _skeleton == null:
+		return
+	for n in _skeleton.get_children():
+		if n is PhysicalBone3D:
+			for ch in n.get_children():
+				if ch is CollisionShape3D:
+					ch.set_deferred("disabled", not enabled)
+
 func _shrink_ragdoll_shapes(skel: Skeleton3D, factor: float) -> void:
-	if skel == null: return
+	if skel == null:
+		return
 	for pb in skel.get_children():
 		if pb is PhysicalBone3D:
 			for ch in pb.get_children():
-				if ch is CollisionShape3D and (ch as CollisionShape3D).shape:
-					var shp := (ch as CollisionShape3D).shape
-					if shp is CapsuleShape3D:
-						var cap := shp as CapsuleShape3D
+				if ch is CollisionShape3D and ch.shape:
+					if ch.shape is CapsuleShape3D:
+						var cap := ch.shape as CapsuleShape3D
 						cap.radius *= factor
 						cap.height *= factor
-					elif shp is SphereShape3D:
-						(shp as SphereShape3D).radius *= factor
-					elif shp is BoxShape3D:
-						(shp as BoxShape3D).size *= factor
+					elif ch.shape is BoxShape3D:
+						(ch.shape as BoxShape3D).size *= factor
+					elif ch.shape is SphereShape3D:
+						(ch.shape as SphereShape3D).radius *= factor
 
-# kleine Reflection-Helpers
+# -------- Debug ----------
+func _dbg(msg: String) -> void:
+	if debug_logs:
+		print("[manager] " + msg)
+
 func _has_property(obj: Object, prop: StringName) -> bool:
 	for info in obj.get_property_list():
 		if info.has("name") and String(info["name"]) == String(prop):
 			return true
 	return false
 
-func _log(msg: String) -> void:
-	if debug_logs:
-		print("[manager] " + msg)
+func _log_ragdoll_setup() -> void:
+	# Skeleton
+	if _skeleton == null:
+		_dbg("❌ Skeleton NICHT gefunden. skeleton_path=" + str(skeleton_path))
+	else:
+		_dbg("✅ Skeleton: " + str(_skeleton.get_path()) + " | bones=" + str(_skeleton.get_bone_count()))
+		var pb_total := 0
+		var shape_total := 0
+		for n in _skeleton.get_children():
+			if n is PhysicalBone3D:
+				pb_total += 1
+				var shapes_for_bone := 0
+				for ch in n.get_children():
+					if ch is CollisionShape3D:
+						shapes_for_bone += 1
+						shape_total += 1
+				if pb_total <= 4:
+					_dbg("  PB " + n.name + " | shapes=" + str(shapes_for_bone))
+		_dbg("PB total=" + str(pb_total) + " | shapes total=" + str(shape_total))
+
+	# Simulator
+	if _sim == null:
+		_dbg("❌ Simulator NICHT gefunden. simulator_path=" + str(simulator_path))
+	else:
+		_dbg("✅ Simulator: " + str(_sim.get_path()))
+		if _has_property(_sim, &"skeleton"):
+			_dbg("  sim.skeleton = " + str(_sim.get("skeleton")))
+		elif _has_property(_sim, &"skeleton_path"):
+			_dbg("  sim.skeleton_path = " + str(_sim.get("skeleton_path")))
+		else:
+			_dbg("  (Simulator hat weder 'skeleton' noch 'skeleton_path')")
+		if _has_property(_sim, &"active"):
+			_dbg("  sim.active=" + str(_sim.get("active")))
+		_dbg("  sim.process=" + str(_sim.is_processing()) + " | sim.physics_process=" + str(_sim.is_physics_processing()))
