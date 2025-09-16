@@ -7,15 +7,8 @@ var current_light_index = 0
 var time_since_last_on = 0.0
 
 func _ready():
-	print("Script läuft an Node: ", self.name, " Pfad: ", self.get_path())
-	print("Lamps Node gefunden!")
 
 	find_spotlights(self)
-
-	print("Lichter im Array: ", lights.size())
-	for light in lights:
-		print(" - ", light.name, " Pfad: ", light.get_path())
-
 	for light in lights:
 		set_visible_recursive(light, false)
 
@@ -23,7 +16,6 @@ func find_spotlights(node: Node):
 	for child in node.get_children():
 		if child is SpotLight3D:
 			if not child in lights:
-				print("SpotLight gefunden: ", child.name, " Pfad: ", child.get_path())
 				lights.append(child)
 		elif child is Node:
 			find_spotlights(child)

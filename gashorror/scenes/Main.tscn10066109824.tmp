@@ -1,0 +1,591 @@
+[gd_scene load_steps=48 format=3 uid="uid://brk1bi6nckn8r"]
+
+[ext_resource type="Script" uid="uid://bjp1xbcce3uwv" path="res://scripts/main.gd" id="1_bjd11"]
+[ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="1_rvslj"]
+[ext_resource type="PackedScene" uid="uid://c5a30iqc83kwo" path="res://scenes/props/shelf.tscn" id="1_wp0k4"]
+[ext_resource type="PackedScene" uid="uid://b508608ahs5xv" path="res://ui/ObjectiveHUD.tscn" id="2_0bbpv"]
+[ext_resource type="PackedScene" uid="uid://dig56my50obj6" path="res://scenes/props/note.tscn" id="2_1iba3"]
+[ext_resource type="Shader" uid="uid://1tc2rtqiu7q2" path="res://shaders/buckshot.gdshader" id="2_rarhs"]
+[ext_resource type="Shader" uid="uid://ber46v45djbx5" path="res://shaders/crt.gdshader" id="4_rarhs"]
+[ext_resource type="PackedScene" uid="uid://c7jnqeoq7xx8p" path="res://scenes/props/gas_station.tscn" id="4_vcsgt"]
+[ext_resource type="Script" uid="uid://bs38i01lfq3hw" path="res://scripts/flickerLight.gd" id="6_bjd11"]
+[ext_resource type="PackedScene" uid="uid://l2htm3powhjl" path="res://scenes/props/car.tscn" id="6_c01mt"]
+[ext_resource type="AudioStream" uid="uid://cwosylj8tr2lp" path="res://assets/sounds/doors.wav" id="6_cvmbd"]
+[ext_resource type="PackedScene" uid="uid://bibrda0q610u" path="res://assets/3d/people/hillybilly.tscn" id="7_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://cr3h4epr0smro" path="res://assets/3d/sign/sign.glb" id="8_36rkl"]
+[ext_resource type="PackedScene" uid="uid://dm1saq7jdsi4h" path="res://assets/3d/sign/sign2.glb" id="8_xa025"]
+[ext_resource type="PackedScene" uid="uid://cxone3oejtr47" path="res://scenes/props/box.tscn" id="9_lhr70"]
+[ext_resource type="PackedScene" uid="uid://5hh0b165fj4p" path="res://scenes/props/breaker.tscn" id="10_lhr70"]
+[ext_resource type="PackedScene" uid="uid://cw17vkmh56ysm" path="res://scenes/props/breakerClosed.tscn" id="11_1nqs0"]
+[ext_resource type="Script" uid="uid://d2dt7i481l32k" path="res://scripts/lockedBreaker.gd" id="12_1iba3"]
+[ext_resource type="PackedScene" uid="uid://j30csp6a6tuo" path="res://scenes/props/lantern.tscn" id="13_qmy6f"]
+[ext_resource type="PackedScene" uid="uid://mjhdv6c1qnyi" path="res://scenes/props/cellar.tscn" id="14_mwfav"]
+[ext_resource type="AudioStream" uid="uid://b38eudtsr1ssj" path="res://assets/sounds/Alley(145).wav" id="15_3p2gp"]
+[ext_resource type="Script" uid="uid://btswlr8jqov3h" path="res://scripts/path.gd" id="16_ft6cd"]
+[ext_resource type="PackedScene" uid="uid://dx7hr7gqjomm1" path="res://ui/Dialog.tscn" id="18_bb450"]
+[ext_resource type="Script" uid="uid://ddlnnjyxsdj3r" path="res://scripts/npc.gd" id="21_ebg2g"]
+[ext_resource type="PackedScene" uid="uid://cwixmhxiwdbma" path="res://ui/cross.tscn" id="24_2ofn6"]
+[ext_resource type="Texture2D" uid="uid://cjgbu667vp1q6" path="res://assets/satara_night_no_lamps_1k.hdr" id="25_fs0b5"]
+[ext_resource type="Script" uid="uid://cvs4aeurbayj3" path="res://scripts/gunInteract.gd" id="28_e2s0e"]
+[ext_resource type="PackedScene" uid="uid://bh1bde8sgfkwd" path="res://scenes/props/gun.tscn" id="29_gsxep"]
+[ext_resource type="PackedScene" uid="uid://dgpnvfakotxpm" path="res://scenes/props/manager.tscn" id="30_gsxep"]
+[ext_resource type="Script" uid="uid://b25lleq5lur8" path="res://scripts/managerTrigger.gd" id="31_dg70y"]
+[ext_resource type="Script" uid="uid://ddjjee0qwboeb" path="res://scripts/manager.gd" id="31_v0vrg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rarhs"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rvslj"]
+material = SubResource("StandardMaterial3D_rarhs")
+size = Vector3(100, 0.5, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0bbpv"]
+data = PackedVector3Array(-5, 0.25, 5, 5, 0.25, 5, -5, -0.25, 5, 5, 0.25, 5, 5, -0.25, 5, -5, -0.25, 5, 5, 0.25, -5, -5, 0.25, -5, 5, -0.25, -5, -5, 0.25, -5, -5, -0.25, -5, 5, -0.25, -5, 5, 0.25, 5, 5, 0.25, -5, 5, -0.25, 5, 5, 0.25, -5, 5, -0.25, -5, 5, -0.25, 5, -5, 0.25, -5, -5, 0.25, 5, -5, -0.25, -5, -5, 0.25, 5, -5, -0.25, 5, -5, -0.25, -5, 5, 0.25, 5, -5, 0.25, 5, 5, 0.25, -5, -5, 0.25, 5, -5, 0.25, -5, 5, 0.25, -5, -5, -0.25, 5, 5, -0.25, 5, -5, -0.25, -5, 5, -0.25, 5, 5, -0.25, -5, -5, -0.25, -5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rarhs"]
+data = PackedVector3Array(-50, 0.25, 50, 50, 0.25, 50, -50, -0.25, 50, 50, 0.25, 50, 50, -0.25, 50, -50, -0.25, 50, 50, 0.25, -50, -50, 0.25, -50, 50, -0.25, -50, -50, 0.25, -50, -50, -0.25, -50, 50, -0.25, -50, 50, 0.25, 50, 50, 0.25, -50, 50, -0.25, 50, 50, 0.25, -50, 50, -0.25, -50, 50, -0.25, 50, -50, 0.25, -50, -50, 0.25, 50, -50, -0.25, -50, -50, 0.25, 50, -50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, 50, 50, 0.25, -50, -50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, -0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, 50, 50, -0.25, -50, -50, -0.25, -50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vcsgt"]
+data = PackedVector3Array(-50, 0.25, 50, 50, 0.25, 50, -50, -0.25, 50, 50, 0.25, 50, 50, -0.25, 50, -50, -0.25, 50, 50, 0.25, -50, -50, 0.25, -50, 50, -0.25, -50, -50, 0.25, -50, -50, -0.25, -50, 50, -0.25, -50, 50, 0.25, 50, 50, 0.25, -50, 50, -0.25, 50, 50, 0.25, -50, 50, -0.25, -50, 50, -0.25, 50, -50, 0.25, -50, -50, 0.25, 50, -50, -0.25, -50, -50, 0.25, 50, -50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, 50, 50, 0.25, -50, -50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, -0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, 50, 50, -0.25, -50, -50, -0.25, -50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_c01mt"]
+data = PackedVector3Array(-50, 0.25, 50, 50, 0.25, 50, -50, -0.25, 50, 50, 0.25, 50, 50, -0.25, 50, -50, -0.25, 50, 50, 0.25, -50, -50, 0.25, -50, 50, -0.25, -50, -50, 0.25, -50, -50, -0.25, -50, 50, -0.25, -50, 50, 0.25, 50, 50, 0.25, -50, 50, -0.25, 50, 50, 0.25, -50, 50, -0.25, -50, 50, -0.25, 50, -50, 0.25, -50, -50, 0.25, 50, -50, -0.25, -50, -50, 0.25, 50, -50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, 50, 50, 0.25, -50, -50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, -0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, 50, 50, -0.25, -50, -50, -0.25, -50)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vcsgt"]
+shader = ExtResource("4_rarhs")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 15.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 1.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c01mt"]
+shader = ExtResource("2_rarhs")
+shader_parameter/exposure = 1.0
+shader_parameter/contrast = 1.05
+shader_parameter/saturation = 0.9
+shader_parameter/enable_pixelate = true
+shader_parameter/pixel_factor = 3.0
+shader_parameter/enable_posterize = true
+shader_parameter/color_levels = 16.0
+shader_parameter/dither_strength = 0.35
+shader_parameter/chrom_aberration = 0.07
+shader_parameter/vignette_strength = 1.0
+shader_parameter/grain_strength = 0.2
+shader_parameter/tint_color = Vector3(0.95, 1.03, 0.9)
+shader_parameter/tint_strength = 0.15
+shader_parameter/viewport_size_override = Vector2(0, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nxtc6"]
+size = Vector3(1.35651, 4.28571, 3.78235)
+
+[sub_resource type="Curve3D" id="Curve3D_bb450"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0.82, 0, 0, 1.27, 0, -16.055, 1.805, 0, 0, 0, 0, 0, 1.15, 0, 0, 0, 0, 2.465, 0, 0, 0, -2.48, 0, -1.465, 1.32, 0, -0.715, 0, 0, 0, -5.13147, 0, -2.59, -0.315, 0, 0, 0, 0, 1.99, -5.22945, 0, 1.90927, -0.485, 0, 0, 0, 0, 0, -7.65711, 0, 2.43036, 0, 0, 0, 0, 0, 0, -7.779, 0, -3.031),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
+
+[sub_resource type="Shader" id="Shader_fs0b5"]
+code = "
+// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's PanoramaSkyMaterial.
+
+shader_type sky;
+
+uniform sampler2D source_panorama : filter_linear, source_color, hint_default_black;
+uniform float exposure : hint_range(0, 128) = 1.0;
+uniform float speed = 0.002;
+
+void sky() {
+	vec2 skyCoords = vec2(SKY_COORDS.x + TIME * speed, SKY_COORDS.y);
+	
+	COLOR = texture(source_panorama, skyCoords).rgb * exposure;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ma7h6"]
+shader = SubResource("Shader_fs0b5")
+shader_parameter/source_panorama = ExtResource("25_fs0b5")
+shader_parameter/exposure = 0.4
+shader_parameter/speed = 0.002
+
+[sub_resource type="Sky" id="Sky_36rkl"]
+sky_material = SubResource("ShaderMaterial_ma7h6")
+
+[sub_resource type="Environment" id="Environment_rarhs"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_36rkl")
+sky_custom_fov = 84.3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.17
+reflected_light_source = 1
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.6
+glow_strength = 0.5
+glow_bloom = 0.6
+glow_blend_mode = 1
+glow_hdr_threshold = 0.0
+glow_hdr_scale = 0.0
+glow_hdr_luminance_cap = 70.35
+glow_map_strength = 0.0
+fog_light_color = Color(0.140447, 0.140447, 0.140447, 1)
+fog_light_energy = 0.45
+fog_density = 0.0626
+fog_height = 280.25
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0347
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.1
+volumetric_fog_length = 15.47
+volumetric_fog_ambient_inject = 0.05
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v0vrg"]
+size = Vector3(0.407227, 1.12427, 1.70117)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pnhog"]
+size = Vector3(1, 5.4491, 26.0789)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_bjd11")
+note_marker_path = NodePath("noteSpawn")
+note_scene = ExtResource("2_1iba3")
+doorArea = NodePath("Area3D")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.6376, -0.265231, -4.86137)
+mesh = SubResource("BoxMesh_rvslj")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0bbpv")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_rarhs")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D3"]
+shape = SubResource("ConcavePolygonShape3D_vcsgt")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D4"]
+shape = SubResource("ConcavePolygonShape3D_c01mt")
+
+[node name="Floor3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.0881, -0.265231, -51.8488)
+mesh = SubResource("BoxMesh_rvslj")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0bbpv")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_rarhs")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D3"]
+shape = SubResource("ConcavePolygonShape3D_vcsgt")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D4"]
+shape = SubResource("ConcavePolygonShape3D_c01mt")
+
+[node name="Floor2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.551, -0.265, 53.977)
+mesh = SubResource("BoxMesh_rvslj")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0bbpv")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_rarhs")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D3"]
+shape = SubResource("ConcavePolygonShape3D_vcsgt")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D4"]
+shape = SubResource("ConcavePolygonShape3D_c01mt")
+
+[node name="Floor4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.4319, -0.265231, -34.4354)
+mesh = SubResource("BoxMesh_rvslj")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_0bbpv")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_rarhs")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D3"]
+shape = SubResource("ConcavePolygonShape3D_vcsgt")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D4"]
+shape = SubResource("ConcavePolygonShape3D_c01mt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.008269, -0.542515, 0.840006, 0.965048, 0.22438, 0.135415, -0.261945, 0.809525, 0.525408, 6.08608, 11.9077, -120.974)
+light_color = Color(0.330305, 0.510314, 0.488677, 1)
+light_energy = 0.068
+light_indirect_energy = 1.149
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+
+[node name="FpsPlayer" parent="." instance=ExtResource("1_rvslj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 121.045, -12.5897, -5.08406)
+
+[node name="CharacterBody3D" parent="FpsPlayer" index="0" node_paths=PackedStringArray("gunProp")]
+gunProp = NodePath("../../GunProp")
+
+[node name="CRT" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="crt" type="ColorRect" parent="CRT"]
+material = SubResource("ShaderMaterial_vcsgt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vhs" type="CanvasLayer" parent="."]
+
+[node name="vhs" type="ColorRect" parent="vhs"]
+material = SubResource("ShaderMaterial_c01mt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="gas_station" parent="." instance=ExtResource("4_vcsgt")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="SpotLight3D2" parent="gas_station/Sketchfab_model/Gas_Station_fbx/RootNode/Sign/Sign_Sign_0" index="1"]
+light_energy = 17.632
+
+[node name="DoorSound" type="AudioStreamPlayer" parent="gas_station/Sketchfab_model/Gas_Station_fbx/RootNode/Store/Door/Door_Palette_0/StaticBody3D" index="2"]
+stream = ExtResource("6_cvmbd")
+
+[node name="lamps" parent="gas_station" index="1" groups=["Emissive"]]
+
+[node name="lamp" parent="gas_station/lamps" index="0" groups=["Emissive"]]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="gas_station/lamps/lamp" index="1" groups=["Lights"]]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, 0, 0, 17.2767)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="lamp2" parent="gas_station/lamps" index="1" groups=["Emissive"]]
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="gas_station/lamps/lamp2" index="1" groups=["Lights"]]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, -6.62309, 0, 8.70748)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="lamp10" parent="gas_station/lamps" index="2" groups=["Emissive"]]
+
+[node name="lamp11" parent="gas_station/lamps" index="3" groups=["Emissive"]]
+
+[node name="lamp12" parent="gas_station/lamps" index="4" groups=["Emissive"]]
+
+[node name="lamp13" parent="gas_station/lamps" index="5" groups=["Emissive"]]
+
+[node name="lamp3" parent="gas_station/lamps" index="6" groups=["Emissive"]]
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="gas_station/lamps/lamp3" index="1" groups=["Lights"]]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, -6.66134, 0, 0)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="lamp4" parent="gas_station/lamps" index="7" groups=["Emissive"]]
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="gas_station/lamps/lamp4" index="1" groups=["Lights"]]
+transform = Transform3D(-1.89251, -0.871019, -3.80735e-08, 0, -9.10654e-08, 2.08333, -0.871019, 1.89251, 8.27244e-08, 13.2252, 0, -8.57915)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+script = ExtResource("6_bjd11")
+
+[node name="lamp5" parent="gas_station/lamps" index="8" groups=["Emissive"]]
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="gas_station/lamps/lamp5" index="1" groups=["Lights"]]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10654e-08, 2.08333, 0, -2.08333, -9.10654e-08, 0.0458059, 0, -0.184185)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="lamp6" parent="gas_station/lamps" index="9" groups=["Emissive"]]
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="gas_station/lamps/lamp6" index="1" groups=["Lights"]]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, -6.67061, 0, 8.52461)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="lamp7" parent="gas_station/lamps" index="10" groups=["Emissive"]]
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="gas_station/lamps/lamp7" index="1" groups=["Lights"]]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, 13.2593, 0, -0.0590744)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="lamp8" parent="gas_station/lamps" index="11" groups=["Emissive"]]
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="gas_station/lamps/lamp8" index="1" groups=["Lights"]]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, -6.62309, 0, -17.2413)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="lamp9" parent="gas_station/lamps" index="12" groups=["Emissive"]]
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="gas_station/lamps/lamp9" index="1" groups=["Lights"]]
+transform = Transform3D(2.08333, 0, 0, 0, -9.10655e-08, 2.08333, 0, -2.08333, -9.10655e-08, 0.155204, 0, -8.68942)
+light_color = Color(1, 1, 0.580392, 1)
+shadow_enabled = true
+spot_range = 10.444
+spot_angle = 87.51
+
+[node name="Car" parent="." instance=ExtResource("6_c01mt")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 8.165, 0, -2.355)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16043, 1.64285, 0.569406)
+shape = SubResource("BoxShape3D_nxtc6")
+
+[node name="Shelf" parent="." instance=ExtResource("1_wp0k4")]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, 0, 0, 0, 0.008, -3.99654, 0, 0.16435)
+
+[node name="Shelf2" parent="." instance=ExtResource("1_wp0k4")]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, 0, 0, 0, 0.008, -6.43708, 0, 0.16435)
+
+[node name="Box" parent="." instance=ExtResource("9_lhr70")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16043, 0.217959, 8.14623)
+
+[node name="Box2" parent="." instance=ExtResource("9_lhr70")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98153, 0.217959, 8.14623)
+
+[node name="Box3" parent="." instance=ExtResource("9_lhr70")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3.9153, 0.383823, 8.14623)
+
+[node name="Box4" parent="." instance=ExtResource("9_lhr70")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -2.82702, 0.383823, 8.14623)
+
+[node name="breakerClosed" parent="." instance=ExtResource("11_1nqs0")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -9.54722, 1.51044, 5.6765)
+script = ExtResource("12_1iba3")
+unlocked_breaker_scene = ExtResource("10_lhr70")
+main_node_path = NodePath("..")
+
+[node name="gas24" parent="breakerClosed" instance=ExtResource("8_36rkl")]
+transform = Transform3D(-1.31134e-07, 0, -2.103, 0, 2.103, 0, 3, 0, -9.1925e-08, -18.9001, 3.6144, 10.5432)
+
+[node name="Breaker" parent="." node_paths=PackedStringArray("sign_node", "sign2_node") instance=ExtResource("10_lhr70")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -9.54452, 1.51044, 5.67607)
+visible = false
+sign_node = NodePath("../breakerClosed/gas24")
+sign2_node = NodePath("thereIsMore")
+
+[node name="thereIsMore" parent="Breaker" instance=ExtResource("8_xa025")]
+transform = Transform3D(-1.31134e-07, 0, -2.103, 0, 2.103, 0, 3, 0, -9.1925e-08, -0.139542, 3.54569, 0.330813)
+
+[node name="Interactor HUD" type="CanvasLayer" parent="."]
+
+[node name="InteractionPrompt" type="Label" parent="Interactor HUD"]
+visible = false
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "[E] Interagieren"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ObjectiveHud" parent="." instance=ExtResource("2_0bbpv")]
+
+[node name="lantern" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.97322, -0.211525, 7.41536)
+
+[node name="lantern12" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, -9.61681, -0.211525, 6.74186)
+
+[node name="lantern2" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.8833, -0.211525, 8.0675)
+
+[node name="lantern3" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.8833, -0.211525, 24.0967)
+
+[node name="lantern4" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.8833, -0.211525, 39.8773)
+
+[node name="lantern5" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.8833, -0.211525, -7.96166)
+
+[node name="lantern6" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 15.8833, -0.211525, -24.3636)
+
+[node name="lantern7" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 29.0384, -0.211525, 7.81898)
+
+[node name="lantern8" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 29.0244, -0.211525, -8.21017)
+
+[node name="lantern9" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 29.0106, -0.211525, -23.9908)
+
+[node name="lantern10" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 29.0524, -0.211525, 23.8481)
+
+[node name="lantern11" parent="." instance=ExtResource("13_qmy6f")]
+transform = Transform3D(-0.5, 0, -0.000436381, 0, 0.5, 0, 0.000436381, 0, -0.5, 29.0667, -0.211525, 40.2501)
+
+[node name="Node3D" parent="." instance=ExtResource("14_mwfav")]
+transform = Transform3D(-0.00313282, 0, -0.49999, 0, 0.5, 0, 0.49999, 0, -0.00313282, -11.956, 0.0662103, -1.61629)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_3p2gp")
+volume_db = -18.207
+pitch_scale = 0.57
+autoplay = true
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.242476, 0.204227)
+curve = SubResource("Curve3D_bb450")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-4.37104e-08, 0, -0.999978, 0, 1, 0, 0.999978, 0, -4.37104e-08, 1.27, 0, -15.775)
+h_offset = 0.28
+rotation_mode = 1
+loop = false
+script = ExtResource("16_ft6cd")
+
+[node name="Hillybilly" parent="Path3D/PathFollow3D" instance=ExtResource("7_nxtc6")]
+transform = Transform3D(-1.49524, 0, 0.119568, 0, 1.5, 0, -0.119568, 0, -1.49524, 0.0238495, -0.242476, 0.0291016)
+script = ExtResource("21_ebg2g")
+speed = 2.0
+
+[node name="Skeleton3D" parent="Path3D/PathFollow3D/Hillybilly/hillybilly/metarig" index="0"]
+bones/2/rotation = Quaternion(0.0196632, 1.19186e-07, 2.34404e-09, 0.999807)
+bones/6/rotation = Quaternion(-0.093712, 1.39284e-21, 4.89621e-22, 0.995599)
+bones/9/rotation = Quaternion(-0.330486, 0.634936, -0.520935, 0.46504)
+bones/13/rotation = Quaternion(0.327797, 0.640316, -0.507175, -0.474677)
+bones/14/rotation = Quaternion(0.155463, -0.144438, 0.113209, 0.970646)
+bones/20/rotation = Quaternion(0.98942, 0.0258915, -0.0048121, 0.14267)
+bones/21/rotation = Quaternion(0.0456387, 0.00234047, 0.0266068, 0.998601)
+bones/23/rotation = Quaternion(-0.0430236, -0.625181, 0.779288, -0.00297654)
+bones/25/rotation = Quaternion(0.98942, -0.0258915, 0.0048121, 0.14267)
+bones/26/rotation = Quaternion(0.0456387, -0.00234047, -0.0266068, 0.998601)
+
+[node name="productSpawn" type="Marker3D" parent="."]
+transform = Transform3D(0.008, 0, 0, 0, 0.008, -1.77636e-18, 0, 1.77636e-18, 0.008, -7.23118, 0.958245, -3.60451)
+
+[node name="noteSpawn" type="Marker3D" parent="."]
+transform = Transform3D(0.00355033, -1.59185e-18, -0.00716904, 0, 0.008, -1.77636e-18, 0.00716904, 7.88332e-19, 0.00355033, -8.41652, 0.95177, -3.85853)
+
+[node name="dialog" parent="." instance=ExtResource("18_bb450")]
+
+[node name="Cross" parent="." instance=ExtResource("24_2ofn6")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rarhs")
+
+[node name="Manager" parent="." instance=ExtResource("30_gsxep")]
+transform = Transform3D(-0.669055, -1.49276e-08, 0.205828, -8.96192e-09, 0.7, 2.1636e-08, -0.205828, 1.80444e-08, -0.669055, 82.7367, -13.1437, -0.829363)
+script = ExtResource("31_v0vrg")
+
+[node name="GunProp" type="Area3D" parent="." groups=["PistolPickup"]]
+transform = Transform3D(1.43177e-08, 0.327551, 0.618636, 0.7, -3.0598e-08, -3.32416e-14, 2.70414e-08, 0.618636, -0.327551, 127.285, -11.3283, -5.91413)
+script = ExtResource("28_e2s0e")
+
+[node name="Node3D" parent="GunProp" instance=ExtResource("29_gsxep")]
+
+[node name="gun" parent="GunProp/Node3D" index="0"]
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GunProp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296387, -0.208824, 0.239227)
+shape = SubResource("BoxShape3D_v0vrg")
+
+[node name="mangerTrigger" type="Area3D" parent="." node_paths=PackedStringArray("manager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5142, -11.995, -6.261)
+script = ExtResource("31_dg70y")
+manager = NodePath("../Manager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mangerTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22455, 3.20203)
+shape = SubResource("BoxShape3D_pnhog")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
+
+[editable path="FpsPlayer"]
+[editable path="gas_station"]
+[editable path="gas_station/lamps/lamp4"]
+[editable path="Path3D/PathFollow3D/Hillybilly"]
+[editable path="Path3D/PathFollow3D/Hillybilly/hillybilly"]
+[editable path="GunProp/Node3D"]
+[editable path="GunProp/Node3D/gun"]

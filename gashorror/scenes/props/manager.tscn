@@ -3,13 +3,38 @@
 [ext_resource type="PackedScene" uid="uid://cktissf2yda8e" path="res://assets/3d/people/psxprop_-_male_character_02_rigged.glb" id="1_3iw8k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t4ufd"]
-size = Vector3(3.53027, 3.32422, 1.94641)
+size = Vector3(1.38013, 3.14648, 1.94641)
 
 [node name="Manager" type="CharacterBody3D"]
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("1_3iw8k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0231932, 0, 0.0325365)
 
+[node name="Skeleton3D" parent="Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4" index="0"]
+bones/1/position = Vector3(-0.125897, 94.6918, -0.638982)
+bones/1/rotation = Quaternion(0.00831718, 0.0244604, -0.0222079, 0.99942)
+bones/2/rotation = Quaternion(-0.0271514, 0.00197537, 0.0113946, 0.999564)
+bones/3/rotation = Quaternion(0.00338568, 0.00576629, 0.00469724, 0.999967)
+bones/4/rotation = Quaternion(0.0033857, 0.00576631, 0.00469724, 0.999967)
+bones/5/rotation = Quaternion(0.0288699, -0.00367348, -0.0106526, 0.99952)
+bones/6/rotation = Quaternion(0.0235006, -0.0268053, 0.0160073, 0.999236)
+bones/8/rotation = Quaternion(-0.711178, -0.265491, 0.569401, -0.315473)
+bones/9/rotation = Quaternion(0.175839, -0.132807, -0.037679, 0.974692)
+bones/10/rotation = Quaternion(0.133771, 0.138, 0.262509, 0.945595)
+bones/12/rotation = Quaternion(0.679124, -0.285527, 0.610693, 0.290376)
+bones/13/rotation = Quaternion(0.187285, 0.175387, 0.169292, 0.95158)
+bones/14/rotation = Quaternion(0.158203, -0.101476, -0.18558, 0.964487)
+bones/16/rotation = Quaternion(0.0612905, 0.205257, 0.975386, -0.0523004)
+bones/17/rotation = Quaternion(-0.562605, 0.0103663, 0.00254813, 0.826657)
+bones/18/rotation = Quaternion(0.533413, 0.0602251, -0.0271846, 0.84327)
+bones/19/rotation = Quaternion(0.300897, -0.131982, 0.0274355, 0.944081)
+bones/21/rotation = Quaternion(-0.0750459, 0.111058, 0.990128, -0.0410053)
+bones/22/rotation = Quaternion(-0.242974, -0.0667478, 0.00916402, 0.96769)
+bones/23/rotation = Quaternion(0.589716, -0.0878123, -0.0212995, 0.80254)
+bones/24/rotation = Quaternion(0.314122, 0.149418, -0.0421531, 0.936603)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00439453, 1.60156, 0.473206)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.120239, 1.69043, 0.473206)
 shape = SubResource("BoxShape3D_t4ufd")
+
+[editable path="Sketchfab_Scene"]

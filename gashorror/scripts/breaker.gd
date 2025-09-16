@@ -50,9 +50,9 @@ func interact(player: Node) -> void:
 		_dbg("Fallback: Lights sichtbar geschaltet. Count=" + str(c))
 
 	# Schilder umschalten
-	var ok := _switch_signs_on_power()
-	if not ok:
-		_warn("⚠️ Konnte keine Schilder finden. Bitte `sign_node`/`sign2_node` oder `sign_path`/`sign2_path` korrekt setzen.")
+	#var ok := _switch_signs_on_power()
+	#if not ok:
+		#_warn("⚠️ Konnte keine Schilder finden. Bitte `sign_node`/`sign2_node` oder `sign_path`/`sign2_path` korrekt setzen.")
 
 	# Flags/Step
 	is_on = true

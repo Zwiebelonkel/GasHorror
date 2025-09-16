@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://brk1bi6nckn8r"]
+[gd_scene load_steps=48 format=3 uid="uid://brk1bi6nckn8r"]
 
 [ext_resource type="Script" uid="uid://bjp1xbcce3uwv" path="res://scripts/main.gd" id="1_bjd11"]
 [ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="1_rvslj"]
@@ -24,9 +24,13 @@
 [ext_resource type="Script" uid="uid://btswlr8jqov3h" path="res://scripts/path.gd" id="16_ft6cd"]
 [ext_resource type="PackedScene" uid="uid://dx7hr7gqjomm1" path="res://ui/Dialog.tscn" id="18_bb450"]
 [ext_resource type="Script" uid="uid://ddlnnjyxsdj3r" path="res://scripts/npc.gd" id="21_ebg2g"]
-[ext_resource type="PackedScene" uid="uid://cm54sb8canv0x" path="res://scenes/props/product.tscn" id="22_2ofn6"]
 [ext_resource type="PackedScene" uid="uid://cwixmhxiwdbma" path="res://ui/cross.tscn" id="24_2ofn6"]
 [ext_resource type="Texture2D" uid="uid://cjgbu667vp1q6" path="res://assets/satara_night_no_lamps_1k.hdr" id="25_fs0b5"]
+[ext_resource type="Script" uid="uid://cvs4aeurbayj3" path="res://scripts/gunInteract.gd" id="28_e2s0e"]
+[ext_resource type="PackedScene" uid="uid://bh1bde8sgfkwd" path="res://scenes/props/gun.tscn" id="29_gsxep"]
+[ext_resource type="PackedScene" uid="uid://dgpnvfakotxpm" path="res://scenes/props/manager.tscn" id="30_gsxep"]
+[ext_resource type="Script" uid="uid://b25lleq5lur8" path="res://scripts/managerTrigger.gd" id="31_dg70y"]
+[ext_resource type="Script" uid="uid://ddjjee0qwboeb" path="res://scripts/manager.gd" id="31_v0vrg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rarhs"]
 albedo_color = Color(0, 0, 0, 1)
@@ -153,6 +157,12 @@ volumetric_fog_gi_inject = 0.1
 volumetric_fog_length = 15.47
 volumetric_fog_ambient_inject = 0.05
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_v0vrg"]
+size = Vector3(0.407227, 1.12427, 1.70117)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pnhog"]
+size = Vector3(1, 5.4491, 26.0789)
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_bjd11")
 note_marker_path = NodePath("noteSpawn")
@@ -268,7 +278,10 @@ light_volumetric_fog_energy = 0.0
 light_specular = 0.0
 
 [node name="FpsPlayer" parent="." instance=ExtResource("1_rvslj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9187, 0, 7.16995)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 121.045, -12.5897, -5.08406)
+
+[node name="CharacterBody3D" parent="FpsPlayer" index="0" node_paths=PackedStringArray("gunProp")]
+gunProp = NodePath("../../GunProp")
 
 [node name="CRT" type="CanvasLayer" parent="."]
 visible = false
@@ -435,7 +448,7 @@ sign_node = NodePath("../breakerClosed/gas24")
 sign2_node = NodePath("thereIsMore")
 
 [node name="thereIsMore" parent="Breaker" instance=ExtResource("8_xa025")]
-transform = Transform3D(-1.31134e-07, 0, -2.103, 0, 2.103, 0, 3, 0, -9.1925e-08, -18.9651, 3.54569, 10.5984)
+transform = Transform3D(-1.31134e-07, 0, -2.103, 0, 2.103, 0, 3, 0, -9.1925e-08, -0.139542, 3.54569, 0.330813)
 
 [node name="Interactor HUD" type="CanvasLayer" parent="."]
 
@@ -515,8 +528,18 @@ script = ExtResource("16_ft6cd")
 transform = Transform3D(-1.49524, 0, 0.119568, 0, 1.5, 0, -0.119568, 0, -1.49524, 0.0238495, -0.242476, 0.0291016)
 script = ExtResource("21_ebg2g")
 speed = 2.0
-product_scene = ExtResource("22_2ofn6")
-spawn_marker_path = NodePath("../../../productSpawn")
+
+[node name="Skeleton3D" parent="Path3D/PathFollow3D/Hillybilly/hillybilly/metarig" index="0"]
+bones/2/rotation = Quaternion(0.0196632, 1.19186e-07, 2.34404e-09, 0.999807)
+bones/6/rotation = Quaternion(-0.093712, 1.39284e-21, 4.89621e-22, 0.995599)
+bones/9/rotation = Quaternion(-0.330486, 0.634936, -0.520935, 0.46504)
+bones/13/rotation = Quaternion(0.327797, 0.640316, -0.507175, -0.474677)
+bones/14/rotation = Quaternion(0.155463, -0.144438, 0.113209, 0.970646)
+bones/20/rotation = Quaternion(0.98942, 0.0258915, -0.0048121, 0.14267)
+bones/21/rotation = Quaternion(0.0456387, 0.00234047, 0.0266068, 0.998601)
+bones/23/rotation = Quaternion(-0.0430236, -0.625181, 0.779288, -0.00297654)
+bones/25/rotation = Quaternion(0.98942, -0.0258915, 0.0048121, 0.14267)
+bones/26/rotation = Quaternion(0.0456387, -0.00234047, -0.0266068, 0.998601)
 
 [node name="productSpawn" type="Marker3D" parent="."]
 transform = Transform3D(0.008, 0, 0, 0, 0.008, -1.77636e-18, 0, 1.77636e-18, 0.008, -7.23118, 0.958245, -3.60451)
@@ -531,9 +554,46 @@ transform = Transform3D(0.00355033, -1.59185e-18, -0.00716904, 0, 0.008, -1.7763
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rarhs")
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
+[node name="Manager" parent="." node_paths=PackedStringArray("dialog_ui", "animation_player", "manager_trigger") instance=ExtResource("30_gsxep")]
+transform = Transform3D(-0.669055, -1.49276e-08, 0.205828, -8.96192e-09, 0.7, 2.1636e-08, -0.205828, 1.80444e-08, -0.669055, 82.7367, -13.1437, -0.829363)
+script = ExtResource("31_v0vrg")
+dialog_ui = NodePath("../dialog")
+animation_player = NodePath("Sketchfab_Scene/AnimationPlayer")
+manager_trigger = NodePath("../mangerTrigger")
+speed = 3.0
 
+[node name="GunProp" type="Area3D" parent="." groups=["PistolPickup"]]
+transform = Transform3D(1.43177e-08, 0.327551, 0.618636, 0.7, -3.0598e-08, -3.32416e-14, 2.70414e-08, 0.618636, -0.327551, 127.285, -11.3283, -5.91413)
+script = ExtResource("28_e2s0e")
+
+[node name="Node3D" parent="GunProp" instance=ExtResource("29_gsxep")]
+
+[node name="gun" parent="GunProp/Node3D" index="0"]
+script = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GunProp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296387, -0.208824, 0.239227)
+shape = SubResource("BoxShape3D_v0vrg")
+
+[node name="mangerTrigger" type="Area3D" parent="." node_paths=PackedStringArray("manager")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5142, -12.937, -7.65505)
+script = ExtResource("31_dg70y")
+manager = NodePath("../Manager")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="mangerTrigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22455, 3.20203)
+shape = SubResource("BoxShape3D_pnhog")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
+[connection signal="body_entered" from="mangerTrigger" to="Manager" method="_on_manager_trigger_entered"]
+[connection signal="body_exited" from="mangerTrigger" to="mangerTrigger" method="_on_body_exited"]
+
+[editable path="FpsPlayer"]
 [editable path="gas_station"]
 [editable path="gas_station/lamps/lamp4"]
 [editable path="Path3D/PathFollow3D/Hillybilly"]
 [editable path="Path3D/PathFollow3D/Hillybilly/hillybilly"]
+[editable path="Manager"]
+[editable path="Manager/Sketchfab_Scene"]
+[editable path="GunProp/Node3D"]
+[editable path="GunProp/Node3D/gun"]

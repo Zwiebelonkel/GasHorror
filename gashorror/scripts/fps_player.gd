@@ -27,6 +27,8 @@ extends CharacterBody3D
 # -------- Weapon Sway (flashlight + gun) ----------
 @export var flashlight_path: NodePath
 @export var gun_path: NodePath
+@export var pickup_group: StringName = &"PistolPickup"  # Gruppe der World-Pistolen
+
 @export var sway_rot_deg_x: float = 1.5
 @export var sway_rot_deg_y: float = 1.5
 @export var sway_pos_x: float = 0.02
@@ -34,7 +36,9 @@ extends CharacterBody3D
 @export var sway_return_speed: float = 12.0
 @export var sway_from_move_scale: float = 0.5
 @export var weapon_scale := Vector3.ONE
+@export var gunProp: Node3D  # Pfad zur Pistole, um sie später zu finden
 
+@onready var pistol: Node3D  # Referenz zur Pistole
 @onready var cam: Camera3D = $Camera3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var s_light: AudioStreamPlayer = $LightSound
@@ -63,9 +67,40 @@ var _gun_base_pos: Vector3
 var _flash_base_rot := Basis.IDENTITY
 var _gun_base_rot := Basis.IDENTITY
 
+var has_pistol: bool = false  # Flag, ob der Spieler die Pistole hat
+
+# Funktion zum Aufheben der Pistole
+func pickup_pistol() -> void:
+	if gun:
+		has_pistol = true
+		gun.visible = true  # Pistole sichtbar machen
+		gun.position = Vector3(0.5, 0.5, 1.0)  # Positioniere die Pistole in der Hand des Spielers
+		gun.rotation = cam.rotation  # Setze die Rotation der Pistole entsprechend der Kamera
+		# Weitere Logik, um die Pistole dem Spieler zu geben
+		_update_weapon_sway(0.0, Vector3.ZERO)  # Update für Waffen-Sway
+		print("Pistole aufgenommen!")
+
 func _ready() -> void:
 	add_to_group("player")
 	_capture_mouse(true)
+		# Pistole wird nur verbunden, wenn sie im Spiel existiert
+# Hand-Pistole holen und anfangs verstecken
+	gun = cam.get_node_or_null(gun_path) as Node3D if gun_path != NodePath() else cam.get_node_or_null("gun") as Node3D
+	if gun:
+		gun.visible = false   # <— ganz wichtig: erst unsichtbar!
+
+	# alle World-Pistol-Pickups automatisch verbinden (Gruppe: PistolPickup)
+	for p in get_tree().get_nodes_in_group(pickup_group):
+		if p.has_signal("picked_up"):
+			print("Connecting")
+			# Signal ohne Argumente – ruft _on_pistol_picked_up() auf
+			p.connect("picked_up", Callable(self, "_on_pistol_picked_up"))
+
+	# falls du zusätzlich eine einzelne Referenz im Inspector gesetzt hast (optional)
+	# if gunProp and gunProp.has_signal("picked_up"):
+	# 	gunProp.connect("picked_up", Callable(self, "_on_pistol_picked_up"))
+
+
 	randomize()
 
 	if not step_timer.is_connected("timeout", Callable(self, "_on_step_timer_timeout")):
@@ -75,7 +110,7 @@ func _ready() -> void:
 
 	# --- Sway-Halter suchen ---
 	flashlight = null
-	gun = null
+	#gun = null
 	if flashlight_path != NodePath():
 		flashlight = cam.get_node_or_null(flashlight_path) as Node3D
 	if gun_path != NodePath():
@@ -95,7 +130,25 @@ func _ready() -> void:
 		_make_holder_unscaled_and_scale_child(gun, weapon_scale)
 		_gun_base_pos = gun.position
 		_gun_base_rot = gun.transform.basis.orthonormalized()
+		
+func _on_pistol_picked_up() -> void:
+	if has_pistol:
+		return
+	has_pistol = true
 
+	# zur Sicherheit den Holder noch mal auflösen
+	if gun == null:
+		if gun_path != NodePath():
+			gun = cam.get_node_or_null(gun_path) as Node3D
+		if gun == null:
+			gun = cam.get_node_or_null("gun") as Node3D
+
+	if gun:
+		gun.visible = true
+		print("[player] Hand-Gun sichtbar:", gun.get_path())
+	else:
+		push_warning("[player] Hand-Gun-Holder nicht gefunden! Setze 'gun_path' korrekt (z.B. 'Camera3D/gun').")
+		
 func _make_holder_unscaled_and_scale_child(holder: Node3D, desired_scale: Vector3) -> void:
 	# Finde ein visuelles Kind (z.B. "Node3D", Mesh, Armature). Nimm das erste Node3D-Kind.
 	var visual: Node3D = null
