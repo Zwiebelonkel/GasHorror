@@ -9,8 +9,18 @@
 [node name="gun" parent="." instance=ExtResource("1_iwijv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335476, 0, 1.00173)
 script = ExtResource("1_rjvdq")
-cam_path = NodePath("/root/Main/FpsPlayer/CharacterBody3D/Camera3D")
-fire_cooldown = 0.15
+animation_name = null
+muzzle_light_path = null
+shot_sound_path = null
+cam_path = null
+muzzle_path = NodePath("Muzzle/muzzleLight")
+max_distance = null
+ray_mask = null
+manager_group = null
+debug_logs = null
+muzzle_flash_time = null
+fire_cooldown = null
+disable_anim_visibility_tracks = null
 
 [node name="muzzleLight" type="OmniLight3D" parent="gun/Muzzle" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.243221, 0.0981131, -2.10493)

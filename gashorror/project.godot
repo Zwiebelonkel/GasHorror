@@ -39,6 +39,7 @@ version_control/size/viewport_width=400
 Lights=""
 Emissive=""
 PistolPickup=""
+manager=""
 
 [importer_defaults]
 

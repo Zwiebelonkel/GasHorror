@@ -554,14 +554,6 @@ transform = Transform3D(0.00355033, -1.59185e-18, -0.00716904, 0, 0.008, -1.7763
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rarhs")
 
-[node name="Manager" parent="." node_paths=PackedStringArray("dialog_ui", "animation_player", "manager_trigger") instance=ExtResource("30_gsxep")]
-transform = Transform3D(-0.669055, -1.49276e-08, 0.205828, -8.96192e-09, 0.7, 2.1636e-08, -0.205828, 1.80444e-08, -0.669055, 82.7367, -13.1437, -0.829363)
-script = ExtResource("31_v0vrg")
-dialog_ui = NodePath("../dialog")
-animation_player = NodePath("Sketchfab_Scene/AnimationPlayer")
-manager_trigger = NodePath("../mangerTrigger")
-speed = 3.0
-
 [node name="GunProp" type="Area3D" parent="." groups=["PistolPickup"]]
 transform = Transform3D(1.43177e-08, 0.327551, 0.618636, 0.7, -3.0598e-08, -3.32416e-14, 2.70414e-08, 0.618636, -0.327551, 127.285, -11.3283, -5.91413)
 script = ExtResource("28_e2s0e")
@@ -575,17 +567,135 @@ script = null
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.296387, -0.208824, 0.239227)
 shape = SubResource("BoxShape3D_v0vrg")
 
-[node name="mangerTrigger" type="Area3D" parent="." node_paths=PackedStringArray("manager")]
+[node name="mangerTrigger" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.5142, -12.937, -7.65505)
 script = ExtResource("31_dg70y")
-manager = NodePath("../Manager")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="mangerTrigger"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.22455, 3.20203)
 shape = SubResource("BoxShape3D_pnhog")
 
+[node name="Manager" parent="." node_paths=PackedStringArray("dialog_ui", "animation_player", "manager_trigger") groups=["manager"] instance=ExtResource("30_gsxep")]
+transform = Transform3D(0.963616, 0, -0.267289, 0, 1, 0, 0.267289, 0, 0.963616, 120.87, -12.4726, -8.17441)
+script = ExtResource("31_v0vrg")
+dialog_ui = NodePath("../dialog")
+animation_player = NodePath("Sketchfab_Scene/AnimationPlayer")
+manager_trigger = NodePath("../mangerTrigger")
+player_path = NodePath("../FpsPlayer")
+idle_anim = &"mixamo_com"
+use_gravity = false
+gravity = 1.0
+skeleton_path = NodePath("Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D")
+
+[node name="Physical Bone _rootJoint" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="0"]
+transform = Transform3D(1, -4.17233e-07, 2.6077e-08, 2.98023e-08, 0.0092322, -0.999957, 3.8743e-07, 0.999957, 0.0092322, -0.001091, 0.973194, -0.00932312)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00109098, 0.000338, 0.973239)
+body_offset = Transform3D(1, -4.17233e-07, 2.6077e-08, 2.98023e-08, 0.0092322, -0.999957, 3.8743e-07, 0.999957, 0.0092322, -0.001091, 0.973194, -0.00932312)
+
+[node name="Physical Bone mixamorig_Hips_00" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="1"]
+transform = Transform3D(0.997817, 0.0510241, -0.0419217, -0.0439828, 0.0399651, -0.998233, -0.0492585, 0.997897, 0.042122, -0.00171661, 2.00156, -0.017807)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00369261, 0.000666806, 0.107774)
+body_offset = Transform3D(1, -3.33786e-06, 2.19326e-07, 4.15836e-07, 0.0577115, -0.998333, 3.33786e-06, 0.998333, 0.0577115, -0.00369263, 0.107556, -0.00688553)
+
+[node name="Physical Bone mixamorig_Spine_01" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="2"]
+transform = Transform3D(0.998344, 0.0542094, -0.0192513, -0.0212443, 0.0364318, -0.99911, -0.0534598, 0.997865, 0.0375231, 0.00931549, 2.23391, -0.0270195)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000427218, 0.000446309, 0.125278)
+body_offset = Transform3D(1, 1.72853e-06, -2.30037e-07, -2.37487e-07, 8.9407e-08, -1, -1.72853e-06, 1, 8.19564e-08, 0.000427246, 0.125278, -0.00044632)
+
+[node name="Physical Bone mixamorig_Spine1_02" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="3"]
+transform = Transform3D(0.997792, 0.0656192, -0.0102602, -0.0122156, 0.0294679, -0.999491, -0.0652834, 0.99741, 0.0302044, 0.00733948, 2.50334, -0.0359535)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00543685, 0.000698662, 0.143634)
+body_offset = Transform3D(1, 8.49366e-07, 2.02297e-05, 2.02199e-05, -3.94322e-06, -1, -8.34465e-07, 1, -3.95067e-06, -0.00543976, 0.143634, -0.00069809)
+
+[node name="Physical Bone mixamorig_Spine2_03" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="4"]
+transform = Transform3D(0.997024, 0.0770809, -0.00139164, -0.00314358, 0.0226119, -0.999739, -0.0770294, 0.996768, 0.0227869, 0.0177765, 2.80779, -0.0443878)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00331137, 0.000513436, 0.161186)
+body_offset = Transform3D(1, -1.01328e-06, 1.3425e-06, 1.33971e-06, -2.19792e-06, -1, 9.98378e-07, 1, -2.2091e-06, 0.00331116, 0.161186, -0.000513077)
+
+[node name="Physical Bone mixamorig_Neck_04" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="5"]
+transform = Transform3D(-0.997259, -0.0558265, -0.0485509, 0.0244936, 0.370099, -0.92867, 0.069813, -0.927314, -0.367717, 0.00263977, 3.05918, -0.014946)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0165329, -0.00383947, 0.0945522)
+body_offset = Transform3D(-1, 9.68575e-07, 3.42727e-07, -9.31323e-10, 0.337443, -0.941346, -1.04308e-06, -0.941346, -0.337443, -0.0165329, 0.090302, 0.0282917)
+
+[node name="Physical Bone mixamorig_Head_05" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="6"]
+transform = Transform3D(-0.999885, -0.0150017, -0.00202208, -0.00435392, 0.412954, -0.910742, 0.0144977, -0.910628, -0.412972, 0.0297852, 3.3372, 0.108238)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00530233, -0.000739403, 0.207213)
+body_offset = Transform3D(-1, -2.38419e-07, -4.76837e-07, 3.89293e-07, 0.337438, -0.941348, 3.72529e-07, -0.941348, -0.337438, 0.00530243, 0.195309, 0.0692253)
+
+[node name="Physical Bone mixamorig_LeftShoulder_07" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="7"]
+transform = Transform3D(0.134653, -0.653262, -0.745061, -0.00440761, -0.752297, 0.65881, -0.990883, -0.0854271, -0.104179, 0.200768, 2.84699, -0.0459366)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000442417, 0.000258014, 0.112991)
+body_offset = Transform3D(1, 3.8743e-07, -7.7486e-07, -7.45058e-07, 1.22115e-05, -1, -4.61936e-07, 1, 1.22562e-05, 0.000442505, 0.112991, -0.000259399)
+
+[node name="Physical Bone mixamorig_LeftArm_08" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="8"]
+transform = Transform3D(-0.120472, -0.874408, -0.469996, -0.109871, -0.458791, 0.881725, -0.986618, 0.157862, -0.0408008, 0.398064, 2.55653, -0.0247498)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0011499, -0.00123429, 0.244202)
+body_offset = Transform3D(1, -1.11014e-06, -9.38773e-07, -9.68575e-07, -6.8713e-06, -1, 1.07288e-06, 1, -6.8238e-06, 0.00115013, 0.244202, 0.00123596)
+
+[node name="Physical Bone mixamorig_LeftForeArm_09" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="9"]
+transform = Transform3D(0.318203, -0.93456, -0.159198, -0.473316, -0.302112, 0.827466, -0.821413, -0.187951, -0.538475, 0.572746, 2.04449, 0.177986)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00107588, 0.000778625, 0.357509)
+body_offset = Transform3D(1, -4.17233e-07, 3.8743e-07, 6.85453e-07, -1.16229e-06, -1, 2.98023e-07, 1, -1.19209e-06, 0.00107574, 0.357509, -0.000778198)
+
+[node name="Physical Bone mixamorig_RightShoulder_011" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="10"]
+transform = Transform3D(0.167457, 0.654056, 0.737678, -0.0109285, -0.746966, 0.664772, 0.985819, -0.119383, -0.117937, -0.170494, 2.84649, -0.027729)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000331651, -0.000419401, 0.1129)
+body_offset = Transform3D(1, -1.53482e-06, 2.01166e-06, 2.02656e-06, -1.76439e-06, -1, 1.43796e-06, 1, -1.91759e-06, -0.000331879, 0.1129, 0.000419617)
+
+[node name="Physical Bone mixamorig_RightArm_012" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="11"]
+transform = Transform3D(-0.315418, 0.853589, 0.414606, -0.0655218, -0.455456, 0.887844, 0.946688, 0.252877, 0.199588, -0.356377, 2.55476, -0.0633774)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00015971, 0.00107552, 0.245026)
+body_offset = Transform3D(1, -3.18885e-06, 2.08616e-06, 2.20537e-06, -3.00854e-05, -1, 3.15905e-06, 1, -3.02047e-05, -0.000160217, 0.245026, -0.00106812)
+
+[node name="Physical Bone mixamorig_RightForeArm_013" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="12"]
+transform = Transform3D(-0.00849178, 0.984449, 0.175468, 0.224263, -0.169129, 0.95974, 0.974492, 0.047501, -0.219339, -0.521339, 1.99276, -0.0342407)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000752019, 0.00122871, 0.357954)
+body_offset = Transform3D(1, -1.04308e-06, -1.46031e-06, -1.38581e-06, -1.15111e-06, -1, 9.83477e-07, 1, -1.06916e-06, -0.000751495, 0.357954, -0.00122833)
+
+[node name="Physical Bone mixamorig_LeftUpLeg_015" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="13"]
+transform = Transform3D(-0.981462, 0.160175, -0.105249, -0.0358639, 0.385961, 0.921818, 0.188274, 0.908503, -0.373061, 0.175354, 1.35558, 0.156639)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00811741, 0.00307372, 0.445667)
+body_offset = Transform3D(1, -9.38773e-07, -5.84871e-07, -5.92321e-07, 2.11596e-06, -1, 9.23872e-07, 1, 2.08616e-06, 0.00811768, 0.445667, -0.00307465)
+
+[node name="Physical Bone mixamorig_LeftLeg_016" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="14"]
+transform = Transform3D(-0.985226, 0.142644, 0.0947717, -0.0367148, -0.716449, 0.696673, 0.167275, 0.682901, 0.711102, 0.193565, 0.685831, 0.0592842)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00187825, 0.000889202, 0.372795)
+body_offset = Transform3D(1, -3.83705e-06, 3.8147e-06, 3.79235e-06, -6.07967e-06, -1, 3.8445e-06, 1, -6.10948e-06, 0.00187683, 0.372795, -0.000886917)
+
+[node name="Physical Bone mixamorig_LeftFoot_017" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="15"]
+transform = Transform3D(-0.996992, 0.0745094, 0.0213193, 0.044341, 0.322803, 0.945427, 0.0635612, 0.943529, -0.325136, 0.152634, 0.266394, -0.150993)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00396729, 0.000877371, 0.168545)
+body_offset = Transform3D(1, -3.42727e-07, 1.49012e-08, -2.98023e-08, 1.19209e-07, -1, 2.83122e-07, 1, 5.96046e-08, 0.00396729, 0.168545, -0.00087738)
+
+[node name="Physical Bone mixamorig_LeftToeBase_018" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="16"]
+transform = Transform3D(-0.94037, 0.302683, -0.155201, 0.154619, 0.78677, 0.597567, 0.30298, 0.537937, -0.786656, 0.16378, 0.0619898, -0.0389099)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000129761, 0.00152735, 0.0728927)
+body_offset = Transform3D(1, -9.08971e-07, 8.64267e-07, 8.53091e-07, -5.96046e-07, -1, 9.38773e-07, 1, -5.06639e-07, 0.0001297, 0.0728927, -0.00152731)
+
+[node name="Physical Bone mixamorig_RightUpLeg_020" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="17"]
+transform = Transform3D(-0.994376, -0.101017, -0.0318192, -0.0519482, 0.20339, 0.977719, -0.0922942, 0.973873, -0.207494, -0.13781, 1.34427, 0.100029)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00072448, -4.22134e-05, 0.446202)
+body_offset = Transform3D(1, -1.2517e-06, -7.00355e-07, -7.00355e-07, 5.66244e-07, -1, 1.3113e-06, 1, 5.66244e-07, 0.000724792, 0.446202, 4.19617e-05)
+
+[node name="Physical Bone mixamorig_RightLeg_021" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="18"]
+transform = Transform3D(-0.996352, 0.0596182, -0.0610623, -0.0751584, -0.27407, 0.958769, 0.0404247, 0.95986, 0.277551, -0.0990677, 0.549857, 0.0900955)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00096302, -0.00101929, 0.37307)
+body_offset = Transform3D(1, -1.93715e-07, -4.60073e-06, -4.60446e-06, 2.04146e-06, -1, 2.23517e-07, 1, 2.04146e-06, -0.000961304, 0.37307, 0.00101852)
+
+[node name="Physical Bone mixamorig_RightFoot_022" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="19"]
+transform = Transform3D(-0.981589, 0.125119, -0.144319, 0.0263968, 0.837192, 0.546271, 0.189172, 0.532405, -0.825082, -0.0565872, 0.100875, 0.125832)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00363147, 0.000307464, 0.168972)
+body_offset = Transform3D(1, 6.59376e-07, -7.00355e-07, -6.63102e-07, -2.26498e-06, -1, -6.18398e-07, 1, -2.26498e-06, 0.00363159, 0.168972, -0.000307083)
+
+[node name="Physical Bone mixamorig_RightToeBase_023" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D/PhysicalBoneSimulator3D" index="20"]
+transform = Transform3D(-0.970454, -0.240635, -0.0177234, -0.239509, 0.9696, -0.0501055, 0.0292418, -0.0443801, -0.998587, -0.024147, 0.0122566, 0.340069)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00298298, 0.00020985, 0.0744476)
+body_offset = Transform3D(1, -3.22983e-06, 1.57952e-06, 1.56462e-06, -7.45058e-07, -1, 3.18885e-06, 1, -6.92904e-07, -0.00298309, 0.0744476, -0.000209808)
+
+[node name="CollisionShape3D" parent="Manager" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0866699, 1.63405, 0.0410118)
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
-[connection signal="body_entered" from="mangerTrigger" to="Manager" method="_on_manager_trigger_entered"]
 [connection signal="body_exited" from="mangerTrigger" to="mangerTrigger" method="_on_body_exited"]
 
 [editable path="FpsPlayer"]
@@ -593,7 +703,7 @@ shape = SubResource("BoxShape3D_pnhog")
 [editable path="gas_station/lamps/lamp4"]
 [editable path="Path3D/PathFollow3D/Hillybilly"]
 [editable path="Path3D/PathFollow3D/Hillybilly/hillybilly"]
-[editable path="Manager"]
-[editable path="Manager/Sketchfab_Scene"]
 [editable path="GunProp/Node3D"]
 [editable path="GunProp/Node3D/gun"]
+[editable path="Manager"]
+[editable path="Manager/Sketchfab_Scene"]
