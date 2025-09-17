@@ -183,7 +183,7 @@ func _start_dialog_after_scare() -> void:
 	]
 
 	if dialog_ui.has_method("show_dialog"):
-		dialog_ui.show_dialog(lines, Callable(self, "_on_scare_dialog_finished"))
+		dialog_ui.show_dialog(lines, global_transform.origin, Callable(self, "_on_scare_dialog_finished"))
 	else:
 		push_warning("Dialog-Controller hat keine Methode show_dialog(lines, callback)")
 		_on_scare_dialog_finished()

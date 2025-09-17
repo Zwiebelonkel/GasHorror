@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var animation_player: AnimationPlayer
 @export var manager_trigger: Area3D
 @export var player_path: NodePath = NodePath()      # leer lassen → per Gruppe "player" wird gesucht
+@export var sound: Node
 
 # --- Animationen ---
 @export var walk_anim: StringName = "mixamo_com"
@@ -82,7 +83,7 @@ func _on_manager_trigger_entered(body: Node) -> void:
 	if not body.is_in_group("player") or _dialog_started:
 		return
 	_dialog_started = true
-
+	sound.call("play")
 	if dialog_ui and dialog_ui.has_method("show_dialog"):
 		var lines := [
 			"Manager: Was suchst du denn hier?",
@@ -94,7 +95,8 @@ func _on_manager_trigger_entered(body: Node) -> void:
 			"Spieler: Das kann so nicht weitergehen!",
 			"Manager: Wie du meinst."
 		]
-		dialog_ui.show_dialog(lines, Callable(self, "_on_dialog_finished"))
+		dialog_ui.show_dialog(lines, global_transform.origin, Callable(self, "_on_dialog_finished"))
+
 	else:
 		_on_dialog_finished()
 

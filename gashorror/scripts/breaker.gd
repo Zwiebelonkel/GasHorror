@@ -6,22 +6,32 @@ extends Area3D
 # Sound
 @export var s_switch: AudioStreamPlayer
 
-# Schilder: am leichtesten per Drag&Drop im Inspector zuweisen
-@export var sign_node: Node            # altes Schild (Node3D oder Control)
-@export var sign2_node: Node           # neues Schild
+# Schilder: per Drag&Drop im Inspector zuweisen
+@export var sign_path: NodePath
+@export var sign2_path: NodePath
 
-# Optional zusätzlich: NodePaths (falls du lieber Pfade nutzt)
-#@export var sign_path: NodePath
-#@export var sign2_path: NodePath
-
-# Fallback-Gruppen (falls oben nichts gesetzt ist)
+# Fallback-Gruppen (optional)
 @export var old_group: StringName = &"SignOld"
 @export var new_group: StringName = &"SignNew"
 
+# Interner Zustand
 var is_on := false
+var sign_node: Node = null
+var sign2_node: Node = null
 
+# ----------------------------------------------------------
+# Haupt-Interaktion
 func interact(player: Node) -> void:
 	_dbg("breaker path: " + str(get_path()))
+
+	# 🛠️ Nachträgliche Initialisierung, falls nötig
+	if sign_node == null and sign_path != NodePath(""):
+		sign_node = get_node(sign_path)
+		_dbg("🔁 sign_node nachgeladen: " + str(sign_node))
+	if sign2_node == null and sign2_path != NodePath(""):
+		sign2_node = get_node(sign2_path)
+		_dbg("🔁 sign2_node nachgeladen: " + str(sign2_node))
+
 	if not player.is_in_group("player"):
 		_dbg("interact(): Body ist kein Spieler → Abbruch.")
 		return
@@ -49,10 +59,10 @@ func interact(player: Node) -> void:
 				c += 1
 		_dbg("Fallback: Lights sichtbar geschaltet. Count=" + str(c))
 
-	# Schilder umschalten
-	#var ok := _switch_signs_on_power()
-	#if not ok:
-		#_warn("⚠️ Konnte keine Schilder finden. Bitte `sign_node`/`sign2_node` oder `sign_path`/`sign2_path` korrekt setzen.")
+	# Schilder umschalten ✅
+	var ok := _switch_signs_on_power()
+	if not ok:
+		_warn("⚠️ Konnte keine Schilder finden. Bitte `sign_node`/`sign2_node` korrekt setzen.")
 
 	# Flags/Step
 	is_on = true
@@ -69,9 +79,7 @@ func interact(player: Node) -> void:
 func _switch_signs_on_power() -> bool:
 	var touched := false
 
-	# Priorität 1: direkte Node-Referenzen verwenden, wenn gesetzt
-
-	# Umschalten per Node-Referenz (Node direkt gesetzt oder über Pfad aufgelöst)
+	# Umschalten per Node-Referenz
 	if sign_node != null:
 		_dbg("Altes Schild (Node) vorher: " + _vis_str(sign_node))
 		_set_visible_recursive(sign_node, false)

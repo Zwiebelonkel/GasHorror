@@ -40,6 +40,8 @@ Lights=""
 Emissive=""
 PistolPickup=""
 manager=""
+SignOld=""
+SignNew=""
 
 [importer_defaults]
 

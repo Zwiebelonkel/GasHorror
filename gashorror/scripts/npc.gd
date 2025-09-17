@@ -40,7 +40,7 @@ func interact(player):
 		print("dont start again")
 		return  # ⛔️ Dialog läuft schon – keine neue Interaktion starten
 	if not reached_end:
-		dialog_ui.show_dialog(["📦 Warte bis er angekommen ist"])
+		return
 	else:
 		var dialogues = [
 			" Kunde: Einmal das hier bitte.",
@@ -49,7 +49,8 @@ func interact(player):
 			" Spieler: Tankstellenpreise eben. Tschüs!",
 			" Kunde: Tschüss."
 		]
-		dialog_ui.show_dialog(dialogues, _on_dialog_finished)
+		dialog_ui.show_dialog(dialogues, global_transform.origin, Callable(self, "_on_dialog_finished"))
+
 
 func _on_dialog_finished():
 	if spawned_product:

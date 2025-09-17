@@ -54,6 +54,7 @@ var yaw: float = 0.0
 var pitch: float = 0.0
 var is_crouching: bool = false
 var can_look := true
+var can_move := true
 var keys: Array[String] = []
 
 # Headbob
@@ -208,6 +209,8 @@ func _toggle_crouch() -> void:
 			cam.position.y = normal_height
 
 func _physics_process(delta: float) -> void:
+	if not can_move:
+		return
 	var dir := Vector3.ZERO
 	if Input.is_action_pressed("move_forward"):
 		dir -= transform.basis.z
