@@ -2,6 +2,8 @@ extends Node3D
 
 # -------------------- N O D E S --------------------
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@export var player_root_path: NodePath     # optional: Player-Root zum Excluden
+
 
 @export var animation_name: StringName = &"combined"
 
@@ -14,13 +16,13 @@ extends Node3D
 @export var cam_path: NodePath = ^"/root/Main/FpsPlayer/Camera3D"  # FPS-Kamera
 @export var muzzle_path: NodePath                                  # optional: echter Mündungs-Node
 @onready var cam: Camera3D = get_node_or_null(cam_path) as Camera3D
+@onready var player: CharacterBody3D = get_node_or_null(player_root_path) as CharacterBody3D
 @onready var muzzle: Node3D = get_node_or_null(muzzle_path) as Node3D
 
 @export var use_camera_ray: bool = true          # true = vom Crosshair, false = vom Muzzle
 @export var max_distance: float = 120.0
 @export_flags_3d_physics var ray_mask: int = -1  # DEBUG: alles treffen; später Welt+Manager-Layer setzen
 @export var manager_group: StringName = &"manager"  # Manager-Root MUSS in dieser Gruppe sein
-@export var player_root_path: NodePath              # optional: Player-Root zum Excluden
 
 # -------------------- T I M I N G --------------------
 @export var muzzle_flash_time: float = 0.1
@@ -78,6 +80,8 @@ func _process(delta: float) -> void:
 		_fire_once()
 
 func _fire_once() -> void:
+	#if player.hasPistol == false and player != null:
+		#return
 	_can_fire = false
 	_cd_left = fire_cooldown
 	_flash_left = muzzle_flash_time

@@ -37,6 +37,7 @@ extends CharacterBody3D
 @export var sway_from_move_scale: float = 0.5
 @export var weapon_scale := Vector3.ONE
 @export var gunProp: Node3D  # Pfad zur Pistole, um sie später zu finden
+@onready var main: Node3D = get_node("/root/Main")
 
 @onready var pistol: Node3D  # Referenz zur Pistole
 @onready var cam: Camera3D = $Camera3D
@@ -191,9 +192,9 @@ func _input(event: InputEvent) -> void:
 		if s_light:
 			s_light.play()
 
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("pause"):
 		_capture_mouse(false)
-	elif event is InputEventMouseButton and event.pressed and Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+	elif event is InputEventMouseButton and main.paused == false and event.pressed and Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		_capture_mouse(true)
 
 func _toggle_crouch() -> void:

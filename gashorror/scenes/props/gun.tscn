@@ -9,6 +9,7 @@
 [node name="gun" parent="." instance=ExtResource("1_iwijv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335476, 0, 1.00173)
 script = ExtResource("1_rjvdq")
+player_root_path = NodePath("/root/Main/FpsPlayer")
 cam_path = NodePath("/root/Main/FpsPlayer/CharacterBody3D/Camera3D")
 fire_cooldown = 0.15
 debug_logs = false
