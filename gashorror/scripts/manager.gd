@@ -86,14 +86,14 @@ func _on_manager_trigger_entered(body: Node) -> void:
 	sound.call("play")
 	if dialog_ui and dialog_ui.has_method("show_dialog"):
 		var lines := [
-			"Manager: Was suchst du denn hier?",
-			"Spieler: Was geht hier unten vor sich?",
-			"Manager: Das hat dich einen Scheiß zu interessieren!",
-			"Manager: Hättest du nicht einfach weiterarbeiten können?",
-			"Spieler: Was sind das hier für Leute?",
-			"Manager: Der Schmutz der Gesellschaft – sie werden hier gemolken für das angesagteste Benzin.",
-			"Spieler: Das kann so nicht weitergehen!",
-			"Manager: Wie du meinst."
+			{"speaker": "Manager", "text": "Was suchst du denn hier?"},
+			{"speaker": "Spieler", "text": "Was geht hier unten vor sich?"},
+			{"speaker": "Manager", "text": "Das hat dich einen Scheiß zu interessieren!"},
+			{"speaker": "Manager", "text": "Hättest du nicht einfach weiterarbeiten können?"},
+			{"speaker": "Spieler", "text": "Was sind das hier für Leute?"},
+			{"speaker": "Manager", "text": "Der Schmutz der Gesellschaft – sie werden hier gemolken für das angesagteste Benzin."},
+			{"speaker": "Spieler", "text": "Das kann so nicht weitergehen!"},
+			{"speaker": "Manager", "text": "Wie du meinst."}
 		]
 		dialog_ui.show_dialog(lines, global_transform.origin, Callable(self, "_on_dialog_finished"))
 

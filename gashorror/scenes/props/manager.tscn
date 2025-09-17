@@ -250,10 +250,10 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_t4ufd")
 
 [node name="Physical Bone mixamorig_Spine1_02" type="PhysicalBone3D" parent="Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="4"]
-transform = Transform3D(1.08769, -3.282e-07, -9.47827e-09, -9.47827e-09, -0.0627718, 1.08588, -3.282e-07, -1.08588, -0.0627718, -2.74522e-10, 0.62851, -0.0353915)
+transform = Transform3D(1.08769, -3.282e-07, -9.47827e-09, -9.47827e-09, -0.0627718, 1.08588, -3.282e-07, -1.08588, -0.0627718, -3.48395e-10, 0.62851, -0.0353915)
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.99043e-10, -4.3187e-06, -0.131985)
-body_offset = Transform3D(1.08769, -1.6207e-07, -9.47821e-09, 9.47814e-09, -4.32134e-07, 1.08769, -1.62069e-07, -1.08769, -4.24683e-07, -2.73795e-10, 0.143559, -4.75347e-06)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.31126e-10, -4.3187e-06, -0.131985)
+body_offset = Transform3D(1.08769, -1.6207e-07, -9.47821e-09, 9.47814e-09, -4.32134e-07, 1.08769, -1.62069e-07, -1.08769, -4.24683e-07, -3.47669e-10, 0.143559, -4.75347e-06)
 bone_name = "mixamorig_Spine1_02"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -1066,10 +1066,10 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_q4gau")
 
 [node name="Physical Bone mixamorig_LeftLeg_016" type="PhysicalBone3D" parent="Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="15"]
-transform = Transform3D(-1.087, -0.0035564, 0.0385203, -0.0386836, 0.094343, -1.0829, 0.000199605, -1.08359, -0.0944098, 0.188112, -1.36314, -0.0161327)
+transform = Transform3D(-1.087, -0.00358355, 0.0385181, -0.0386838, 0.0943418, -1.0829, 0.000226871, -1.08359, -0.0944095, 0.188112, -1.36314, -0.0161327)
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.94298e-07, 3.36345e-06, -0.34254)
-body_offset = Transform3D(1.08769, 7.14163e-05, 3.17542e-06, -3.19961e-06, 3.38256e-06, 1.08769, 7.14145e-05, -1.08769, 3.36021e-06, 2.23517e-07, 0.372578, 4.80935e-06)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48407e-06, 3.26264e-06, -0.34254)
+body_offset = Transform3D(1.08769, 9.85946e-05, 5.36593e-06, -5.39122e-06, 3.69549e-06, 1.08769, 9.85928e-05, -1.08769, 3.68059e-06, 2.23517e-07, 0.372578, 4.80935e-06)
 bone_name = "mixamorig_LeftLeg_016"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -1142,8 +1142,8 @@ shape = SubResource("CapsuleShape3D_xlkob")
 [node name="Physical Bone mixamorig_LeftFoot_017" type="PhysicalBone3D" parent="Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="16"]
 transform = Transform3D(-1.07685, 0.103784, -0.112719, -0.0251303, -0.90897, -0.59684, -0.151146, -0.588284, 0.902304, 0.18382, -1.82673, 0.0915404)
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39118e-06, -1.77474e-05, -0.15519)
-body_offset = Transform3D(1.08769, -1.95205e-06, 2.5481e-06, -2.5332e-06, -3.8743e-07, 1.08769, -1.9297e-06, -1.08769, -1.49012e-07, -3.29316e-06, 0.168799, -1.93268e-05)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.39331e-06, -1.77389e-05, -0.15519)
+body_offset = Transform3D(1.08769, -1.9446e-06, 2.563e-06, -2.5332e-06, -4.17233e-07, 1.08769, -1.9297e-06, -1.08769, -2.08616e-07, -3.29316e-06, 0.168799, -1.93268e-05)
 bone_name = "mixamorig_LeftFoot_017"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -1362,10 +1362,10 @@ transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_vct5t")
 
 [node name="Physical Bone mixamorig_RightLeg_021" type="PhysicalBone3D" parent="Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="19"]
-transform = Transform3D(-1.087, 0.00352527, -0.038519, 0.0386795, 0.093886, -1.08294, -0.000185047, -1.08363, -0.093952, -0.188106, -1.36316, -0.0152575)
+transform = Transform3D(-1.087, 0.00353067, -0.0385183, 0.0386793, 0.0938858, -1.08294, -0.000190483, -1.08363, -0.093952, -0.188106, -1.36316, -0.0157626)
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.20336e-06, -0.00120881, -0.342651)
-body_offset = Transform3D(1.08769, -3.6913e-05, -5.48757e-06, 5.50459e-06, 2.98023e-08, 1.08769, -3.69122e-05, -1.08769, 7.45058e-09, -6.49691e-06, 0.372699, -0.00131481)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.90644e-06, -0.00167144, -0.342691)
+body_offset = Transform3D(1.08769, -4.23131e-05, -6.13578e-06, 6.15294e-06, 8.19564e-08, 1.08769, -4.23118e-05, -1.08769, 5.21541e-08, -6.4224e-06, 0.372743, -0.001818)
 bone_name = "mixamorig_RightLeg_021"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0
@@ -1512,8 +1512,8 @@ shape = SubResource("CapsuleShape3D_8w8lj")
 [node name="Physical Bone mixamorig_RightToeBase_023" type="PhysicalBone3D" parent="Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="21"]
 transform = Transform3D(-1.05799, 0.251205, -0.0249433, -0.250264, -1.05782, -0.0381972, -0.03308, -0.0314151, 1.08674, -0.16802, -1.92192, 0.309342)
 joint_type = 5
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34282e-05, -3.10341e-05, -0.0675312)
-body_offset = Transform3D(1.08769, -8.10211e-05, 2.19792e-07, -2.6077e-07, 4.80562e-07, 1.08769, -8.12847e-05, -1.08769, 5.51343e-07, 1.4618e-05, 0.0734532, -3.37195e-05)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34284e-05, -3.10344e-05, -0.0675312)
+body_offset = Transform3D(1.08769, -8.10359e-05, 2.16067e-07, -2.6077e-07, 4.80562e-07, 1.08769, -8.12847e-05, -1.08769, 5.55068e-07, 1.4618e-05, 0.0734532, -3.37195e-05)
 bone_name = "mixamorig_RightToeBase_023"
 joint_constraints/x/linear_limit_enabled = true
 joint_constraints/x/linear_limit_upper = 0.0

@@ -176,14 +176,15 @@ func _start_dialog_after_scare() -> void:
 		return
 
 	var lines := [
-		"Spieler: AHHH?!",
-		"Kunde: Entschuldigung. Ist hier die Toilette?",
-		"Spieler: Nein, ist sie nicht.",
-		"Kunde: Okay, weil dieses Getränk ist sehr sehr flüssig gewesen!",
-		"Spieler: Haha, ja",
-		"Spieler: Wir haben leider keine Toilette",
-		"Kunde: Das darf doch nicht wahr sein."
+		{"speaker": "Spieler", "text": "AHHH?!"},
+		{"speaker": "Kunde", "text": "Entschuldigung. Ist hier die Toilette?"},
+		{"speaker": "Spieler", "text": "Nein, ist sie nicht."},
+		{"speaker": "Kunde", "text": "Okay, weil dieses Getränk ist sehr sehr flüssig gewesen!"},
+		{"speaker": "Spieler", "text": "Haha, ja"},
+		{"speaker": "Spieler", "text": "Wir haben leider keine Toilette"},
+		{"speaker": "Kunde", "text": "Das darf doch nicht wahr sein."}
 	]
+
 
 	if dialog_ui.has_method("show_dialog"):
 		dialog_ui.show_dialog(lines, global_transform.origin, Callable(self, "_on_scare_dialog_finished"))

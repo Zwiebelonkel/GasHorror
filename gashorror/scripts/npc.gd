@@ -43,12 +43,13 @@ func interact(player):
 		return
 	else:
 		var dialogues = [
-			"Kunde: Einmal das hier bitte.",
-			"Spieler: 2$ bitte. Haben Sie alles gefunden?",
-			"Kunde: Ja, aber alles kann ich mir hier leider nicht leisten.",
-			"Spieler: Tankstellenpreise eben. Tschüss!",
-			"Kunde: Tschüss."
+			{"speaker": "Kunde", "text": "Einmal das hier bitte."},
+			{"speaker": "Spieler", "text": "2$ bitte. Haben Sie alles gefunden?"},
+			{"speaker": "Kunde", "text": "Ja, aber alles kann ich mir hier leider nicht leisten."},
+			{"speaker": "Spieler", "text": "Tankstellenpreise eben. Tschüss!"},
+			{"speaker": "Kunde", "text": "Tschüss."}
 		]
+
 		dialog_ui.show_dialog(dialogues, global_transform.origin, Callable(self, "_on_dialog_finished"))
 
 

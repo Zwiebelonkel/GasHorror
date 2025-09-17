@@ -1,6 +1,13 @@
 extends CanvasLayer
 
 @onready var label: Label = $Panel/Label
+@onready var portrait: TextureRect = $Panel/Portrait
+
+var portraits = {
+	"Kunde": preload("res://assets/portraits/customer.png"),
+	"Spieler": preload("res://assets/portraits/player.png"),
+	"Manager": preload("res://assets/portraits/manager.png")
+}
 
 var dialog_lines: Array = []
 var current_line_index: int = 0
@@ -73,11 +80,20 @@ func _start_dialog():
 	_show_current_line()
 
 func _show_current_line():
-	full_text = dialog_lines[current_line_index]
+	var line_data = dialog_lines[current_line_index]
+	var speaker = line_data.get("speaker", "")
+	full_text = line_data.get("text", "")
 	visible_chars = 0
 	typing_timer = 0.0
 	is_typing = true
-	label.text = ""  # leer starten
+	label.text = ""
+
+	# Porträt setzen
+	if portraits.has(speaker):
+		portrait.texture = portraits[speaker]
+	else:
+		portrait.texture = null  # Fallback: kein Bild
+
 
 func _unhandled_input(event):
 	if is_active and event.is_action_pressed("ui_accept"):

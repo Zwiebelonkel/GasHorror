@@ -37,8 +37,16 @@ anchor_right = 1.0
 anchor_bottom = 0.998
 offset_left = 13.7
 offset_top = -115.0
-offset_right = -15.0
+offset_right = -249.0
 offset_bottom = -12.476
 text = "Player: Test"
 label_settings = ExtResource("2_hairy")
 autowrap_mode = 2
+
+[node name="Portrait" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 27.0
+offset_right = 673.0
+offset_bottom = 234.0
+expand_mode = 1
