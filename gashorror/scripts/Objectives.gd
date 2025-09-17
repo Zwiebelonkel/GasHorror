@@ -72,7 +72,7 @@ func get_current_objective_name() -> String:
 		POWER_ON:
 			return "Ziel: Schalte den Strom wieder an."
 		SIGN_CHANGE:
-			return "Ziel: Das Schild draußen hat sich verändert..."
+			return "Ziel: Überprüfe das Licht"
 		REENTER_CELLAR:
 			return "Ziel: Gehe erneut in den Keller."
 		SECRET_ENTRANCE:

@@ -91,7 +91,7 @@ func _on_manager_trigger_entered(body: Node) -> void:
 			"Manager: Das hat dich einen Scheiß zu interessieren!",
 			"Manager: Hättest du nicht einfach weiterarbeiten können?",
 			"Spieler: Was sind das hier für Leute?",
-			"Manager: Der Schmutz der Gesellschaft – sie werden hier 'gemolken' für das angesagteste Benzin.",
+			"Manager: Der Schmutz der Gesellschaft – sie werden hier gemolken für das angesagteste Benzin.",
 			"Spieler: Das kann so nicht weitergehen!",
 			"Manager: Wie du meinst."
 		]

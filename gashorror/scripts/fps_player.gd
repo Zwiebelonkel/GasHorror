@@ -210,6 +210,8 @@ func _toggle_crouch() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not can_move:
+		if not step_timer.is_stopped():
+			step_timer.stop()
 		return
 	var dir := Vector3.ZERO
 	if Input.is_action_pressed("move_forward"):
