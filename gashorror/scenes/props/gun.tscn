@@ -27,5 +27,6 @@ light_specular = 11.328
 stream = ExtResource("3_eryc1")
 volume_db = -21.55
 pitch_scale = 0.53
+bus = &"SFX"
 
 [editable path="gun"]

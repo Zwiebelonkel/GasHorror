@@ -39,3 +39,4 @@ skeleton = NodePath("../..")
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_nsoa3")
+bus = &"SFX"

@@ -63,10 +63,12 @@ script = ExtResource("2_savv0")
 [node name="LightSound" type="AudioStreamPlayer" parent="CharacterBody3D"]
 stream = ExtResource("4_ar54r")
 volume_db = -5.622
+bus = &"SFX"
 
 [node name="StepSound" type="AudioStreamPlayer" parent="CharacterBody3D"]
 stream = ExtResource("5_5gvag")
 volume_db = -4.685
 pitch_scale = 0.82
+bus = &"SFX"
 
 [node name="StepTimer" type="Timer" parent="CharacterBody3D"]

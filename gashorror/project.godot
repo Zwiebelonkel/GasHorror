@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="GasHorror"
-run/main_scene="uid://brk1bi6nckn8r"
+run/main_scene="uid://bh1viipml1p00"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/image="uid://csc6cwxtnclfl"
 
 [autoload]
 
@@ -23,7 +24,7 @@ Objectives="*res://scripts/Objectives.gd"
 window/size/viewport_width=700
 window/size/viewport_height=600
 window/size/borderless=true
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [editor]
 

@@ -313,6 +313,7 @@ light_energy = 17.632
 
 [node name="DoorSound" type="AudioStreamPlayer" parent="gas_station/Sketchfab_model/Gas_Station_fbx/RootNode/Store/Door/Door_Palette_0/StaticBody3D" index="2"]
 stream = ExtResource("6_cvmbd")
+bus = &"SFX"
 
 [node name="lamps" parent="gas_station" index="1" groups=["Emissive"]]
 
@@ -514,6 +515,7 @@ stream = ExtResource("15_3p2gp")
 volume_db = -18.207
 pitch_scale = 0.57
 autoplay = true
+bus = &"Music"
 
 [node name="Path3D" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.242476, 0.204227)
@@ -532,6 +534,9 @@ script = ExtResource("21_ebg2g")
 speed = 2.0
 product_scene = ExtResource("24_dg70y")
 spawn_marker_path = NodePath("../../../productSpawn")
+
+[node name="JumpscareSound" parent="Path3D/PathFollow3D/Hillybilly" index="2"]
+bus = &"SFX"
 
 [node name="productSpawn" type="Marker3D" parent="."]
 transform = Transform3D(0.008, 0, 0, 0, 0.008, -1.77636e-18, 0, 1.77636e-18, 0.008, -7.23118, 0.958245, -3.60451)
@@ -591,9 +596,9 @@ freeze_lin_vel = 0.08
 freeze_ang_vel = 0.25
 
 [node name="Physical Bone mixamorig_Hips_00" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="2"]
-transform = Transform3D(1.55385, 3.96432e-10, -1.36335e-08, 1.36336e-08, -0.0896708, 1.55126, -3.91002e-10, -1.55126, -0.0896708, 0, 0.126938, -0.00639248)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.69974e-10, -4.27477e-07, -0.0692815)
-body_offset = Transform3D(1.55385, 5.38964e-08, -1.05409e-08, 1.36336e-08, -0.0896707, 1.55126, 5.31983e-08, -1.55126, -0.0896707, 0, 0.107473, -0.00621319)
+transform = Transform3D(1.55385, 3.97068e-10, -1.36445e-08, 1.36447e-08, -0.0896708, 1.55126, -3.91002e-10, -1.55126, -0.0896708, 0, 0.126938, -0.00639248)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.70465e-10, -4.27477e-07, -0.0692815)
+body_offset = Transform3D(1.55385, 5.38971e-08, -1.05519e-08, 1.36447e-08, -0.0896707, 1.55126, 5.31983e-08, -1.55126, -0.0896707, 0, 0.107473, -0.00621319)
 
 [node name="Physical Bone mixamorig_Spine_01" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="3"]
 transform = Transform3D(1.55385, -3.91295e-10, 1.35404e-08, -1.35404e-08, -0.089674, 1.55126, 3.90787e-10, -1.55126, -0.089674, 0, 0.359816, -0.0198526)
@@ -601,9 +606,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.04358e-10, 1.25502e-06, 
 body_offset = Transform3D(1.55385, 9.85231e-08, 1.35404e-08, -1.35404e-08, -5.28991e-07, 1.55385, 9.85231e-08, -1.55385, -5.28991e-07, 0, 0.12561, 1.90735e-06)
 
 [node name="Physical Bone mixamorig_Spine1_02" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="4"]
-transform = Transform3D(1.55385, -4.6885e-07, -1.36797e-08, -1.34008e-08, -0.089674, 1.55126, -4.68858e-07, -1.55126, -0.089674, 0, 0.628557, -0.0353765)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.12342e-10, 8.62973e-06, -0.0924186)
-body_offset = Transform3D(1.55385, -2.3152e-07, -1.36796e-08, 1.36795e-08, -6.25849e-07, 1.55385, -2.3152e-07, -1.55385, -6.25849e-07, 0, 0.143604, 1.33514e-05)
+transform = Transform3D(1.55385, -4.68849e-07, -1.36963e-08, -1.33842e-08, -0.089674, 1.55126, -4.68858e-07, -1.55126, -0.089674, 0, 0.628557, -0.0353765)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13327e-10, 8.62973e-06, -0.0924186)
+body_offset = Transform3D(1.55385, -2.31519e-07, -1.36962e-08, 1.36961e-08, -6.25849e-07, 1.55385, -2.31519e-07, -1.55385, -6.25849e-07, 0, 0.143604, 1.33514e-05)
 
 [node name="Physical Bone mixamorig_Spine2_03" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="5"]
 transform = Transform3D(1.55385, 3.90819e-10, -1.35415e-08, 1.35415e-08, -0.089674, 1.55126, -3.91328e-10, -1.55126, -0.089674, 0, 0.933073, -0.0530005)
@@ -611,9 +616,9 @@ joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.05911e-10, -5.49434e-06
 body_offset = Transform3D(1.55385, 4.09106e-08, -1.35415e-08, 1.35415e-08, -4.39584e-07, 1.55385, 4.09105e-08, -1.55385, -4.39584e-07, 0, 0.161549, -8.58307e-06)
 
 [node name="Physical Bone mixamorig_Neck_04" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="6"]
-transform = Transform3D(-1.55385, 1.39494e-08, -8.02082e-08, -8.02109e-08, -0.524323, 1.46271, -1.39339e-08, 1.46271, 0.524323, 0, 1.18475, -0.0298595)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.19474e-09, 1.83098e-06, -0.0618902)
-body_offset = Transform3D(-1.55385, 1.39494e-08, -8.02082e-08, -8.02109e-08, -0.524323, 1.46271, -1.39339e-08, 1.46271, 0.524323, 0, 0.0905285, 0.0324478)
+transform = Transform3D(-1.55385, 1.39724e-08, -8.03317e-08, -8.03349e-08, -0.524323, 1.46271, -1.39539e-08, 1.46271, 0.524323, 0, 1.18475, -0.0298595)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.19965e-09, 1.83098e-06, -0.0618902)
+body_offset = Transform3D(-1.55385, 1.39724e-08, -8.03317e-08, -8.03349e-08, -0.524323, 1.46271, -1.39539e-08, 1.46271, 0.524323, 0, 0.0905285, 0.0324478)
 
 [node name="Physical Bone mixamorig_Head_05" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="7"]
 transform = Transform3D(-1.55385, 1.3761e-08, -7.91675e-08, -7.91676e-08, -0.524325, 1.46271, -1.37602e-08, 1.46271, 0.524325, 0, 1.47068, 0.0726347)
@@ -689,6 +694,9 @@ body_offset = Transform3D(1.55385, 3.26559e-05, -9.84967e-06, 9.93907e-06, 7.629
 transform = Transform3D(-1.51142, 0.358865, -0.0356332, -0.35752, -1.51117, -0.054566, -0.0472568, -0.0448773, 1.55248, -0.168045, -1.92191, 0.309343)
 joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.96435e-05, -1.4796e-05, -0.0472723)
 body_offset = Transform3D(1.55385, -0.00011595, -7.82311e-08, 1.86265e-08, 2.11224e-06, 1.55385, -0.000116242, -1.55385, 2.21655e-06, 3.05176e-05, 0.0734539, -2.28882e-05)
+
+[node name="Jumpscare" parent="Manager" index="2"]
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
 [connection signal="body_exited" from="mangerTrigger" to="mangerTrigger" method="_on_body_exited"]
