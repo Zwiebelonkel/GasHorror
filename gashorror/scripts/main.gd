@@ -3,7 +3,7 @@ extends Node3D
 @export var note_marker_path: NodePath
 @export var note_scene: PackedScene
 @export var doorArea: NodePath  # <-- Pfad zu deiner Area3D (z. B. Türtrigger)
-@onready var options: Panel = $Options/Options2
+@onready var options: Panel = $OptionsCanvas/OptionsControl/Options
 
 var paused = false
 

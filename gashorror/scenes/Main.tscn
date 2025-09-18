@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://brk1bi6nckn8r"]
+[gd_scene load_steps=57 format=3 uid="uid://brk1bi6nckn8r"]
 
 [ext_resource type="Script" uid="uid://bjp1xbcce3uwv" path="res://scripts/main.gd" id="1_bjd11"]
 [ext_resource type="PackedScene" uid="uid://dukjcvebb57k2" path="res://scenes/FPSPlayer.tscn" id="1_rvslj"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b508608ahs5xv" path="res://ui/ObjectiveHUD.tscn" id="2_0bbpv"]
 [ext_resource type="PackedScene" uid="uid://dig56my50obj6" path="res://scenes/props/note.tscn" id="2_1iba3"]
 [ext_resource type="Shader" uid="uid://1tc2rtqiu7q2" path="res://shaders/buckshot.gdshader" id="2_rarhs"]
-[ext_resource type="Shader" uid="uid://ber46v45djbx5" path="res://shaders/crt.gdshader" id="4_rarhs"]
 [ext_resource type="PackedScene" uid="uid://c7jnqeoq7xx8p" path="res://scenes/props/gas_station.tscn" id="4_vcsgt"]
 [ext_resource type="Script" uid="uid://bs38i01lfq3hw" path="res://scripts/flickerLight.gd" id="6_bjd11"]
 [ext_resource type="PackedScene" uid="uid://l2htm3powhjl" path="res://scenes/props/car.tscn" id="6_c01mt"]
@@ -55,59 +54,6 @@ shader_parameter/tint_color = Vector3(0.95, 1.03, 0.9)
 shader_parameter/tint_strength = 0.15
 shader_parameter/viewport_size_override = Vector2(0, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rarhs"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_rvslj"]
-material = SubResource("StandardMaterial3D_rarhs")
-size = Vector3(100, 0.5, 100)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0bbpv"]
-data = PackedVector3Array(-5, 0.25, 5, 5, 0.25, 5, -5, -0.25, 5, 5, 0.25, 5, 5, -0.25, 5, -5, -0.25, 5, 5, 0.25, -5, -5, 0.25, -5, 5, -0.25, -5, -5, 0.25, -5, -5, -0.25, -5, 5, -0.25, -5, 5, 0.25, 5, 5, 0.25, -5, 5, -0.25, 5, 5, 0.25, -5, 5, -0.25, -5, 5, -0.25, 5, -5, 0.25, -5, -5, 0.25, 5, -5, -0.25, -5, -5, 0.25, 5, -5, -0.25, 5, -5, -0.25, -5, 5, 0.25, 5, -5, 0.25, 5, 5, 0.25, -5, -5, 0.25, 5, -5, 0.25, -5, 5, 0.25, -5, -5, -0.25, 5, 5, -0.25, 5, -5, -0.25, -5, 5, -0.25, 5, 5, -0.25, -5, -5, -0.25, -5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rarhs"]
-data = PackedVector3Array(-50, 0.25, 50, 50, 0.25, 50, -50, -0.25, 50, 50, 0.25, 50, 50, -0.25, 50, -50, -0.25, 50, 50, 0.25, -50, -50, 0.25, -50, 50, -0.25, -50, -50, 0.25, -50, -50, -0.25, -50, 50, -0.25, -50, 50, 0.25, 50, 50, 0.25, -50, 50, -0.25, 50, 50, 0.25, -50, 50, -0.25, -50, 50, -0.25, 50, -50, 0.25, -50, -50, 0.25, 50, -50, -0.25, -50, -50, 0.25, 50, -50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, 50, 50, 0.25, -50, -50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, -0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, 50, 50, -0.25, -50, -50, -0.25, -50)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vcsgt"]
-data = PackedVector3Array(-50, 0.25, 50, 50, 0.25, 50, -50, -0.25, 50, 50, 0.25, 50, 50, -0.25, 50, -50, -0.25, 50, 50, 0.25, -50, -50, 0.25, -50, 50, -0.25, -50, -50, 0.25, -50, -50, -0.25, -50, 50, -0.25, -50, 50, 0.25, 50, 50, 0.25, -50, 50, -0.25, 50, 50, 0.25, -50, 50, -0.25, -50, 50, -0.25, 50, -50, 0.25, -50, -50, 0.25, 50, -50, -0.25, -50, -50, 0.25, 50, -50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, 50, 50, 0.25, -50, -50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, -0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, 50, 50, -0.25, -50, -50, -0.25, -50)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_c01mt"]
-data = PackedVector3Array(-50, 0.25, 50, 50, 0.25, 50, -50, -0.25, 50, 50, 0.25, 50, 50, -0.25, 50, -50, -0.25, 50, 50, 0.25, -50, -50, 0.25, -50, 50, -0.25, -50, -50, 0.25, -50, -50, -0.25, -50, 50, -0.25, -50, 50, 0.25, 50, 50, 0.25, -50, 50, -0.25, 50, 50, 0.25, -50, 50, -0.25, -50, 50, -0.25, 50, -50, 0.25, -50, -50, 0.25, 50, -50, -0.25, -50, -50, 0.25, 50, -50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, 50, 50, 0.25, -50, -50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, -0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, 50, 50, -0.25, -50, -50, -0.25, -50)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vcsgt"]
-shader = ExtResource("4_rarhs")
-shader_parameter/overlay = false
-shader_parameter/scanlines_opacity = 0.4
-shader_parameter/scanlines_width = 0.25
-shader_parameter/grille_opacity = 0.3
-shader_parameter/resolution = Vector2(640, 480)
-shader_parameter/pixelate = true
-shader_parameter/roll = true
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 15.0
-shader_parameter/roll_variation = 1.8
-shader_parameter/distort_intensity = 0.05
-shader_parameter/noise_opacity = 0.4
-shader_parameter/noise_speed = 5.0
-shader_parameter/static_noise_intensity = 0.06
-shader_parameter/aberration = 0.03
-shader_parameter/brightness = 1.4
-shader_parameter/discolor = true
-shader_parameter/warp_amount = 1.0
-shader_parameter/clip_warp = false
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.5
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_nxtc6"]
-size = Vector3(1.35651, 4.28571, 3.78235)
-
-[sub_resource type="Curve3D" id="Curve3D_bb450"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0.82, 0, 0, 1.27, 0, -16.055, 1.805, 0, 0, 0, 0, 0, 1.15, 0, 0, 0, 0, 2.465, 0, 0, 0, -2.48, 0, -1.465, 1.32, 0, -0.715, 0, 0, 0, -5.13147, 0, -2.59, -0.315, 0, 0, 0, 0, 1.99, -5.22945, 0, 1.90927, -0.485, 0, 0, 0, 0, 0, -7.65711, 0, 2.43036, 0, 0, 0, 0, 0, 0, -7.779, 0, -3.031),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 7
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pdwbg"]
 bg_color = Color(0.237539, 0.237539, 0.237539, 1)
 corner_radius_top_left = 1595
@@ -135,6 +81,35 @@ thickness = 6
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_8gny2"]
 color = Color(1, 1, 0, 1)
 thickness = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rarhs"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rvslj"]
+material = SubResource("StandardMaterial3D_rarhs")
+size = Vector3(100, 0.5, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0bbpv"]
+data = PackedVector3Array(-5, 0.25, 5, 5, 0.25, 5, -5, -0.25, 5, 5, 0.25, 5, 5, -0.25, 5, -5, -0.25, 5, 5, 0.25, -5, -5, 0.25, -5, 5, -0.25, -5, -5, 0.25, -5, -5, -0.25, -5, 5, -0.25, -5, 5, 0.25, 5, 5, 0.25, -5, 5, -0.25, 5, 5, 0.25, -5, 5, -0.25, -5, 5, -0.25, 5, -5, 0.25, -5, -5, 0.25, 5, -5, -0.25, -5, -5, 0.25, 5, -5, -0.25, 5, -5, -0.25, -5, 5, 0.25, 5, -5, 0.25, 5, 5, 0.25, -5, -5, 0.25, 5, -5, 0.25, -5, 5, 0.25, -5, -5, -0.25, 5, 5, -0.25, 5, -5, -0.25, -5, 5, -0.25, 5, 5, -0.25, -5, -5, -0.25, -5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rarhs"]
+data = PackedVector3Array(-50, 0.25, 50, 50, 0.25, 50, -50, -0.25, 50, 50, 0.25, 50, 50, -0.25, 50, -50, -0.25, 50, 50, 0.25, -50, -50, 0.25, -50, 50, -0.25, -50, -50, 0.25, -50, -50, -0.25, -50, 50, -0.25, -50, 50, 0.25, 50, 50, 0.25, -50, 50, -0.25, 50, 50, 0.25, -50, 50, -0.25, -50, 50, -0.25, 50, -50, 0.25, -50, -50, 0.25, 50, -50, -0.25, -50, -50, 0.25, 50, -50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, 50, 50, 0.25, -50, -50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, -0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, 50, 50, -0.25, -50, -50, -0.25, -50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_vcsgt"]
+data = PackedVector3Array(-50, 0.25, 50, 50, 0.25, 50, -50, -0.25, 50, 50, 0.25, 50, 50, -0.25, 50, -50, -0.25, 50, 50, 0.25, -50, -50, 0.25, -50, 50, -0.25, -50, -50, 0.25, -50, -50, -0.25, -50, 50, -0.25, -50, 50, 0.25, 50, 50, 0.25, -50, 50, -0.25, 50, 50, 0.25, -50, 50, -0.25, -50, 50, -0.25, 50, -50, 0.25, -50, -50, 0.25, 50, -50, -0.25, -50, -50, 0.25, 50, -50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, 50, 50, 0.25, -50, -50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, -0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, 50, 50, -0.25, -50, -50, -0.25, -50)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_c01mt"]
+data = PackedVector3Array(-50, 0.25, 50, 50, 0.25, 50, -50, -0.25, 50, 50, 0.25, 50, 50, -0.25, 50, -50, -0.25, 50, 50, 0.25, -50, -50, 0.25, -50, 50, -0.25, -50, -50, 0.25, -50, -50, -0.25, -50, 50, -0.25, -50, 50, 0.25, 50, 50, 0.25, -50, 50, -0.25, 50, 50, 0.25, -50, 50, -0.25, -50, 50, -0.25, 50, -50, 0.25, -50, -50, 0.25, 50, -50, -0.25, -50, -50, 0.25, 50, -50, -0.25, 50, -50, -0.25, -50, 50, 0.25, 50, -50, 0.25, 50, 50, 0.25, -50, -50, 0.25, 50, -50, 0.25, -50, 50, 0.25, -50, -50, -0.25, 50, 50, -0.25, 50, -50, -0.25, -50, 50, -0.25, 50, 50, -0.25, -50, -50, -0.25, -50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nxtc6"]
+size = Vector3(1.35651, 4.28571, 3.78235)
+
+[sub_resource type="Curve3D" id="Curve3D_bb450"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0.82, 0, 0, 1.27, 0, -16.055, 1.805, 0, 0, 0, 0, 0, 1.15, 0, 0, 0, 0, 2.465, 0, 0, 0, -2.48, 0, -1.465, 1.32, 0, -0.715, 0, 0, 0, -5.13147, 0, -2.59, -0.315, 0, 0, 0, 0, 1.99, -5.22945, 0, 1.90927, -0.485, 0, 0, 0, 0, 0, -7.65711, 0, 2.43036, 0, 0, 0, 0, 0, 0, -7.779, 0, -3.031),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 7
 
 [sub_resource type="Shader" id="Shader_fs0b5"]
 code = "
@@ -212,6 +187,148 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="OptionsCanvas" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="OptionsControl" type="Control" parent="OptionsCanvas"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Options" type="Panel" parent="OptionsCanvas/OptionsControl"]
+process_mode = 3
+top_level = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -349.0
+offset_top = -301.0
+offset_right = 350.0
+offset_bottom = 297.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("27_kxyth")
+
+[node name="Back" type="Button" parent="OptionsCanvas/OptionsControl/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -155.0
+offset_top = 52.0
+offset_right = 155.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("28_cobve")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_pdwbg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5grtr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5grtr")
+text = "Menu"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsCanvas/OptionsControl/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.5
+offset_top = -165.0
+offset_right = 193.5
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("28_cobve")
+text = "Music volume"
+
+[node name="MusicControl" type="HSlider" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_vua0o")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_t70y2")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_8gny2")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("29_cmqll")
+audio_bus_name = "Music"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("28_cobve")
+text = "Sound volume"
+
+[node name="SFXControl" type="HSlider" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_vua0o")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_t70y2")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_8gny2")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("29_cmqll")
+audio_bus_name = "SFX"
+
+[node name="FullscreenControl" type="CheckButton" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("28_cobve")
+text = "Fullscreen"
+script = ExtResource("30_8cp6k")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("28_cobve")
+text = "3D scale"
+
+[node name="ScaleControl" type="OptionButton" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("28_cobve")
+selected = 0
+item_count = 4
+popup/item_0/text = "100%"
+popup/item_0/id = 0
+popup/item_1/text = "75%"
+popup/item_1/id = 1
+popup/item_2/text = "50%"
+popup/item_2/id = 2
+popup/item_3/text = "25%"
+popup/item_3/id = 3
+script = ExtResource("31_8b871")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.6376, -0.265231, -4.86137)
@@ -326,17 +443,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.79861, 0.748985, 0.981637)
 
 [node name="CharacterBody3D" parent="FpsPlayer" index="0" node_paths=PackedStringArray("gunProp")]
 gunProp = NodePath("../../GunProp")
-
-[node name="CRT" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="crt" type="ColorRect" parent="CRT"]
-material = SubResource("ShaderMaterial_vcsgt")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="gas_station" parent="." instance=ExtResource("4_vcsgt")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
@@ -581,138 +687,6 @@ transform = Transform3D(0.00355033, -1.59185e-18, -0.00716904, 0, 0.008, -1.7763
 
 [node name="Cross" parent="." instance=ExtResource("24_2ofn6")]
 
-[node name="Options" type="CanvasLayer" parent="."]
-
-[node name="Options2" type="Panel" parent="Options"]
-visible = false
-top_level = true
-z_index = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -349.0
-offset_top = -301.0
-offset_right = 350.0
-offset_bottom = 297.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-script = ExtResource("27_kxyth")
-
-[node name="Back" type="Button" parent="Options/Options2"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -155.0
-offset_top = 52.0
-offset_right = 155.0
-offset_bottom = 104.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("28_cobve")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/hover = SubResource("StyleBoxFlat_pdwbg")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_5grtr")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5grtr")
-text = "Menu"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Options/Options2"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -208.5
-offset_top = -165.0
-offset_right = 193.5
-offset_bottom = -9.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 15
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Options/Options2/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 30
-
-[node name="Label" type="Label" parent="Options/Options2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("28_cobve")
-text = "Music volume"
-
-[node name="MusicControl" type="HSlider" parent="Options/Options2/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_styles/slider = SubResource("StyleBoxLine_vua0o")
-theme_override_styles/grabber_area = SubResource("StyleBoxLine_t70y2")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_8gny2")
-max_value = 1.0
-step = 0.05
-value = 1.0
-script = ExtResource("29_cmqll")
-audio_bus_name = "Music"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Options/Options2/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 30
-
-[node name="Label" type="Label" parent="Options/Options2/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("28_cobve")
-text = "Sound volume"
-
-[node name="SFXControl" type="HSlider" parent="Options/Options2/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_styles/slider = SubResource("StyleBoxLine_vua0o")
-theme_override_styles/grabber_area = SubResource("StyleBoxLine_t70y2")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_8gny2")
-max_value = 1.0
-step = 0.05
-value = 1.0
-script = ExtResource("29_cmqll")
-audio_bus_name = "SFX"
-
-[node name="FullscreenControl" type="CheckButton" parent="Options/Options2/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("28_cobve")
-text = "Fullscreen"
-script = ExtResource("30_8cp6k")
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="Options/Options2/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 30
-
-[node name="Label" type="Label" parent="Options/Options2/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("28_cobve")
-text = "3D scale"
-
-[node name="ScaleControl" type="OptionButton" parent="Options/Options2/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("28_cobve")
-selected = 0
-item_count = 4
-popup/item_0/text = "100%"
-popup/item_0/id = 0
-popup/item_1/text = "75%"
-popup/item_1/id = 1
-popup/item_2/text = "50%"
-popup/item_2/id = 2
-popup/item_3/text = "25%"
-popup/item_3/id = 3
-script = ExtResource("31_8b871")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rarhs")
 
@@ -761,114 +735,114 @@ freeze_lin_vel = 0.08
 freeze_ang_vel = 0.25
 
 [node name="Physical Bone mixamorig_Hips_00" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="2"]
-transform = Transform3D(1.55385, 4.11059e-10, -1.38865e-08, 1.38871e-08, -0.0896708, 1.55126, -3.91002e-10, -1.55126, -0.0896708, 0, 0.126938, -0.00639248)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.81256e-10, -4.27477e-07, -0.0692815)
-body_offset = Transform3D(1.55385, 5.3911e-08, -1.0794e-08, 1.38871e-08, -0.0896707, 1.55126, 5.31983e-08, -1.55126, -0.0896707, 0, 0.107473, -0.00621319)
+transform = Transform3D(1.55385, 4.17536e-10, -1.40004e-08, 1.40011e-08, -0.0896708, 1.55126, -3.91103e-10, -1.55126, -0.0896708, 0, 0.126938, -0.00639248)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.86307e-10, -1.05239e-06, -0.0692814)
+body_offset = Transform3D(1.55385, 5.39177e-08, -1.09078e-08, 1.40011e-08, -0.0896707, 1.55126, 5.31983e-08, -1.55126, -0.0896707, 0, 0.107473, -0.00621414)
 
 [node name="Physical Bone mixamorig_Spine_01" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="3"]
-transform = Transform3D(1.55385, -3.91295e-10, 1.35404e-08, -1.35404e-08, -0.089674, 1.55126, 3.90787e-10, -1.55126, -0.089674, 0, 0.359816, -0.0198526)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.04358e-10, 1.25502e-06, -0.0808383)
-body_offset = Transform3D(1.55385, 9.85231e-08, 1.35404e-08, -1.35404e-08, -5.28991e-07, 1.55385, 9.85231e-08, -1.55385, -5.28991e-07, 0, 0.12561, 1.90735e-06)
+transform = Transform3D(1.55385, -3.91526e-10, 1.35404e-08, -1.35404e-08, -0.0896742, 1.55126, 3.90556e-10, -1.55126, -0.0896742, 0, 0.359814, -0.0198507)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.04304e-10, 1.86799e-06, -0.0808369)
+body_offset = Transform3D(1.55385, 9.85231e-08, 1.35404e-08, -1.35404e-08, -5.21541e-07, 1.55385, 9.85232e-08, -1.55385, -5.1409e-07, 0, 0.125608, 2.86102e-06)
 
 [node name="Physical Bone mixamorig_Spine1_02" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="4"]
-transform = Transform3D(1.55385, -4.68828e-07, -1.40604e-08, -1.30195e-08, -0.089674, 1.55126, -4.68858e-07, -1.55126, -0.089674, 0, 0.628557, -0.0353765)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.34983e-10, 8.62973e-06, -0.0924186)
-body_offset = Transform3D(1.55385, -2.31498e-07, -1.40603e-08, 1.40602e-08, -6.25849e-07, 1.55385, -2.31498e-07, -1.55385, -6.25849e-07, 0, 0.143604, 1.33514e-05)
+transform = Transform3D(1.55385, -4.68829e-07, -1.40604e-08, -1.30196e-08, -0.0896742, 1.55126, -4.68859e-07, -1.55126, -0.0896742, 0, 0.628567, -0.0353746)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.34852e-10, 9.85633e-06, -0.0924245)
+body_offset = Transform3D(1.55385, -2.31498e-07, -1.40603e-08, 1.40602e-08, -6.18398e-07, 1.55385, -2.31498e-07, -1.55385, -6.10948e-07, 0, 0.143614, 1.52588e-05)
 
 [node name="Physical Bone mixamorig_Spine2_03" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="5"]
-transform = Transform3D(1.55385, 3.90819e-10, -1.35415e-08, 1.35415e-08, -0.089674, 1.55126, -3.91328e-10, -1.55126, -0.089674, 0, 0.933073, -0.0530005)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.05911e-10, -5.49434e-06, -0.103967)
-body_offset = Transform3D(1.55385, 4.09106e-08, -1.35415e-08, 1.35415e-08, -4.39584e-07, 1.55385, 4.09105e-08, -1.55385, -4.39584e-07, 0, 0.161549, -8.58307e-06)
+transform = Transform3D(1.55385, 3.91441e-10, -1.35418e-08, 1.35419e-08, -0.0896731, 1.55126, -3.90714e-10, -1.55126, -0.0896731, 0, 0.933073, -0.0530071)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.05824e-10, -9.86734e-06, -0.103968)
+body_offset = Transform3D(1.55385, 4.09113e-08, -1.35419e-08, 1.35418e-08, 7.07805e-07, 1.55385, 4.09113e-08, -1.55385, 7.07805e-07, 0, 0.161551, -1.52588e-05)
 
 [node name="Physical Bone mixamorig_Neck_04" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="6"]
-transform = Transform3D(-1.55385, 1.45017e-08, -8.3118e-08, -8.31364e-08, -0.524323, 1.46271, -1.43959e-08, 1.46271, 0.524323, 0, 1.18475, -0.0298595)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.31064e-09, 1.83098e-06, -0.0618902)
-body_offset = Transform3D(-1.55385, 1.45016e-08, -8.3118e-08, -8.31364e-08, -0.524323, 1.46271, -1.43959e-08, 1.46271, 0.524323, 0, 0.0905285, 0.0324478)
+transform = Transform3D(-1.55385, 1.45017e-08, -8.31181e-08, -8.31364e-08, -0.524325, 1.46271, -1.43959e-08, 1.46271, 0.524325, 0, 1.18475, -0.0298595)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.31076e-09, 2.08803e-06, -0.0618926)
+body_offset = Transform3D(-1.55385, 1.45016e-08, -8.31181e-08, -8.31364e-08, -0.524325, 1.46271, -1.43959e-08, 1.46271, 0.524325, 0, 0.0905323, 0.0324488)
 
 [node name="Physical Bone mixamorig_Head_05" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="7"]
-transform = Transform3D(-1.55385, 1.3761e-08, -7.91675e-08, -7.91676e-08, -0.524325, 1.46271, -1.37602e-08, 1.46271, 0.524325, 0, 1.47068, 0.0726347)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.14913e-09, 2.23517e-06, -0.133596)
-body_offset = Transform3D(-1.55385, -2.98001e-08, -9.47825e-08, -7.91676e-08, -0.524325, 1.46271, -6.00354e-08, 1.46271, 0.524325, 0, 0.195414, 0.0700445)
+transform = Transform3D(-1.55385, 1.33398e-08, -7.79925e-08, -7.79194e-08, -0.524326, 1.46271, -1.37601e-08, 1.46271, 0.524326, 0, 1.47068, 0.0726357)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.04819e-09, 3.04729e-06, -0.133598)
+body_offset = Transform3D(-1.55385, -3.02214e-08, -9.36075e-08, -7.79194e-08, -0.524326, 1.46271, -6.00354e-08, 1.46271, 0.524326, 0, 0.195417, 0.0700445)
 
 [node name="Physical Bone mixamorig_LeftShoulder_07" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="8"]
-transform = Transform3D(-0.048824, 0.660202, 1.40577, -0.0895994, 1.40292, -0.661978, -1.55049, -0.101861, -0.00601259, 0.204224, 0.998243, -0.0631847)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22587e-06, -5.88484e-05, -0.0725404)
-body_offset = Transform3D(1.55385, 2.98023e-08, -3.49246e-08, 6.47269e-08, -9.09524e-07, 1.55385, -1.49012e-07, -1.55385, -1.53467e-06, -1.90735e-06, 0.112717, -9.15527e-05)
+transform = Transform3D(-0.0488241, 0.660204, 1.40577, -0.0895996, 1.40293, -0.661979, -1.5505, -0.101861, -0.00601261, 0.204239, 0.998243, -0.0631838)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.84042e-06, -5.88594e-05, -0.0725402)
+body_offset = Transform3D(1.55385, 2.23517e-08, -1.76951e-08, 5.96046e-08, -9.08214e-07, 1.55385, -1.49012e-07, -1.55385, -1.29736e-06, -2.86102e-06, 0.112717, -9.15527e-05)
 
 [node name="Physical Bone mixamorig_LeftArm_08" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="9"]
-transform = Transform3D(-0.134853, -0.0210461, 1.54784, -0.272543, 1.52976, -0.00294459, -1.5238, -0.271745, -0.136453, 0.5504, 0.949566, -0.0851002)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71155e-05, -5.63819e-07, -0.157621)
-body_offset = Transform3D(1.55385, -3.8743e-07, -6.73532e-06, 6.72042e-06, 5.67921e-06, 1.55385, -5.66244e-07, -1.55385, 5.55813e-06, -2.76566e-05, 0.244919, 0)
+transform = Transform3D(-0.134853, -0.0210461, 1.54784, -0.272543, 1.52976, -0.0029446, -1.52381, -0.271746, -0.136454, 0.550385, 0.949564, -0.0851002)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65108e-05, 1.89175e-06, -0.157621)
+body_offset = Transform3D(1.55385, -3.57628e-07, -6.64592e-06, 6.69062e-06, 5.68293e-06, 1.55385, -5.36442e-07, -1.55385, 5.55255e-06, -2.67029e-05, 0.244919, 3.8147e-06)
 
 [node name="Physical Bone mixamorig_LeftForeArm_09" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="10"]
-transform = Transform3D(0.038593, 0.0451889, 1.55271, -0.271171, 1.52954, -0.0377744, -1.52952, -0.270034, 0.0458754, 1.15228, 0.940413, -0.0960693)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1424e-06, -1.2681e-05, -0.230485)
-body_offset = Transform3D(1.55385, 0, -5.73695e-07, 7.15256e-07, -1.2517e-06, 1.55385, -2.08616e-07, -1.55385, -1.40071e-06, -1.90735e-06, 0.358139, -2.00272e-05)
+transform = Transform3D(0.0385931, 0.045189, 1.55271, -0.271171, 1.52954, -0.0377745, -1.52952, -0.270035, 0.0458755, 1.15228, 0.940411, -0.0960674)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.37046e-06, -1.20682e-05, -0.230475)
+body_offset = Transform3D(1.55385, 2.98023e-08, -5.69969e-07, 7.18981e-07, -1.24052e-06, 1.55385, -2.08616e-07, -1.55385, -1.39419e-06, -3.8147e-06, 0.358124, -1.90735e-05)
 
 [node name="Physical Bone mixamorig_RightShoulder_011" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="11"]
-transform = Transform3D(-0.0355701, -0.661046, -1.40577, 0.0896253, 1.40292, -0.661975, 1.55085, -0.0962381, 0.00601366, -0.201797, 0.999414, -0.0614042)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0648e-05, -6.85196e-05, -0.0707925)
-body_offset = Transform3D(1.55385, -9.68575e-08, 8.67061e-07, -9.56934e-07, -4.23723e-06, 1.55385, 5.96046e-08, -1.55385, -4.83915e-06, 4.76837e-05, 0.110001, -0.000106812)
+transform = Transform3D(-0.0355702, -0.661047, -1.40578, 0.0896256, 1.40293, -0.661976, 1.55086, -0.0962383, 0.00601367, -0.201752, 0.99942, -0.0614033)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.06481e-05, -5.87023e-05, -0.0707628)
+body_offset = Transform3D(1.55385, -8.19564e-08, 8.63336e-07, -9.6485e-07, -4.29756e-06, 1.55385, 5.21541e-08, -1.55385, -4.77862e-06, 4.76837e-05, 0.109955, -9.15527e-05)
 
 [node name="Physical Bone mixamorig_RightArm_012" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="12"]
-transform = Transform3D(-0.155835, 0.0324509, -1.54567, 0.34461, 1.51515, -0.00293351, 1.50712, -0.343091, -0.159151, -0.550415, 0.946106, -0.0851402)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000117643, 0.00230776, -0.157788)
-body_offset = Transform3D(1.55385, 1.09673e-05, 2.10106e-06, -2.16067e-06, -3.27826e-07, 1.55385, 1.11163e-05, -1.55385, -5.40167e-07, 0.000183105, 0.245178, 0.00358582)
+transform = Transform3D(-0.155835, 0.0324509, -1.54568, 0.344611, 1.51515, -0.00293355, 1.50712, -0.343092, -0.159151, -0.55043, 0.946102, -0.085145)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000117643, 0.00230959, -0.157817)
+body_offset = Transform3D(1.55385, 1.12355e-05, 2.10106e-06, -2.17557e-06, -2.90573e-07, 1.55385, 1.13547e-05, -1.55385, -5.17815e-07, 0.000183105, 0.245224, 0.00358868)
 
 [node name="Physical Bone mixamorig_RightForeArm_013" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="13"]
-transform = Transform3D(0.0449893, -0.0488549, -1.55243, 0.342116, 1.51525, -0.0377703, 1.51505, -0.34071, 0.0546283, -1.1523, 0.940437, -0.0986652)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.25246e-06, -3.08395e-05, -0.230535)
-body_offset = Transform3D(1.55385, -5.96046e-08, 2.77162e-06, -2.8573e-06, 1.23866e-06, 1.55385, 1.19209e-07, -1.55385, 1.02445e-06, -2.86102e-06, 0.358215, -4.76837e-05)
+transform = Transform3D(0.0449895, -0.0488551, -1.55243, 0.342117, 1.51525, -0.0377704, 1.51505, -0.34071, 0.0546284, -1.1523, 0.940435, -0.0986624)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02661e-06, -3.08406e-05, -0.230534)
+body_offset = Transform3D(1.55385, -5.96046e-08, 2.78279e-06, -2.86102e-06, 1.23773e-06, 1.55385, 1.19209e-07, -1.55385, 1.03191e-06, -9.53674e-07, 0.358215, -4.76837e-05)
 
 [node name="Physical Bone mixamorig_LeftUpLeg_015" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="14"]
-transform = Transform3D(-1.55294, 1.18524e-06, 0.0530375, -0.0530372, -0.00517628, -1.55293, 0.000175497, -1.55384, 0.0051733, 0.159683, -0.546162, 0.0147181)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40565e-07, 4.1677e-07, -0.287281)
-body_offset = Transform3D(1.55385, -8.26913e-07, -4.54645e-06, 4.50318e-06, 1.0659e-06, 1.55385, -8.26883e-07, -1.55385, 1.06543e-06, 0, 0.44639, 9.53674e-07)
+transform = Transform3D(-1.55295, 1.18454e-06, 0.0530374, -0.0530371, -0.00517629, -1.55294, 0.000175498, -1.55384, 0.00517332, 0.159683, -0.546156, 0.0147181)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.99914e-07, -1.96805e-07, -0.287276)
+body_offset = Transform3D(1.55385, -8.2617e-07, -4.32666e-06, 4.28339e-06, 1.06543e-06, 1.55385, -8.26156e-07, -1.55385, 1.0645e-06, 0, 0.446384, 0)
 
 [node name="Physical Bone mixamorig_LeftLeg_016" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="15"]
-transform = Transform3D(-1.55286, -0.00506733, 0.0550277, -0.0552598, 0.134775, -1.547, 0.000272131, -1.54798, -0.13487, 0.188324, -1.36315, -0.0161304)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00014821, 4.54115e-06, -0.239784)
-body_offset = Transform3D(1.55385, 8.88369e-05, 5.8952e-06, -5.94485e-06, 6.48201e-06, 1.55385, 8.88335e-05, -1.55385, 6.4224e-06, -0.000228882, 0.372587, 8.58307e-06)
+transform = Transform3D(-1.55287, -0.00506734, 0.0550278, -0.05526, 0.134775, -1.54701, 0.000272132, -1.54799, -0.13487, 0.188416, -1.36314, -0.0161295)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00019731, 3.93022e-06, -0.239778)
+body_offset = Transform3D(1.55385, 8.88373e-05, 5.89888e-06, -5.94489e-06, 6.4671e-06, 1.55385, 8.88335e-05, -1.55385, 6.4224e-06, -0.000305176, 0.37258, 7.62939e-06)
 
 [node name="Physical Bone mixamorig_LeftFoot_017" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="16"]
-transform = Transform3D(-1.53835, 0.148264, -0.16102, -0.0359057, -1.29853, -0.852628, -0.215918, -0.840405, 1.28901, 0.18338, -1.82673, 0.0914545)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000285054, -1.96435e-05, -0.108619)
-body_offset = Transform3D(1.55385, -4.15742e-06, -3.91901e-06, 3.99351e-06, -2.38419e-07, 1.55385, -4.03821e-06, -1.55385, 5.96046e-08, 0.000442505, 0.168777, -3.05176e-05)
+transform = Transform3D(-1.53836, 0.148267, -0.161018, -0.035909, -1.29853, -0.85263, -0.215918, -0.840407, 1.28901, 0.18338, -1.82672, 0.0914507)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000295037, -1.47621e-05, -0.108614)
+body_offset = Transform3D(1.55385, -6.34789e-06, -6.25849e-06, 6.30319e-06, 4.17233e-07, 1.55385, -6.26594e-06, -1.55385, 4.76837e-07, 0.000457764, 0.16877, -2.28882e-05)
 
 [node name="Physical Bone mixamorig_LeftToeBase_018" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="17"]
-transform = Transform3D(-1.51156, -0.35826, 0.0356458, 0.356914, -1.51131, -0.0545855, 0.0472555, -0.0449124, 1.55248, 0.167923, -1.92172, 0.304902)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.87201e-05, 8.85166e-05, -0.047256)
-body_offset = Transform3D(1.55385, 1.62849e-05, -5.23031e-06, 5.20051e-06, -4.51505e-06, 1.55385, 1.60928e-05, -1.55385, -4.51505e-06, 0.00012207, 0.0734286, 0.000137329)
+transform = Transform3D(-1.51157, -0.358261, 0.0356459, 0.356915, -1.51132, -0.0545857, 0.0472557, -0.0449125, 1.55248, 0.167923, -1.92169, 0.304902)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.87202e-05, 0.000106929, -0.0472553)
+body_offset = Transform3D(1.55385, 1.61916e-05, -5.23403e-06, 5.20423e-06, -4.52623e-06, 1.55385, 1.60666e-05, -1.55385, -4.52995e-06, 0.00012207, 0.0734277, 0.000165939)
 
 [node name="Physical Bone mixamorig_RightUpLeg_020" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="18"]
-transform = Transform3D(-1.55294, 4.15969e-06, -0.053036, 0.0530356, -0.00593909, -1.55293, -0.000206871, -1.55384, 0.00593549, -0.159698, -0.546183, 0.0165405)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.72539e-07, 6.98642e-07, -0.287296)
-body_offset = Transform3D(1.55385, -4.23343e-06, 3.09657e-06, -3.04408e-06, -4.59608e-07, 1.55385, -4.23347e-06, -1.55385, -4.59142e-07, 0, 0.446414, 9.53674e-07)
+transform = Transform3D(-1.55295, 4.15966e-06, -0.0530361, 0.0530357, -0.00593911, -1.55293, -0.000206871, -1.55384, 0.0059355, -0.159683, -0.546177, 0.0165424)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.71837e-07, 1.3123e-06, -0.28729)
+body_offset = Transform3D(1.55385, -4.2334e-06, 3.09285e-06, -3.04408e-06, -4.59142e-07, 1.55385, -4.23346e-06, -1.55385, -4.58676e-07, 0, 0.446405, 1.90735e-06)
 
 [node name="Physical Bone mixamorig_RightLeg_021" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="19"]
-transform = Transform3D(-1.55286, 0.00502554, -0.055028, 0.0552564, 0.134123, -1.54706, -0.000253754, -1.54804, -0.134217, -0.189301, -1.36309, -0.0150242)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000767047, -0.000698473, -0.239821)
-body_offset = Transform3D(1.55385, -4.21748e-05, -6.91188e-06, 6.95779e-06, 3.57628e-07, 1.55385, -4.21711e-05, -1.55385, 2.98023e-07, 0.00119019, 0.372645, -0.00108528)
+transform = Transform3D(-1.55287, 0.00502554, -0.0550281, 0.0552566, 0.134123, -1.54706, -0.000253762, -1.54804, -0.134217, -0.19368, -1.36302, -0.0150185)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00358539, -0.000689258, -0.239878)
+body_offset = Transform3D(1.55385, -4.21797e-05, -6.94167e-06, 6.97343e-06, 7.89762e-07, 1.55385, -4.21778e-05, -1.55385, 7.45058e-07, 0.00556946, 0.372734, -0.00107098)
 
 [node name="Physical Bone mixamorig_RightFoot_022" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="20"]
-transform = Transform3D(-1.53854, -0.147177, 0.16022, 0.0361445, -1.30134, -0.848317, 0.214535, -0.836234, 1.29195, -0.183899, -1.82674, 0.0949373)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97917e-05, -2.26238e-05, -0.109186)
-body_offset = Transform3D(1.55385, 3.26559e-05, -9.84967e-06, 9.93907e-06, 7.62939e-06, 1.55385, 3.26559e-05, -1.55385, 7.51019e-06, 7.62939e-05, 0.169659, -3.43323e-05)
+transform = Transform3D(-1.53854, -0.147177, 0.160221, 0.0361446, -1.30135, -0.848319, 0.214535, -0.836236, 1.29195, -0.183899, -1.82674, 0.0949373)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.97874e-05, -2.26489e-05, -0.109186)
+body_offset = Transform3D(1.55385, 3.25963e-05, -9.79006e-06, 9.93907e-06, 7.7486e-06, 1.55385, 3.26559e-05, -1.55385, 7.86781e-06, 7.62939e-05, 0.169659, -3.43323e-05)
 
 [node name="Physical Bone mixamorig_RightToeBase_023" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="21"]
-transform = Transform3D(-1.51142, 0.358865, -0.0356332, -0.35752, -1.51117, -0.054566, -0.0472568, -0.0448773, 1.55248, -0.168045, -1.92191, 0.309343)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.96435e-05, -1.4796e-05, -0.0472723)
-body_offset = Transform3D(1.55385, -0.00011595, -7.82311e-08, 1.86265e-08, 2.11224e-06, 1.55385, -0.000116242, -1.55385, 2.21655e-06, 3.05176e-05, 0.0734539, -2.28882e-05)
+transform = Transform3D(-1.51142, 0.358866, -0.0356333, -0.357521, -1.51118, -0.0545661, -0.0472569, -0.0448774, 1.55248, -0.168167, -1.92194, 0.30934)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000108024, -1.47897e-05, -0.0472734)
+body_offset = Transform3D(1.55385, -0.000116006, -8.56817e-08, 1.86265e-08, 2.12342e-06, 1.55385, -0.000116305, -1.55385, 2.22772e-06, 0.000167847, 0.0734558, -2.28882e-05)
 
 [node name="Jumpscare" parent="Manager" index="2"]
 bus = &"SFX"
 
+[connection signal="pressed" from="OptionsCanvas/OptionsControl/Options/Back" to="OptionsCanvas/OptionsControl/Options" method="_on_menu_pressed"]
+[connection signal="value_changed" from="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer/MusicControl" to="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer/MusicControl" method="_on_value_changed"]
+[connection signal="value_changed" from="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer2/SFXControl" to="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer2/SFXControl" method="_on_value_changed"]
+[connection signal="toggled" from="OptionsCanvas/OptionsControl/Options/VBoxContainer/FullscreenControl" to="OptionsCanvas/OptionsControl/Options/VBoxContainer/FullscreenControl" method="_on_toggled"]
+[connection signal="item_selected" from="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer3/ScaleControl" to="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer3/ScaleControl" method="_on_item_selected"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered_station"]
-[connection signal="pressed" from="Options/Options2/Back" to="Options/Options2" method="_on_menu_pressed"]
-[connection signal="value_changed" from="Options/Options2/VBoxContainer/HBoxContainer/MusicControl" to="Options/Options2/VBoxContainer/HBoxContainer/MusicControl" method="_on_value_changed"]
-[connection signal="value_changed" from="Options/Options2/VBoxContainer/HBoxContainer2/SFXControl" to="Options/Options2/VBoxContainer/HBoxContainer2/SFXControl" method="_on_value_changed"]
-[connection signal="toggled" from="Options/Options2/VBoxContainer/FullscreenControl" to="Options/Options2/VBoxContainer/FullscreenControl" method="_on_toggled"]
-[connection signal="item_selected" from="Options/Options2/VBoxContainer/HBoxContainer3/ScaleControl" to="Options/Options2/VBoxContainer/HBoxContainer3/ScaleControl" method="_on_item_selected"]
 [connection signal="body_exited" from="mangerTrigger" to="mangerTrigger" method="_on_body_exited"]
 
 [editable path="FpsPlayer"]
