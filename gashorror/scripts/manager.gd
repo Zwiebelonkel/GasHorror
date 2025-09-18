@@ -161,9 +161,10 @@ func _physics_process(delta: float) -> void:
 func apply_damage(_amount: float, hit_pos: Vector3, hit_dir: Vector3) -> void:
 	die(hit_pos, hit_dir)
 
-func die(hit_pos: Vector3 = global_position, hit_dir: Vector3 = Vector3.FORWARD) -> void:
+func die(_hit_pos: Vector3 = global_position, hit_dir: Vector3 = Vector3.FORWARD) -> void:
 	if _dead: return
 	_dead = true
+	Objectives.state["manager_killed"] = true;
 
 	_chase = false
 	set_physics_process(false)

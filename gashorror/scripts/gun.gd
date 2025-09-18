@@ -80,8 +80,9 @@ func _process(delta: float) -> void:
 		_fire_once()
 
 func _fire_once() -> void:
-	#if player.hasPistol == false and player != null:
-		#return
+	if Objectives.state["has_gun"] == false:
+		return
+		
 	_can_fire = false
 	_cd_left = fire_cooldown
 	_flash_left = muzzle_flash_time

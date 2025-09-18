@@ -1,0 +1,121 @@
+[gd_scene load_steps=14 format=3 uid="uid://cnkuhoq6fwugc"]
+
+[ext_resource type="PackedScene" uid="uid://l2htm3powhjl" path="res://scenes/props/car.tscn" id="1_nfmnx"]
+[ext_resource type="Shader" uid="uid://1tc2rtqiu7q2" path="res://shaders/buckshot.gdshader" id="2_qa3ag"]
+[ext_resource type="Script" uid="uid://bwhnab74qj27v" path="res://scenes/props/carControl.gd" id="2_t1k4y"]
+[ext_resource type="Texture2D" uid="uid://cjgbu667vp1q6" path="res://assets/satara_night_no_lamps_1k.hdr" id="3_5amew"]
+[ext_resource type="PackedScene" uid="uid://dx7hr7gqjomm1" path="res://ui/Dialog.tscn" id="4_5amew"]
+[ext_resource type="Script" uid="uid://celcmlqpwp0lu" path="res://scenes/road_manager.gd" id="5_t1k4y"]
+[ext_resource type="PackedScene" uid="uid://l11o4mbg6r8r" path="res://scenes/props/road_segment.tscn" id="6_5amew"]
+[ext_resource type="PackedScene" uid="uid://bqcsf2hqcdenx" path="res://ui/endingGUI.tscn" id="8_3v48n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3v48n"]
+shader = ExtResource("2_qa3ag")
+shader_parameter/exposure = 1.0
+shader_parameter/contrast = 1.05
+shader_parameter/saturation = 0.9
+shader_parameter/enable_pixelate = true
+shader_parameter/pixel_factor = 3.0
+shader_parameter/enable_posterize = true
+shader_parameter/color_levels = 16.0
+shader_parameter/dither_strength = 0.35
+shader_parameter/chrom_aberration = 0.07
+shader_parameter/vignette_strength = 1.0
+shader_parameter/grain_strength = 0.2
+shader_parameter/tint_color = Vector3(0.95, 1.03, 0.9)
+shader_parameter/tint_strength = 0.15
+shader_parameter/viewport_size_override = Vector2(0, 0)
+
+[sub_resource type="Shader" id="Shader_fs0b5"]
+code = "
+// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's PanoramaSkyMaterial.
+
+shader_type sky;
+
+uniform sampler2D source_panorama : filter_linear, source_color, hint_default_black;
+uniform float exposure : hint_range(0, 128) = 1.0;
+uniform float speed = 0.002;
+
+void sky() {
+	vec2 skyCoords = vec2(SKY_COORDS.x + TIME * speed, SKY_COORDS.y);
+	
+	COLOR = texture(source_panorama, skyCoords).rgb * exposure;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_75aq2"]
+shader = SubResource("Shader_fs0b5")
+shader_parameter/source_panorama = ExtResource("3_5amew")
+shader_parameter/exposure = 0.4
+shader_parameter/speed = 0.002
+
+[sub_resource type="Sky" id="Sky_36rkl"]
+sky_material = SubResource("ShaderMaterial_75aq2")
+
+[sub_resource type="Environment" id="Environment_o5uye"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_36rkl")
+sky_custom_fov = 84.3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.17
+reflected_light_source = 1
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 5.37
+glow_strength = 0.19
+glow_bloom = 0.41
+glow_blend_mode = 1
+glow_hdr_threshold = 0.0
+glow_hdr_scale = 0.0
+glow_hdr_luminance_cap = 70.35
+glow_map_strength = 0.0
+fog_light_color = Color(0.140447, 0.140447, 0.140447, 1)
+fog_light_energy = 0.45
+fog_density = 0.0626
+fog_height = 280.25
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0347
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.1
+volumetric_fog_length = 15.47
+volumetric_fog_ambient_inject = 0.05
+
+[node name="ending" type="Node3D"]
+
+[node name="Car" parent="." instance=ExtResource("1_nfmnx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.34831, 0, 0)
+script = ExtResource("2_t1k4y")
+move_speed = 10.0
+horizontal_speed = 5.0
+max_offset_x = 3.5
+
+[node name="Camera3D" type="Camera3D" parent="Car"]
+transform = Transform3D(-4.37114e-08, -0.0784591, -0.996917, 0, 0.996917, -0.0784591, 1, -3.42956e-09, -4.35766e-08, -0.00244695, 1.06867, -0.415983)
+fov = 89.1
+near = 0.001
+far = 517.52
+
+[node name="vhs" type="CanvasLayer" parent="."]
+
+[node name="vhs" type="ColorRect" parent="vhs"]
+material = SubResource("ShaderMaterial_3v48n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_o5uye")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("4_5amew")]
+visible = false
+
+[node name="RoadManager" type="Node3D" parent="."]
+script = ExtResource("5_t1k4y")
+road_segment_scene = ExtResource("6_5amew")
+segment_length = 70.0
+
+[node name="CanvasLayer2" parent="." instance=ExtResource("8_3v48n")]

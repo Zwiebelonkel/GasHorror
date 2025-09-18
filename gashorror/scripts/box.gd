@@ -12,7 +12,7 @@ func interact(player):
 		pick_up(player)
 
 func pick_up(player):
-	if is_held: return
+	if is_held or Objectives.current_step != Objectives.PACKAGES: return
 	is_held = true
 	holder = player
 	

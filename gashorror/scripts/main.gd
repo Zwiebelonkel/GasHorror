@@ -30,6 +30,7 @@ func _on_area_3d_body_entered_station(body: Node3D) -> void:
 		print("Spieler betritt die Tankstelle")
 		Objectives.enter_station()
 
+
 func spawn_note():
 	var marker = get_node_or_null(note_marker_path)
 	if marker == null:

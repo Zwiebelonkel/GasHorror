@@ -35,7 +35,7 @@ func _process(delta):
 			spawn_product()
 			has_spawned = true
 
-func interact(player):
+func interact(_player):
 	if dialog_ui.is_active:
 		print("dont start again")
 		return  # ⛔️ Dialog läuft schon – keine neue Interaktion starten

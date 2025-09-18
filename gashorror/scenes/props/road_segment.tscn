@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://l11o4mbg6r8r"]
+
+[ext_resource type="PackedScene" uid="uid://j30csp6a6tuo" path="res://scenes/props/lantern.tscn" id="1_t0nei"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u8cmg"]
+size = Vector3(100, 0.2, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4lb1f"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="roadSegment" type="Node3D"]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="straße" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.1035, -0.0716925, 0)
+mesh = SubResource("BoxMesh_u8cmg")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4lb1f")
+
+[node name="lantern" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -5.20163, 4.68707)
+
+[node name="lantern2" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12.2616, -5.20163, 4.68707)
+
+[node name="lantern3" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24.8039, -5.20163, 4.68707)
+
+[node name="lantern4" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -37.1591, -5.20163, 4.68707)
+
+[node name="lantern5" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -37.1591, -5.20163, 4.68707)
+
+[node name="lantern6" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 48.391, -5.20163, 4.68707)
+
+[node name="lantern7" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 36.1295, -5.20163, 4.68707)
+
+[node name="lantern8" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.5871, -5.20163, 4.68707)
+
+[node name="lantern9" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.232, -5.20163, 4.68707)
+
+[node name="lantern10" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.232, -5.20163, 4.68707)
+
+[node name="lantern11" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -5.20163, -4.60886)
+
+[node name="lantern12" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -12.2616, -5.20163, -4.60886)
+
+[node name="lantern13" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -24.8039, -5.20163, -4.60886)
+
+[node name="lantern14" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -37.1591, -5.20163, -4.60886)
+
+[node name="lantern15" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -37.1591, -5.20163, -4.60886)
+
+[node name="lantern16" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48.391, -5.20163, -4.60886)
+
+[node name="lantern17" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 36.1295, -5.20163, -4.60886)
+
+[node name="lantern18" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 23.5871, -5.20163, -4.60886)
+
+[node name="lantern19" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.232, -5.20163, -4.60886)
+
+[node name="lantern20" parent="straße" instance=ExtResource("1_t0nei")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.232, -5.20163, -4.60886)

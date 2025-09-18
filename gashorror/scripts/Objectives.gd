@@ -26,6 +26,7 @@ enum {
 var current_step := START
 
 var state := {
+	"has_gun":false,
 	"entered_station": false,
 	"packages_stocked": 0,
 	"packages_total": 4,
@@ -39,8 +40,13 @@ var state := {
 	"found_secret": false,
 	"seen_truth": false,
 	"manager_triggered": false,
+	"manager_killed":false,
 	"escaped": false
 }
+
+var ending_index: int = -1     # z.B. 2 von 3
+var ending_type: String = "Ending Text"  # "Good Ending", "Bad Ending", "Secret Ending"
+
 
 func _ready():
 	emit_signal("objective_changed", get_current_objective_name(), state)
@@ -80,7 +86,7 @@ func get_current_objective_name() -> String:
 		SEE_TRUTH:
 			return "Ziel: Entdecke, was wirklich hier unten passiert."
 		TRY_TO_ESCAPE:
-			return "Ziel: Fliehe aus der Tankstelle!"
+			return "Ziel: Fliehe oder Kämpfe"
 		MANAGER_APPEARS:
 			return "Ziel: Der Manager ist hier – lauf!"
 		ESCAPE:
@@ -140,6 +146,17 @@ func restore_lights():
 			#mat.emission_enabled = true
 			#mesh.set_surface_override_material(0, mat)
 
+func end_game():
+	if state["manager_killed"] == true and state["manager_triggered"] == true:
+		Objectives.ending_index = 3
+		Objectives.ending_type = "Good Ending"
+	elif state["manager_killed"] == false and state["manager_triggered"] == true:
+		Objectives.ending_index = 1
+		Objectives.ending_type = "Bad Ending"
+	elif state["manager_killed"] == false and state["manager_triggered"] == false:
+		Objectives.ending_index = 2
+		Objectives.ending_type = "Secret Ending"
+	get_tree().change_scene_to_file("res://scenes/ending.tscn")
 
 
 

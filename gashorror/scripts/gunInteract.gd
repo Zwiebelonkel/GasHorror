@@ -14,7 +14,8 @@ func interact(player: Node) -> void:
 		return
 
 	_taken = true
-	emit_signal("picked_up")      # sagt dem Player: "du hast die Pistole jetzt"
+	emit_signal("picked_up")  
+	Objectives.state["has_gun"] = true    # sagt dem Player: "du hast die Pistole jetzt"
 	if hide_only:
 		_hide_self()
 	elif auto_free:

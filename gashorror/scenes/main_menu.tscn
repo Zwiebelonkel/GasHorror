@@ -143,6 +143,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 71.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_bqqt6")
 theme_override_font_sizes/font_size = 26
 text = "Options"
 horizontal_alignment = 1

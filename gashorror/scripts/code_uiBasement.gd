@@ -3,7 +3,7 @@ extends CanvasLayer
 @export var player_path: NodePath = ^"/root/Main/FpsPlayer/CharacterBody3D"
 @export var debug_logs: bool = true
 
-@onready var _panel: Panel        = $Panel
+#@onready var _panel: Panel        = $Panel
 @onready var _title: Label        = $Panel/VBox/Title
 @onready var _input: LineEdit     = $Panel/VBox/Input
 @onready var _ok_btn: Button      = $Panel/VBox/HBox/OkBtn

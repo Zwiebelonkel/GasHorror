@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqcsf2hqcdenx"]
+
+[ext_resource type="LabelSettings" uid="uid://cl8v7eias4p7a" path="res://ui/font.tres" id="2_7hyop"]
+[ext_resource type="Script" uid="uid://85cxlktdsoo" path="res://ui/endingText.gd" id="2_ll2qe"]
+[ext_resource type="FontFile" uid="uid://cf54ji6hr1hw2" path="res://assets/fonts/VCR_OSD_MONO.ttf" id="3_ll2qe"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hairy"]
+blend_mode = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_7hyop"]
+font = ExtResource("3_ll2qe")
+font_size = 96
+font_color = Color(0.886275, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="wrapper" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.478431)
+self_modulate = Color(1, 1, 1, 0.258824)
+material = SubResource("CanvasItemMaterial_hairy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ll2qe")
+
+[node name="LabelIndex" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -139.0
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Ending 1 / 3
+"
+label_settings = ExtResource("2_7hyop")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LabelTitle" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -110.0
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SECRET ENDING"
+label_settings = SubResource("LabelSettings_7hyop")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

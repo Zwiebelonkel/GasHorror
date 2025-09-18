@@ -431,3 +431,4 @@ shape = SubResource("BoxShape3D_22ua8")
 
 [node name="PlaceSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_r2ika")
+bus = &"SFX"

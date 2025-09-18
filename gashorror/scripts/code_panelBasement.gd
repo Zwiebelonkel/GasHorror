@@ -5,8 +5,8 @@ extends Area3D
 @export var code_length: int = 4
 @export var mask_input: bool = true
 
-@export var s_ok: AudioStreamPlayer
-@export var s_fail: AudioStreamPlayer
+@export var s_ok: AudioStreamPlayer3D
+@export var s_fail: AudioStreamPlayer3D
 
 # Ziel
 @export var success_target: NodePath                # Tür-Root mit door.gd hier zuweisen
@@ -48,6 +48,7 @@ func _on_code_done(ok: bool, entered: String) -> void:
 	_unlocked = true
 	if s_ok: s_ok.play()
 	_log("✅ korrekter Code – versuche TÜR zu öffnen")
+	Objectives.set_step(Objectives.SEE_TRUTH)
 
 	var target := _resolve_target()
 	if target == null:

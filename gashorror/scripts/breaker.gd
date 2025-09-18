@@ -4,7 +4,7 @@ extends Area3D
 @export var debug_logs: bool = true
 
 # Sound
-@export var s_switch: AudioStreamPlayer
+@export var s_switch: AudioStreamPlayer3D
 
 # Schilder: per Drag&Drop im Inspector zuweisen
 @export var sign_path: NodePath

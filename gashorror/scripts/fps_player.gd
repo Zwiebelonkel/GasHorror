@@ -151,6 +151,10 @@ func _on_pistol_picked_up() -> void:
 	else:
 		push_warning("[player] Hand-Gun-Holder nicht gefunden! Setze 'gun_path' korrekt (z.B. 'Camera3D/gun').")
 		
+func change_sensitivity(new_sensitivity: float) -> void:
+	mouse_sens = new_sensitivity
+	print("Maus-Empfindlichkeit geändert auf: ", mouse_sens)
+	
 func _make_holder_unscaled_and_scale_child(holder: Node3D, desired_scale: Vector3) -> void:
 	# Finde ein visuelles Kind (z.B. "Node3D", Mesh, Armature). Nimm das erste Node3D-Kind.
 	var visual: Node3D = null
