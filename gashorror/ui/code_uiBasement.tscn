@@ -1,6 +1,54 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6mwuyhgq67nl"]
+[gd_scene load_steps=6 format=3 uid="uid://b6mwuyhgq67nl"]
 
 [ext_resource type="Script" uid="uid://d1pet15stivs5" path="res://scripts/code_ui.gd" id="1_ecmxq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ecmxq"]
+bg_color = Color(0.215902, 0.215902, 0.215902, 1)
+border_width_left = 20
+border_width_top = 10
+border_width_right = 20
+border_width_bottom = 10
+border_color = Color(0.215686, 0.215686, 0.215686, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_67fpd"]
+bg_color = Color(0.215902, 0.215902, 0.215902, 1)
+border_width_left = 20
+border_width_top = 10
+border_width_right = 20
+border_width_bottom = 10
+border_color = Color(0.215686, 0.215686, 0.215686, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjdyr"]
+bg_color = Color(0.215902, 0.215902, 0.215902, 1)
+border_width_left = 20
+border_width_top = 10
+border_width_right = 20
+border_width_bottom = 10
+border_color = Color(0.215686, 0.215686, 0.215686, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2c4r6"]
+bg_color = Color(0.215902, 0.215902, 0.215902, 1)
+border_width_left = 20
+border_width_top = 10
+border_width_right = 20
+border_width_bottom = 10
+border_color = Color(0.215686, 0.215686, 0.215686, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [node name="code_ui" type="CanvasLayer"]
 script = ExtResource("1_ecmxq")
@@ -35,3 +83,75 @@ text = "OK"
 [node name="CancelBtn" type="Button" parent="Panel/VBox/HBox"]
 layout_mode = 2
 text = "Abbrechen"
+
+[node name="Keypad" type="GridContainer" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 69
+theme_override_constants/v_separation = 50
+columns = 3
+
+[node name="1" type="Button" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_ecmxq")
+text = "1"
+
+[node name="2" type="Button" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_67fpd")
+text = "2"
+
+[node name="3" type="Button" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_kjdyr")
+text = "3"
+
+[node name="4" type="Button" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2c4r6")
+text = "4"
+
+[node name="5" type="Button" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2c4r6")
+text = "5"
+
+[node name="6" type="Button" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_2c4r6")
+text = "6"
+
+[node name="7" type="Button" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_2c4r6")
+text = "7"
+
+[node name="8" type="Button" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_2c4r6")
+text = "8"
+
+[node name="9" type="Button" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_2c4r6")
+text = "9"
+
+[node name="placeholder" type="HBoxContainer" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+theme_override_constants/separation = -670
+
+[node name="0" type="Button" parent="Panel/VBox/Keypad"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_2c4r6")
+text = "0"

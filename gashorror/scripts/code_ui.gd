@@ -8,6 +8,8 @@ extends CanvasLayer
 @onready var _input: LineEdit     = $Panel/VBox/Input
 @onready var _ok_btn: Button      = $Panel/VBox/HBox/OkBtn
 @onready var _cancel_btn: Button  = $Panel/VBox/HBox/CancelBtn
+@onready var _keypad: GridContainer = $Panel/VBox/Keypad
+
 
 var _cb: Callable = Callable()
 var _required_len: int = 0
@@ -18,7 +20,23 @@ func _ready() -> void:
 	_ok_btn.pressed.connect(_on_ok)
 	_cancel_btn.pressed.connect(_on_cancel)
 	_input.text_submitted.connect(func(_t): _on_ok())
+	_connect_keypad_buttons()
 	_log("ready; player_path=", str(player_path))
+
+
+func _connect_keypad_buttons() -> void:
+	for btn in _keypad.get_children():
+		if btn is Button:
+			btn.pressed.connect(func(): _on_keypad_pressed(btn.text))
+
+
+func _on_keypad_pressed(text: String) -> void:
+	if not _open:
+		return
+	if _input.text.length() < _input.max_length or _input.max_length == 0:
+		_input.text += text
+		_log("Keypad gedrückt: " + text)
+
 
 func is_open() -> bool:
 	return _open
