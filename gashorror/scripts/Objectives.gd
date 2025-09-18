@@ -157,7 +157,33 @@ func end_game():
 		Objectives.ending_index = 2
 		Objectives.ending_type = "Secret Ending"
 	get_tree().change_scene_to_file("res://scenes/ending.tscn")
+	
+func reset():
+	current_step = START
 
+	state = {
+		"has_gun":false,
+		"entered_station": false,
+		"packages_stocked": 0,
+		"packages_total": 4,
+		"customer_spoken": false,
+		"blackout": false,
+		"found_note": false,
+		"has_key": false,
+		"jumpscare_done": false,
+		"power_on": false,
+		"sign_changed": false,
+		"found_secret": false,
+		"seen_truth": false,
+		"manager_triggered": false,
+		"manager_killed":false,
+		"escaped": false
+	}
+
+	ending_index = -1
+	ending_type = "Ending Text"
+
+	emit_signal("objective_changed", get_current_objective_name(), state)
 
 
 func set_flag(key: String, value: bool):

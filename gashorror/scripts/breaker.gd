@@ -4,7 +4,8 @@ extends Area3D
 @export var debug_logs: bool = true
 
 # Sound
-@export var s_switch: AudioStreamPlayer3D
+@onready var anim: AnimationPlayer = $breaker2/AnimationPlayer
+@onready var s_switch: AudioStreamPlayer3D = $twist
 
 # Schilder: per Drag&Drop im Inspector zuweisen
 @export var sign_path: NodePath
@@ -46,6 +47,7 @@ func interact(player: Node) -> void:
 	if s_switch:
 		s_switch.play()
 	_dbg("Schalter-Sound vorhanden: " + str(s_switch != null))
+	anim.play("on")
 
 	# Lichter an (Autoload oder Fallback)
 	if typeof(Objectives) != TYPE_NIL and Objectives.has_method("restore_lights"):

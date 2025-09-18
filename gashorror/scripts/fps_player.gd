@@ -351,6 +351,12 @@ func _update_weapon_sway(delta: float, dir: Vector3) -> void:
 # ------------- Utility -------------
 func _capture_mouse(enable: bool) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED if enable else Input.MOUSE_MODE_VISIBLE)
+	
+func reset_mouse_rotation() -> void:
+	yaw = rotation.y
+	pitch = cam.rotation.x
+	_mouse_impulse = Vector2.ZERO
+
 
 func has_key(key_name: String) -> bool:
 	return key_name in keys

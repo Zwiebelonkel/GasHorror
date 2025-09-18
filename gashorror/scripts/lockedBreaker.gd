@@ -6,7 +6,8 @@ extends Area3D
 @export_node_path var main_node_path: NodePath  # ← Referenz auf den Main-Knoten (mit spawn_note)
 
 
-@onready var s_unlock: AudioStreamPlayer = get_node_or_null(s_unlock_path) as AudioStreamPlayer
+#@onready var s_unlock: AudioStreamPlayer = get_node_or_null(s_unlock_path) as AudioStreamPlayer
+@onready var s_unlock: AudioStreamPlayer3D = $open
 
 func interact(player: Node) -> void:
 	if not player.is_in_group("player"):

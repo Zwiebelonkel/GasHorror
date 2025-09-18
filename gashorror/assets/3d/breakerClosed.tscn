@@ -1,4 +1,8 @@
-[gd_scene load_steps=12 format=4 uid="uid://cw17vkmh56ysm"]
+[gd_scene load_steps=15 format=4 uid="uid://cw17vkmh56ysm"]
+
+[ext_resource type="AudioStream" uid="uid://c1m74hxjuolbj" path="res://assets/sounds/open.mp3" id="1_2322j"]
+[ext_resource type="Script" uid="uid://d2dt7i481l32k" path="res://scripts/lockedBreaker.gd" id="1_ujtpr"]
+[ext_resource type="PackedScene" uid="uid://5hh0b165fj4p" path="res://scenes/props/breaker.tscn" id="2_vmj2c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ud1yh"]
 resource_name = "Material"
@@ -165,6 +169,8 @@ size = Vector3(0.75, 2.1275, 1.61386)
 
 [node name="breakerClosed" type="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.017205, 0, -0.000864267)
+script = ExtResource("1_ujtpr")
+unlocked_breaker_scene = ExtResource("2_vmj2c")
 
 [node name="breaker" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.325281, 0, 0, 0, 1, 0, 0, 0, 0.754151, 0, 0, 0)
@@ -184,3 +190,8 @@ libraries = {
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0576172, -0.0284729, 0.0192719)
 shape = SubResource("BoxShape3D_17fvo")
+
+[node name="open" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_2322j")
+volume_db = 28.029
+bus = &"SFX"

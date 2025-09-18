@@ -8,6 +8,7 @@ func _ready() -> void:
 	options.visible = false
 
 func _on_start_pressed() -> void:
+	Objectives.reset()
 	get_tree().change_scene_to_file("res://scenes/Main.tscn")
 
 func _on_options_pressed() -> void:

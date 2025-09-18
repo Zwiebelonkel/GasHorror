@@ -117,12 +117,14 @@ func hide_dialog():
 	visible = false
 	dialog_lines.clear()
 	label.text = ""  # leer starten
+	portrait.texture = null
 
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	player.can_look = true
 	player.can_move = true
 
+	player.reset_mouse_rotation()
 	on_dialog_finished.call()
 
 func angle_diff(angle1: float, angle2: float) -> float:
