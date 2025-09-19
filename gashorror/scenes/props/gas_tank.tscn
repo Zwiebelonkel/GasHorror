@@ -1,10 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwk2yvojjebn8"]
+[gd_scene load_steps=3 format=3 uid="uid://bwk2yvojjebn8"]
 
 [ext_resource type="PackedScene" uid="uid://difeit8ft7td5" path="res://assets/3d/gasTank.glb" id="1_sh0je"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sh0je"]
+height = 5.77991
+radius = 1.00684
 
 [node name="gasTank" type="Node3D"]
 
 [node name="gasTank" parent="." instance=ExtResource("1_sh0je")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00612462, -1.19209e-07, -0.0493538)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="gasTank/Cylinder_002" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="gasTank/Cylinder_002/StaticBody3D"]
+transform = Transform3D(0.999998, 0, 0, 0, 0.999998, 1.27898e-11, 0, -1.27898e-11, 0.999998, 0, 1.88434, -4.76837e-07)
+shape = SubResource("CylinderShape3D_sh0je")
 
 [editable path="gasTank"]

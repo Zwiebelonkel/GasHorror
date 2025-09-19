@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var shake_duration: float = 0.5      # Dauer des Shakes in Sekunden
 @export var shake_strength: float = 0.1      # Stärke des Zitterns
+@onready var scare: AudioStreamPlayer = $scare
 
 var _is_shaking: bool = false
 var _shake_timer: float = 0.0
@@ -10,6 +11,7 @@ var _original_position: Vector3
 func _ready() -> void:
 	_capture_mouse(false)
 	start_shake(3, 0.05)  # (z. B. 0.7 Sekunden, 0.15 Stärke)
+	scare.play()
 
 
 func _process(delta):

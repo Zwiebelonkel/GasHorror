@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://744ixtrkh5c6"]
+[gd_scene load_steps=16 format=3 uid="uid://744ixtrkh5c6"]
 
 [ext_resource type="PackedScene" uid="uid://dgpnvfakotxpm" path="res://scenes/props/manager.tscn" id="1_w8wr1"]
 [ext_resource type="Texture2D" uid="uid://cjgbu667vp1q6" path="res://assets/satara_night_no_lamps_1k.hdr" id="2_tjai8"]
 [ext_resource type="Script" uid="uid://iesnjdvklpdv" path="res://scenes/props/shake.gd" id="2_w0no0"]
+[ext_resource type="AudioStream" uid="uid://buuoyudsr3nsm" path="res://assets/sounds/mechanic.mp3" id="3_2m3wi"]
 [ext_resource type="PackedScene" uid="uid://bqcsf2hqcdenx" path="res://ui/endingGUI.tscn" id="3_tjai8"]
 [ext_resource type="Script" uid="uid://d1guosfhm0xpt" path="res://scenes/options.gd" id="4_6up1m"]
 [ext_resource type="FontFile" uid="uid://cf54ji6hr1hw2" path="res://assets/fonts/VCR_OSD_MONO.ttf" id="5_w0no0"]
@@ -103,6 +104,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0302945, -0.0241791, 0.1355
 script = ExtResource("2_w0no0")
 shake_duration = 0.5
 shake_strength = 0.1
+
+[node name="scare" type="AudioStreamPlayer" parent="Manager"]
+stream = ExtResource("3_2m3wi")
+volume_db = -17.333
+pitch_scale = 0.92
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0280113, 1.50835, 0.938886)
