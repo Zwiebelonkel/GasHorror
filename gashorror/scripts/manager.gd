@@ -147,6 +147,7 @@ func _physics_process(delta: float) -> void:
 		if animation_player and animation_player.has_animation(walk_anim) and animation_player.current_animation != String(walk_anim):
 			animation_player.play(String(walk_anim))
 	else:
+		get_tree().change_scene_to_file("res://scenes/death.tscn")
 		velocity.x = 0.0
 		velocity.z = 0.0
 		if animation_player and animation_player.has_animation(idle_anim) and animation_player.current_animation != String(idle_anim):

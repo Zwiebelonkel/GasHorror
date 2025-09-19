@@ -1,0 +1,196 @@
+[gd_scene load_steps=15 format=3 uid="uid://744ixtrkh5c6"]
+
+[ext_resource type="PackedScene" uid="uid://dgpnvfakotxpm" path="res://scenes/props/manager.tscn" id="1_w8wr1"]
+[ext_resource type="Texture2D" uid="uid://cjgbu667vp1q6" path="res://assets/satara_night_no_lamps_1k.hdr" id="2_tjai8"]
+[ext_resource type="Script" uid="uid://iesnjdvklpdv" path="res://scenes/props/shake.gd" id="2_w0no0"]
+[ext_resource type="PackedScene" uid="uid://bqcsf2hqcdenx" path="res://ui/endingGUI.tscn" id="3_tjai8"]
+[ext_resource type="Script" uid="uid://d1guosfhm0xpt" path="res://scenes/options.gd" id="4_6up1m"]
+[ext_resource type="FontFile" uid="uid://cf54ji6hr1hw2" path="res://assets/fonts/VCR_OSD_MONO.ttf" id="5_w0no0"]
+[ext_resource type="Shader" uid="uid://1tc2rtqiu7q2" path="res://shaders/buckshot.gdshader" id="7_7205l"]
+
+[sub_resource type="Shader" id="Shader_cmqll"]
+code = "
+// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's PanoramaSkyMaterial.
+
+shader_type sky;
+
+uniform sampler2D source_panorama : filter_linear, source_color, hint_default_black;
+uniform float exposure : hint_range(0, 128) = 1.0;
+uniform float speed = 0.002;
+
+void sky() {
+	vec2 skyCoords = vec2(SKY_COORDS.x + TIME * speed, SKY_COORDS.y);
+	
+	COLOR = texture(source_panorama, skyCoords).rgb * exposure;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1r8t"]
+shader = SubResource("Shader_cmqll")
+shader_parameter/source_panorama = ExtResource("2_tjai8")
+shader_parameter/exposure = 0.4
+shader_parameter/speed = 0.002
+
+[sub_resource type="Sky" id="Sky_8cp6k"]
+sky_material = SubResource("ShaderMaterial_q1r8t")
+
+[sub_resource type="Environment" id="Environment_6up1m"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_8cp6k")
+sky_custom_fov = 84.3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 1.17
+reflected_light_source = 1
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.6
+glow_strength = 0.5
+glow_bloom = 0.6
+glow_blend_mode = 1
+glow_hdr_threshold = 0.0
+glow_hdr_scale = 0.0
+glow_hdr_luminance_cap = 70.35
+glow_map_strength = 0.0
+fog_light_color = Color(0.140447, 0.140447, 0.140447, 1)
+fog_light_energy = 0.45
+fog_density = 0.0626
+fog_height = 280.25
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0347
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_gi_inject = 0.1
+volumetric_fog_length = 15.47
+volumetric_fog_ambient_inject = 0.05
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7205l"]
+bg_color = Color(0.237539, 0.237539, 0.237539, 1)
+corner_radius_top_left = 1595
+corner_radius_bottom_right = 2235
+shadow_color = Color(0, 0, 0, 0.239216)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.445)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m3wi"]
+bg_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+corner_radius_top_left = 1595
+corner_radius_bottom_right = 2235
+shadow_color = Color(0, 0, 0, 0.239216)
+shadow_size = 5
+shadow_offset = Vector2(0, 3.445)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2m3wi"]
+shader = ExtResource("7_7205l")
+shader_parameter/exposure = 1.0
+shader_parameter/contrast = 1.05
+shader_parameter/saturation = 0.9
+shader_parameter/enable_pixelate = true
+shader_parameter/pixel_factor = 3.0
+shader_parameter/enable_posterize = true
+shader_parameter/color_levels = 16.0
+shader_parameter/dither_strength = 0.35
+shader_parameter/chrom_aberration = 0.07
+shader_parameter/vignette_strength = 1.0
+shader_parameter/grain_strength = 0.2
+shader_parameter/tint_color = Vector3(0.95, 1.03, 0.9)
+shader_parameter/tint_strength = 0.15
+shader_parameter/viewport_size_override = Vector2(0, 0)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Manager" parent="." instance=ExtResource("1_w8wr1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0302945, -0.0241791, 0.135571)
+script = ExtResource("2_w0no0")
+shake_duration = 0.5
+shake_strength = 0.1
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0280113, 1.50835, 0.938886)
+fov = 56.6
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_6up1m")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.154262, -0.98803, 0, 0.98803, 0.154262, 0, -0.054973, 0.853085)
+light_color = Color(1, 0, 0, 1)
+light_energy = 11.329
+spot_range = 5.534
+spot_attenuation = 1.56
+spot_angle = 20.85
+
+[node name="CanvasLayer2" parent="." instance=ExtResource("3_tjai8")]
+
+[node name="LabelIndex" parent="CanvasLayer2/Panel" index="0"]
+visible = false
+text = ""
+
+[node name="LabelTitle" parent="CanvasLayer2/Panel" index="1"]
+text = "YOU DIED"
+
+[node name="OptionsCanvas" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="OptionsControl" type="Control" parent="OptionsCanvas"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Options" type="Panel" parent="OptionsCanvas/OptionsControl"]
+process_mode = 3
+top_level = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -349.0
+offset_top = -301.0
+offset_right = 350.0
+offset_bottom = 297.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("4_6up1m")
+
+[node name="Try Again" type="Button" parent="OptionsCanvas/OptionsControl/Options"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -155.0
+offset_top = 146.0
+offset_right = 155.0
+offset_bottom = 198.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_w0no0")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_7205l")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2m3wi")
+theme_override_styles/normal = SubResource("StyleBoxFlat_2m3wi")
+text = "Try again"
+
+[node name="vhs" type="CanvasLayer" parent="."]
+
+[node name="vhs" type="ColorRect" parent="vhs"]
+material = SubResource("ShaderMaterial_2m3wi")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="OptionsCanvas/OptionsControl/Options/Try Again" to="OptionsCanvas/OptionsControl/Options" method="_on_menu_pressed"]
+
+[editable path="CanvasLayer2"]

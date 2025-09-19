@@ -26,6 +26,7 @@ enum {
 var current_step := START
 
 var state := {
+	"is_retrying": false,
 	"has_gun":false,
 	"entered_station": false,
 	"packages_stocked": 0,
@@ -165,6 +166,7 @@ func reset():
 	current_step = START
 
 	state = {
+		"is_retrying": false,
 		"has_gun":false,
 		"entered_station": false,
 		"packages_stocked": 0,

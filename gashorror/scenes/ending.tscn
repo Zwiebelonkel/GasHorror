@@ -119,3 +119,5 @@ road_segment_scene = ExtResource("6_5amew")
 segment_length = 70.0
 
 [node name="CanvasLayer2" parent="." instance=ExtResource("8_3v48n")]
+
+[editable path="CanvasLayer2"]

@@ -6,13 +6,8 @@ extends Control
 @export var typing_speed := 0.09  # Sekunden pro Buchstabe
 
 func _ready() -> void:
-	# Setze Index sofort
-	var current = Objectives.ending_index
-	var total = 3  # falls du das flexibel willst, mach es auch zu einer Variable
-	label_index.text = "Ending %d/%d" % [current, total]
-
 	# Zeige Title mit Schreibmaschineneffekt
-	var full_text = Objectives.ending_type
+	var full_text = "YOU DIED"
 	label_title.text = ""
 	type_text(label_title, full_text)
 	
