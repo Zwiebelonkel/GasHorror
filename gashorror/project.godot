@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="GasHorror"
+config/description="You accepted a job at a gas-station. When strange things start to happen."
+config/version="1.0"
 run/main_scene="uid://bh1viipml1p00"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/image="uid://csc6cwxtnclfl"
+config/icon="uid://csc6cwxtnclfl"
+config/windows_native_icon="res://assets/customer.ico"
 
 [autoload]
 
@@ -23,7 +27,6 @@ Objectives="*res://scripts/Objectives.gd"
 
 window/size/viewport_width=700
 window/size/viewport_height=600
-window/size/borderless=true
 window/stretch/mode="canvas_items"
 
 [editor]

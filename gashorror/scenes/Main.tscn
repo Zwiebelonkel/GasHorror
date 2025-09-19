@@ -287,7 +287,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_8gny2")
 min_value = 0.001
 max_value = 0.015
 step = 0.001
-value = 0.001
+value = 0.01
 script = ExtResource("6_kxyth")
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer"]
@@ -1194,7 +1194,7 @@ gizmo_extents = 2.72
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5644, -3.43298, -4.91205)
 gizmo_extents = 2.72
 
-[connection signal="pressed" from="OptionsCanvas/OptionsControl/Options/Back" to="OptionsCanvas/OptionsControl/Options" method="_on_back_pressed"]
+[connection signal="pressed" from="OptionsCanvas/OptionsControl/Options/Back" to="OptionsCanvas/OptionsControl/Options" method="_on_menu_pressed"]
 [connection signal="value_changed" from="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer/SensivityControl" to="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer/SensivityControl" method="_on_value_changed"]
 [connection signal="value_changed" from="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer4/MusicControl" to="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer4/MusicControl" method="_on_value_changed"]
 [connection signal="value_changed" from="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer2/SFXControl" to="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer2/SFXControl" method="_on_value_changed"]
