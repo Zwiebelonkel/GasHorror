@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnkuhoq6fwugc"]
+[gd_scene load_steps=15 format=3 uid="uid://cnkuhoq6fwugc"]
 
 [ext_resource type="PackedScene" uid="uid://l2htm3powhjl" path="res://scenes/props/car.tscn" id="1_nfmnx"]
 [ext_resource type="Shader" uid="uid://1tc2rtqiu7q2" path="res://shaders/buckshot.gdshader" id="2_qa3ag"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://celcmlqpwp0lu" path="res://scenes/road_manager.gd" id="5_t1k4y"]
 [ext_resource type="PackedScene" uid="uid://l11o4mbg6r8r" path="res://scenes/props/road_segment.tscn" id="6_5amew"]
 [ext_resource type="PackedScene" uid="uid://bqcsf2hqcdenx" path="res://ui/endingGUI.tscn" id="8_3v48n"]
+[ext_resource type="Script" uid="uid://b1q3c61smceve" path="res://scenes/endingText.gd" id="9_75aq2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3v48n"]
 shader = ExtResource("2_qa3ag")
@@ -119,5 +120,8 @@ road_segment_scene = ExtResource("6_5amew")
 segment_length = 70.0
 
 [node name="CanvasLayer2" parent="." instance=ExtResource("8_3v48n")]
+
+[node name="Panel" parent="CanvasLayer2" index="1"]
+script = ExtResource("9_75aq2")
 
 [editable path="CanvasLayer2"]

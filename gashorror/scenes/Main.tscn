@@ -188,6 +188,7 @@ script = ExtResource("1_bjd11")
 note_marker_path = NodePath("noteSpawn")
 note_scene = ExtResource("2_1iba3")
 doorArea = NodePath("Area3D")
+player_scene = ExtResource("1_rvslj")
 
 [node name="vhs" type="CanvasLayer" parent="."]
 
@@ -288,7 +289,6 @@ max_value = 0.015
 step = 0.001
 value = 0.001
 script = ExtResource("6_kxyth")
-fps_player = NodePath("../../../../../../FpsPlayer/CharacterBody3D")
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="OptionsCanvas/OptionsControl/Options/VBoxContainer"]
 layout_mode = 2
@@ -372,12 +372,6 @@ light_indirect_energy = 1.149
 light_volumetric_fog_energy = 0.0
 light_specular = 0.405
 sky_mode = 1
-
-[node name="FpsPlayer" parent="." instance=ExtResource("1_rvslj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0769, 0.57445, 10.06)
-
-[node name="CharacterBody3D" parent="FpsPlayer" index="0" node_paths=PackedStringArray("gunProp")]
-gunProp = NodePath("../../GunProp")
 
 [node name="gas_station" parent="." instance=ExtResource("4_vcsgt")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
@@ -1192,7 +1186,15 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 99.539
 [node name="wall12" parent="walls" instance=ExtResource("40_8cp6k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.5399, 0, 0.0767871)
 
-[connection signal="pressed" from="OptionsCanvas/OptionsControl/Options/Back" to="OptionsCanvas/OptionsControl/Options" method="_on_menu_pressed"]
+[node name="PlayerSpawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.062, 1.2956, 10.4684)
+gizmo_extents = 2.72
+
+[node name="PlayerRespawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5644, -3.43298, -4.91205)
+gizmo_extents = 2.72
+
+[connection signal="pressed" from="OptionsCanvas/OptionsControl/Options/Back" to="OptionsCanvas/OptionsControl/Options" method="_on_back_pressed"]
 [connection signal="value_changed" from="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer/SensivityControl" to="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer/SensivityControl" method="_on_value_changed"]
 [connection signal="value_changed" from="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer4/MusicControl" to="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer4/MusicControl" method="_on_value_changed"]
 [connection signal="value_changed" from="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer2/SFXControl" to="OptionsCanvas/OptionsControl/Options/VBoxContainer/HBoxContainer2/SFXControl" method="_on_value_changed"]
@@ -1202,7 +1204,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 99.5399, 0, 0.0767871)
 [connection signal="body_entered" from="mangerTrigger" to="mangerTrigger" method="_on_body_entered"]
 [connection signal="body_exited" from="mangerTrigger" to="mangerTrigger" method="_on_body_exited"]
 
-[editable path="FpsPlayer"]
 [editable path="gas_station"]
 [editable path="gas_station/lamps/lamp4"]
 [editable path="thereIsMore"]

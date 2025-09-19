@@ -28,9 +28,15 @@ var is_typing: bool = false
 
 func _ready():
 	visible = false
-	player = get_node("/root/Main/FpsPlayer/CharacterBody3D")
+	player = get_node_or_null("/root/Main/FpsPlayer/CharacterBody3D")
+	if player == null:
+		print("⚠️ Spieler wurde nicht gefunden oder ist noch nicht instanziert.")
+
+
+
 
 func show_dialog(lines: Array, target_position: Vector3, finished_callback: Callable = func(): pass):
+	player = get_node_or_null("/root/Main/FpsPlayer/CharacterBody3D")
 	if lines.is_empty():
 		return
 	
@@ -43,7 +49,7 @@ func show_dialog(lines: Array, target_position: Vector3, finished_callback: Call
 	target_look_at_position = target_position
 	is_rotating_to_target = true
 	
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	player.can_look = false
 	player.can_move = false
 

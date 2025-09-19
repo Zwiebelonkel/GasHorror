@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bqcsf2hqcdenx"]
 
 [ext_resource type="LabelSettings" uid="uid://cl8v7eias4p7a" path="res://ui/font.tres" id="2_7hyop"]
-[ext_resource type="Script" uid="uid://85cxlktdsoo" path="res://ui/endingText.gd" id="2_ll2qe"]
+[ext_resource type="Script" uid="uid://85cxlktdsoo" path="res://ui/deathText.gd" id="2_ll2qe"]
 [ext_resource type="FontFile" uid="uid://cf54ji6hr1hw2" path="res://assets/fonts/VCR_OSD_MONO.ttf" id="3_ll2qe"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hairy"]

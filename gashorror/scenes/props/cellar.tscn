@@ -294,10 +294,10 @@ volume_db = -9.343
 
 [node name="code_ui" parent="." instance=ExtResource("12_mal4d")]
 
-[node name="door" parent="." instance=ExtResource("13_mal4d")]
+[node name="door" parent="." groups=["doors"] instance=ExtResource("13_mal4d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2265, 0, -2.29677)
 
-[node name="secretDoor" parent="." instance=ExtResource("14_8ev5g")]
+[node name="secretDoor" parent="." groups=["doors"] instance=ExtResource("14_8ev5g")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.03919, -2.04871, -26.2944)
 open_dir = -1
 

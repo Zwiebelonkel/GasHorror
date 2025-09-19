@@ -43,6 +43,7 @@ PistolPickup=""
 manager=""
 SignOld=""
 SignNew=""
+doors=""
 
 [importer_defaults]
 
