@@ -50,6 +50,8 @@ var ending_type: String = "Ending Text"  # "Good Ending", "Bad Ending", "Secret 
 
 func _ready():
 	emit_signal("objective_changed", get_current_objective_name(), state)
+	Engine.time_scale = 1
+
 
 func advance():
 	current_step += 1
@@ -156,6 +158,7 @@ func end_game():
 	elif state["manager_killed"] == false and state["manager_triggered"] == false:
 		Objectives.ending_index = 2
 		Objectives.ending_type = "Secret Ending"
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/ending.tscn")
 	
 func reset():

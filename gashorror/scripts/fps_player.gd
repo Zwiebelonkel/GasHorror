@@ -62,6 +62,8 @@ var keys: Array[String] = []
 var _bob_t: float = 0.0
 var _cam_base_pos: Vector3
 
+var _pos_dbg_t := 0.0
+
 # Weapon sway
 var _mouse_impulse := Vector2.ZERO
 var _flash_base_pos: Vector3
@@ -250,6 +252,12 @@ func _physics_process(delta: float) -> void:
 			velocity.y = jump_strength
 
 	move_and_slide()
+	# --- Debug: Position 1x pro Sekunde ausgeben --- 
+	_pos_dbg_t += delta 
+	if _pos_dbg_t >= 1.0: 
+		_pos_dbg_t = 0.0 
+		var p := global_position 	
+		print("Player @ (%.2f, %.2f, %.2f)" % [p.x, p.y, p.z])
 
 	_update_step_timer(dir, running)
 	_update_headbob(delta, dir, running)
