@@ -365,12 +365,13 @@ popup/item_3/id = 3
 script = ExtResource("31_8b871")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.008269, -0.542515, 0.840005, 0.965047, 0.22438, 0.135415, -0.261945, 0.809525, 0.525408, 6.08608, 16.5474, -120.974)
+transform = Transform3D(0.673607, -0.465817, 0.573818, 0.018967, 0.787025, 0.616629, -0.738846, -0.404482, 0.538981, 18.9063, 7.04906, -11.9503)
 light_color = Color(0.330305, 0.510314, 0.488677, 1)
-light_energy = 0.068
+light_energy = 0.0
 light_indirect_energy = 1.149
 light_volumetric_fog_energy = 0.0
-light_specular = 0.0
+light_specular = 0.405
+sky_mode = 1
 
 [node name="FpsPlayer" parent="." instance=ExtResource("1_rvslj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0769, 0.57445, 10.06)
@@ -384,7 +385,7 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 [node name="SpotLight3D2" parent="gas_station/Sketchfab_model/Gas_Station_fbx/RootNode/Sign/Sign_Sign_0" index="1"]
 light_energy = 17.632
 
-[node name="DoorSound" type="AudioStreamPlayer" parent="gas_station/Sketchfab_model/Gas_Station_fbx/RootNode/Store/Door/Door_Palette_0/StaticBody3D" index="2"]
+[node name="DoorSound" type="AudioStreamPlayer" parent="gas_station/Sketchfab_model/Gas_Station_fbx/RootNode/Store/Door/Door_Palette_0/StaticBody3D" index="1"]
 stream = ExtResource("6_cvmbd")
 bus = &"SFX"
 
@@ -694,9 +695,9 @@ freeze_lin_vel = 0.08
 freeze_ang_vel = 0.25
 
 [node name="Physical Bone mixamorig_Hips_00" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="2"]
-transform = Transform3D(1.55385, 4.6821e-10, -1.4877e-08, 1.48792e-08, -0.0896708, 1.55126, -3.91103e-10, -1.55126, -0.0896708, 0, 0.12694, -0.00639439)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.25395e-10, -1.28802e-06, -0.0692826)
-body_offset = Transform3D(1.55385, 5.39683e-08, -1.17844e-08, 1.48792e-08, -0.0896707, 1.55126, 5.31983e-08, -1.55126, -0.0896707, 0, 0.107475, -0.00621462)
+transform = Transform3D(1.55385, 4.69476e-10, -1.48989e-08, 1.49012e-08, -0.0896708, 1.55126, -3.91103e-10, -1.55126, -0.0896708, 0, 0.12694, -0.00639439)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.26372e-10, -1.28802e-06, -0.0692826)
+body_offset = Transform3D(1.55385, 5.39696e-08, -1.18063e-08, 1.49012e-08, -0.0896707, 1.55126, 5.31983e-08, -1.55126, -0.0896707, 0, 0.107475, -0.00621462)
 
 [node name="Physical Bone mixamorig_Spine_01" parent="Manager/Sketchfab_Scene/Sketchfab_model/ca4277049ce1436b9e342cd12ef1e627_fbx/Object_2/RootNode/Object_4/Skeleton3D" index="3"]
 transform = Transform3D(1.55385, -3.90631e-10, 1.35408e-08, -1.35408e-08, -0.0896742, 1.55126, 3.91473e-10, -1.55126, -0.0896742, 0, 0.359808, -0.0198903)
