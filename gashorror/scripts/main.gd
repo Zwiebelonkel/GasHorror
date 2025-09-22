@@ -10,7 +10,7 @@ extends Node3D
 
 var paused = false
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		pauseMenu()
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bh1viipml1p00"]
+[gd_scene load_steps=15 format=3 uid="uid://bh1viipml1p00"]
 
 [ext_resource type="Script" uid="uid://bj7tilhb7y7h5" path="res://scenes/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://csn8y2wdrr5f2" path="res://assets/menuBG.png" id="1_ekxnf"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://b38eudtsr1ssj" path="res://assets/sounds/Alley(145).wav" id="4_wu84c"]
 [ext_resource type="Script" uid="uid://b4l4ey2er05av" path="res://scenes/fullscreen_control.gd" id="5_rtw2f"]
 [ext_resource type="Script" uid="uid://58txsfw8nbbr" path="res://scenes/scale_control.gd" id="6_oa1go"]
+[ext_resource type="PackedScene" uid="uid://dm0wmvncm4quv" path="res://scenes/credits.tscn" id="7_tbmy8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu84c"]
 texture = ExtResource("1_ekxnf")
@@ -152,9 +153,9 @@ vertical_alignment = 1
 [node name="Back" type="Button" parent="Options"]
 layout_mode = 2
 offset_left = 57.5
-offset_top = 295.0
+offset_top = 344.0
 offset_right = 367.5
-offset_bottom = 347.0
+offset_bottom = 396.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_bqqt6")
@@ -174,7 +175,7 @@ anchor_bottom = 0.5
 offset_left = -200.5
 offset_top = -132.5
 offset_right = 201.5
-offset_bottom = 23.5
+offset_bottom = 80.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
@@ -253,6 +254,24 @@ popup/item_3/text = "25%"
 popup/item_3/id = 3
 script = ExtResource("6_oa1go")
 
+[node name="HBoxContainer4" type="HBoxContainer" parent="Options"]
+layout_mode = 2
+offset_left = 13.0
+offset_top = 201.0
+offset_right = 415.0
+offset_bottom = 338.0
+
+[node name="Credits" parent="Options/HBoxContainer4" instance=ExtResource("7_tbmy8")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" parent="Options/HBoxContainer4/Credits" index="0"]
+anchors_preset = 15
+anchor_top = 0.0
+anchor_bottom = 1.0
+offset_top = 0.0
+offset_bottom = 0.0
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_wu84c")
 pitch_scale = 0.45
@@ -267,3 +286,5 @@ bus = &"Music"
 [connection signal="value_changed" from="Options/VBoxContainer/HBoxContainer2/SFXControl" to="Options/VBoxContainer/HBoxContainer2/SFXControl" method="_on_value_changed"]
 [connection signal="toggled" from="Options/VBoxContainer/FullscreenControl" to="Options/VBoxContainer/FullscreenControl" method="_on_toggled"]
 [connection signal="item_selected" from="Options/VBoxContainer/HBoxContainer3/ScaleControl" to="Options/VBoxContainer/HBoxContainer3/ScaleControl" method="_on_item_selected"]
+
+[editable path="Options/HBoxContainer4/Credits"]
